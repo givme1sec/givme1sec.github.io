@@ -224,24 +224,24 @@
       
           <p>这是一个自己搭建<em>Hexo</em>博客的记录，踩过的坑和耍过的花样都在这里！</p>
 <h2 id="Chapter-1-Quick-Start"><a href="#Chapter-1-Quick-Start" class="headerlink" title="Chapter 1. Quick Start"></a>Chapter 1. Quick Start</h2><h3 id="Nodejs-和-Hexo"><a href="#Nodejs-和-Hexo" class="headerlink" title="Nodejs 和 Hexo"></a>Nodejs 和 Hexo</h3><p>在安装<em>Hexo</em>之前，<a target="_blank" rel="noopener" href="https://nodejs.org/en/">点这里</a>下载并安装<em>Nodejs</em>。</p>
-<div align="center"><img src="/.com//nodejs.png" width="50%"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/nodejs.png" width="50%"></div>
 
 <p>在<em>windows</em>系统下，打开<em>cmd</em>，使用<code>node -v</code>和<code>npm -v</code>查看这两个是否安装成功。</p>
-<div align="center"><img src="/.com//nodeandnpm.png" width="50%"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/nodeandnpm.png" width="50%"></div>
 
 <p>之后，利用安装好的<em>npm</em>来安装<em>cnpm</em>（淘宝的一个镜像源）。<br><code>&gt; npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
 <p>最后用<br><code>&gt; cnpm install -g hexo-cli</code><br>安装Hexo。</p>
-<div align="center"><img src="/.com//hexo.png" width="50%"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/hexo.png" width="50%"></div>
 
 
 <h3 id="搭建Blog"><a href="#搭建Blog" class="headerlink" title="搭建Blog"></a>搭建Blog</h3><p>新建一个文件夹<em>test-blog</em>，作为博客的根目录，在该根目录下，运行<em>cmd</em>，使用<code>hexo init</code>初始化。</p>
-<div align="center"><img src="/.com//hexo-init.png" width="50%"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/hexo-init.png" width="50%"></div>
 
 <p>克隆到本地的初始化框架自带<em>landscape</em>主题，是可以用<code>hexo s</code>直接启动的。</p>
-<div align="center"><img src="/.com//hexo-s.png" width="50%"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/hexo-s.png" width="50%"></div>
 
 <p>在浏览器中打开端口<code>localhost:4000</code>，就可以看到一个博客页面。</p>
-<div align="center"><img src="/.com//landscape-blog.png"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/landscape-blog.png"></div>
 
 
 
@@ -250,37 +250,37 @@
 <p>使用<br><code>&gt; git clone https://github.com/next-theme/hexo-theme-next themes/next</code></p>
 <p>将<em>NexT</em>主题<em>clone</em>到<em>themes</em>下的<em>next</em>文件夹中，但是这个过程会非常慢，在链接中<em>github.com</em>后面加上<code>cnpmjs.org</code>可以更换源。即</p>
 <p><code>&gt; git clone https://github.com.cnpm.org/next-theme/hexo-theme-next themes/next</code></p>
-<div align="center"><img src="/.com//git-clone-next.png" width="80%"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/git-clone-next.png" width="80%"></div>
 
 <p>然后，打开根目录下的 <em>_config.yml</em> 文件，将<em>theme</em>改为<em>next</em>。</p>
-<div align="center"><img src="/.com//theme-next.png" width="60%"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/theme-next.png" width="60%"></div>
 
 <p>在<em>cmd</em>中，先后执行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo clean</span><br><span class="line">&gt; hexo g</span><br><span class="line">&gt; hexo s</span><br></pre></td></tr></table></figure>
 <p>再次打开<code>localhost:4000</code>，可以看到<em>next</em>主题下的博客。</p>
-<div align="center"><img src="/.com//next-blog.png"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/next-blog.png"></div>
 
 <h3 id="将Hexo部署到服务器"><a href="#将Hexo部署到服务器" class="headerlink" title="将Hexo部署到服务器"></a>将Hexo部署到服务器</h3><p>服务器选用<em>Github</em>的个人仓库 <em>(Repositories)<em>，首先登陆</em>Github</em>，新建一个<em>Repositories</em>，<strong>仓库的名称一定要写成：</strong><code>Github_id.github.io</code></p>
-<div align="center"><img src="/.com//github-repo.png" width="80%"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/github-repo.png" width="80%"></div>
 
 <p>之后我们要将本地的博客部署到这个仓库中，第一次部署时需要安装<em>Hexo</em>部署组件，在<em>cmd</em>中：</p>
 <p><code>&gt; cnpm install --save hexo-deployer-git</code></p>
-<div align="center"><img src="/.com//deployer-install.png" width="80%"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/deployer-install.png" width="80%"></div>
 
 <p>另外，还需要在根目录下的 <em>_config.yml</em> 文件中，添加部署的参数：</p>
-<div align="center"><img src="/.com//deployment.png" width="80%"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/deployment.png" width="80%"></div>
 
 <p>在<em>cmd</em>中，执行：</p>
 <p><code>&gt; hexo d</code></p>
 <p>（<strong>注意</strong>在初次部署时，要使用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; git config --global user.email &quot;your%example.com&quot;</span><br><span class="line">&gt; git config --global user.name &quot;your name&quot;</span><br></pre></td></tr></table></figure>
 <p>初始化一下。）<br>在<em>Github</em>上的仓库中可以看到文件已经部署上去了。</p>
-<div align="center"><img src="/.com//github-deployment.png"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/github-deployment.png"></div>
 
 
 
 <p>在浏览器中打开 <a target="_blank" rel="noopener" href="https://givme1sec.github.io,就可以访问热乎出炉的博客啦!/">https://givme1sec.github.io，就可以访问热乎出炉的博客啦！</a></p>
-<div align="center"><img src="/.com//givme1sec-1.png"></div>
+<div align="center"><img src="/2020/12/02/My-first-Blog/givme1sec-1.png"></div>
 
       
     </div>
