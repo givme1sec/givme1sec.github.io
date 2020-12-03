@@ -5,7 +5,7 @@
     <url>/2020/12/02/My-first-Blog/</url>
     <content><![CDATA[<p>这是一个自己搭建<em>Hexo</em>博客的记录，踩过的坑和耍过的花样都在这里！</p>
 <h2 id="Chapter-1-Quick-Start"><a href="#Chapter-1-Quick-Start" class="headerlink" title="Chapter 1. Quick Start"></a>Chapter 1. Quick Start</h2><h3 id="Nodejs-和-Hexo"><a href="#Nodejs-和-Hexo" class="headerlink" title="Nodejs 和 Hexo"></a>Nodejs 和 Hexo</h3><p>在安装<em>Hexo</em>之前，<a href="https://nodejs.org/en/">点这里</a>下载并安装<em>Nodejs</em>。</p>
-<div align="center"><img src="/.io//nodejs.png" width="70%"></div>
+<div align="center"><img src="/.io//nodejs.png" width="80%"></div>
 
 <p>在<em>windows</em>系统下，打开<em>cmd</em>，使用<code>node -v</code>和<code>npm -v</code>查看这两个是否安装成功。</p>
 <div align="center"><img src="/.io//nodeandnpm.png" width="50%"></div>
