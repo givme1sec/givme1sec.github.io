@@ -13,10 +13,10 @@
 <p>再重新部署启动：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; hexo clean</span><br><span class="line">&gt; hexo g</span><br><span class="line">&gt; hexo d</span><br></pre></td></tr></table></figure>
 <p>启用<em>Menu</em>后的页面如下：</p>
-<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/menu-3.png"></div>
+<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/menu-3.png" width="60%/></div>
 
 <p>但是这时候<em>Menu</em>里的<em>Tags</em>、<em>Categories</em>这些页面是不能打开的，需要在根目录下新建页面文件夹。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; hexo new page tags</span><br><span class="line">&gt; hexo new page categories</span><br><span class="line">&gt; hexo new page archives</span><br></pre></td></tr></table></figure>
+<figure class=" highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; hexo new page tags</span><br><span class="line">&gt; hexo new page categories</span><br><span class="line">&gt; hexo new page archives</span><br></pre></td></tr></table>
 
 <p>根目录下的<code>source</code>文件夹中就会生成这几个页面对应的文件：</p>
 <div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/page-1.png"></div>
@@ -47,7 +47,7 @@
 
 <p>在本地编写<em>Markdown</em>文本的时候，预览中图片是加载不出来的，但是部署到服务器上再打开页面，图片可以正常显示：</p>
 <div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/image-5.png"></div>
-]]></content>
+</div>]]></content>
       <tags>
         <tag>Hexo</tag>
       </tags>
