@@ -1,185 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>My first Blog</title>
-    <url>/2020/12/02/My-first-Blog/</url>
-    <content><![CDATA[<p>这是一个自己搭建<em>Hexo</em>博客的记录，踩过的坑和耍过的花样都在这里！</p>
-<h2 id="Chapter-1-Quick-Start"><a href="#Chapter-1-Quick-Start" class="headerlink" title="Chapter 1. Quick Start"></a>Chapter 1. Quick Start</h2><h3 id="Nodejs-和-Hexo"><a href="#Nodejs-和-Hexo" class="headerlink" title="Nodejs 和 Hexo"></a>Nodejs 和 Hexo</h3><p>在安装<em>Hexo</em>之前，<a href="https://nodejs.org/en/">点这里</a>下载并安装<em>Nodejs</em>。</p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/nodejs.png" width="80%"></div>
-
-<p>在<em>windows</em>系统下，打开<em>cmd</em>，使用<code>node -v</code>和<code>npm -v</code>查看这两个是否安装成功。</p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/nodeandnpm.png" width="50%"></div>
-
-<p>之后，利用安装好的<em>npm</em>来安装<em>cnpm</em>（淘宝的一个镜像源）。<br><code>&gt; npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
-<p>最后用<br><code>&gt; cnpm install -g hexo-cli</code><br>安装Hexo。</p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/hexo.png" width="50%"></div>
-
-
-<h3 id="搭建Blog"><a href="#搭建Blog" class="headerlink" title="搭建Blog"></a>搭建Blog</h3><p>新建一个文件夹<em>test-blog</em>，作为博客的根目录，在该根目录下，运行<em>cmd</em>，使用<code>hexo init</code>初始化。</p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/hexo-init.png" width="50%"></div>
-
-<p>克隆到本地的初始化框架自带<em>landscape</em>主题，是可以用<code>hexo s</code>直接启动的。</p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/hexo-s.png" width="50%"></div>
-
-<p>在浏览器中打开端口<code>localhost:4000</code>，就可以看到一个博客页面。</p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/landscape-blog.png"></div>
-
-
-
-<h3 id="更换Blog主题"><a href="#更换Blog主题" class="headerlink" title="更换Blog主题"></a>更换Blog主题</h3><p><em>Hexo</em>官方网站上有很多收集的<a href="https://hexo.io/themes/"><em>Hexo</em>主题</a></p>
-<p>以经典的<em>NexT</em>主题为例，在<a href="https://github.com/next-theme/hexo-theme-next"><em>Github-theme-next</em></a>上<em>clone</em>下来。在博客根目录下打开<em>Git</em>。</p>
-<p>使用<br><code>&gt; git clone https://github.com/next-theme/hexo-theme-next themes/next</code></p>
-<p>将<em>NexT</em>主题<em>clone</em>到<em>themes</em>下的<em>next</em>文件夹中，但是这个过程会非常慢，在链接中<em>github.com</em>后面加上<code>cnpmjs.org</code>可以更换源。即</p>
-<p><code>&gt; git clone https://github.com.cnpm.org/next-theme/hexo-theme-next themes/next</code></p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/git-clone-next.png" width="80%"></div>
-
-<p>然后，打开根目录下的 <em>_config.yml</em> 文件，将<em>theme</em>改为<em>next</em>。</p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/theme-next.png" width="60%"></div>
-
-<p>在<em>cmd</em>中，先后执行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; hexo clean</span><br><span class="line">&gt; hexo g</span><br><span class="line">&gt; hexo s</span><br></pre></td></tr></table></figure>
-<p>再次打开<code>localhost:4000</code>，可以看到<em>next</em>主题下的博客。</p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/next-blog.png"></div>
-
-<h3 id="将Hexo部署到服务器"><a href="#将Hexo部署到服务器" class="headerlink" title="将Hexo部署到服务器"></a>将Hexo部署到服务器</h3><p>服务器选用<em>Github</em>的个人仓库 <em>(Repositories)<em>，首先登陆</em>Github</em>，新建一个<em>Repositories</em>，<strong>仓库的名称一定要写成：</strong><code>Github_id.github.io</code></p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/github-repo.png" width="80%"></div>
-
-<p>之后我们要将本地的博客部署到这个仓库中，第一次部署时需要安装<em>Hexo</em>部署组件，在<em>cmd</em>中：</p>
-<p><code>&gt; cnpm install --save hexo-deployer-git</code></p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/deployer-install.png" width="80%"></div>
-
-<p>另外，还需要在根目录下的 <em>_config.yml</em> 文件中，添加部署的参数：</p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/deployment.png" width="80%"></div>
-
-<p>在<em>cmd</em>中，执行：</p>
-<p><code>&gt; hexo d</code></p>
-<p>（<strong>注意</strong>在初次部署时，要使用</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; git config --global user.email &quot;your%example.com&quot;</span><br><span class="line">&gt; git config --global user.name &quot;your name&quot;</span><br></pre></td></tr></table></figure>
-<p>初始化一下。）<br>在<em>Github</em>上的仓库中可以看到文件已经部署上去了。</p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/github-deployment.png"></div>
-
-
-
-<p>在浏览器中打开 <a href="https://givme1sec.github.io,就可以访问热乎出炉的博客啦!/">https://givme1sec.github.io，就可以访问热乎出炉的博客啦！</a></p>
-<div align="center"><img src="/2020/12/02/My-first-Blog/givme1sec-1.png"></div>
-]]></content>
-  </entry>
-  <entry>
-    <title>Hexo blog embellishing</title>
-    <url>/2020/12/03/Hexo-blog-embellishing/</url>
-    <content><![CDATA[<p>记录建立<em>Hexo</em>博客后，逐步优化的过程。</p>
-<h2 id="Menu"><a href="#Menu" class="headerlink" title="Menu"></a>Menu</h2><h3 id="1-启用Menu"><a href="#1-启用Menu" class="headerlink" title="1.启用Menu"></a>1.启用Menu</h3><p>默认的<em>Hexo</em>页面中<em>Menu</em>是没有被启动的。</p>
-<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/menu-1.png"></div>
-
-<p>启动<em>Menu</em>需要到主题文件夹<code>themes/next</code>中修改 <em>_config.yml</em>文件，启用<em>home</em>、<em>tags</em>、<em>categories</em>、<em>archives</em>。</p>
-<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/menu-2.png"></div>
-
-<p>再重新部署启动：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; hexo clean</span><br><span class="line">&gt; hexo g</span><br><span class="line">&gt; hexo d</span><br></pre></td></tr></table></figure>
-<p>启用<em>Menu</em>后的页面如下：</p>
-<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/menu-3.png"></div>
-
-<p>但是这时候<em>Menu</em>里的<em>Tags</em>、<em>Categories</em>这些页面是不能打开的，需要在根目录下新建页面文件夹。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; hexo new page tags</span><br><span class="line">&gt; hexo new page categories</span><br><span class="line">&gt; hexo new page archives</span><br></pre></td></tr></table></figure>
-<p>根目录下的<code>source</code>文件夹中就会生成这几个页面对应的文件：</p>
-<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/page-1.png"></div>
-
-<h3 id="2-设置语言"><a href="#2-设置语言" class="headerlink" title="2.设置语言"></a>2.设置语言</h3><p>咳， <del>英语不好就不勉强自己看英文界面了</del>，而且由于语言是英文，每次打开页面<em>Edge</em>都弹出询问翻译，很是恼人，所以干脆一劳永逸把语言改成中文。</p>
-<p><strong>主题目录</strong>下有一个<code>language</code>文件夹，里面可以查看主题支持的语言，<em>NexT</em>支持的语言就包括中文：</p>
-<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/lang-1.png"></div>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">再打开**博客根目录**下的 *_config.yml*文件，将*language*设置成中文：</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;Hexo-blog-embellishing&#x2F;lang-2.png&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">重新部署启动：</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;Hexo-blog-embellishing&#x2F;lang-3.png&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">### 3.添加搜索栏</span><br><span class="line">还可以给*Menu*加一个搜索的栏目，方便以后查找文章。在博客**根目录**下：</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>cnpm install hexo-generator-search –save<br>cnpm install hexo-generator–searchdb –save</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">安装之后会在&#96;&#96;&#96;public&#96;&#96;&#96;文件夹下生成一个&#96;&#96;&#96;search.xml&#96;&#96;&#96;文件。（如果没有就执行一遍&#96;&#96;&#96;hexo clean&#96;&#96;&#96;和&#96;&#96;&#96;hexo g&#96;&#96;&#96;)</span><br><span class="line"></span><br><span class="line">然后修改**根目录**下的 *_config.yml*文件，在后面添加：</span><br></pre></td></tr></table></figure>
-<p>search:<br>  path: search.xml<br>  field: post<br>  format: html<br>  limit: 10000</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">并修改**主题目录**下的 *_config.yml*文件，将&#96;&#96;&#96;local_search&#96;&#96;&#96;启动：</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;Hexo-blog-embellishing&#x2F;search-1.png&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">重新部署启动：</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;Hexo-blog-embellishing&#x2F;search-2.png&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;Hexo-blog-embellishing&#x2F;search-3.png&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">## Image</span><br><span class="line"></span><br><span class="line">写文章，最重要的是咩？</span><br><span class="line"></span><br><span class="line">图 文 并 茂！</span><br><span class="line"></span><br><span class="line">*Hexo*中引用图片需要先安装插件：</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;&gt; cnpm install hexo-asset-image --save&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">但是这个插件的内容需要修改,不然可能出*bug*，打开&#96;&#96;&#96;&#x2F;node_modules&#x2F;hexo-asset-image&#x2F;index.js&#96;&#96;&#96;，内容替换为：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;js</span><br><span class="line">&#39;use strict&#39;;</span><br><span class="line">var cheerio &#x3D; require(&#39;cheerio&#39;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; http:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;14480345&#x2F;how-to-get-the-nth-occurrence-in-a-string</span><br><span class="line">function getPosition(str, m, i) &#123;</span><br><span class="line">  return str.split(m, i).join(m).length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hexo.extend.filter.register(&#39;after_post_render&#39;, function(data)&#123;</span><br><span class="line">  var config &#x3D; hexo.config;</span><br><span class="line">  if(config.post_asset_folder)&#123;</span><br><span class="line">    var link &#x3D; data.permalink;</span><br><span class="line">    var beginPos &#x3D; getPosition(link, &#39;&#x2F;&#39;, 3) + 1;</span><br><span class="line">    var appendLink &#x3D; &#39;&#39;;</span><br><span class="line">    &#x2F;&#x2F; In hexo 3.1.1, the permalink of &quot;about&quot; page is like &quot;...&#x2F;about&#x2F;index.html&quot;.</span><br><span class="line">    &#x2F;&#x2F; if not with index.html endpos &#x3D; link.lastIndexOf(&#39;.&#39;) + 1 support hexo-abbrlink</span><br><span class="line">    if(&#x2F;.*\&#x2F;index\.html$&#x2F;.test(link)) &#123;</span><br><span class="line">      &#x2F;&#x2F; when permalink is end with index.html, for example 2019&#x2F;02&#x2F;20&#x2F;xxtitle&#x2F;index.html</span><br><span class="line">      &#x2F;&#x2F; image in xxtitle&#x2F; will go to xxtitle&#x2F;index&#x2F;</span><br><span class="line">      appendLink &#x3D; &#39;index&#x2F;&#39;;</span><br><span class="line">      var endPos &#x3D; link.lastIndexOf(&#39;&#x2F;&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">      var endPos &#x3D; link.lastIndexOf(&#39;.&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    link &#x3D; link.substring(beginPos, endPos) + &#39;&#x2F;&#39; + appendLink;</span><br><span class="line"></span><br><span class="line">    var toprocess &#x3D; [&#39;excerpt&#39;, &#39;more&#39;, &#39;content&#39;];</span><br><span class="line">    for(var i &#x3D; 0; i &lt; toprocess.length; i++)&#123;</span><br><span class="line">      var key &#x3D; toprocess[i];</span><br><span class="line"></span><br><span class="line">      var $ &#x3D; cheerio.load(data[key], &#123;</span><br><span class="line">        ignoreWhitespace: false,</span><br><span class="line">        xmlMode: false,</span><br><span class="line">        lowerCaseTags: false,</span><br><span class="line">        decodeEntities: false</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      $(&#39;img&#39;).each(function()&#123;</span><br><span class="line">        if ($(this).attr(&#39;src&#39;))&#123;</span><br><span class="line">          &#x2F;&#x2F; For windows style path, we replace &#39;\&#39; to &#39;&#x2F;&#39;.</span><br><span class="line">          var src &#x3D; $(this).attr(&#39;src&#39;).replace(&#39;\\&#39;, &#39;&#x2F;&#39;);</span><br><span class="line">          if(!(&#x2F;http[s]*.*|\&#x2F;\&#x2F;.*&#x2F;.test(src)</span><br><span class="line">            || &#x2F;^\s+\&#x2F;&#x2F;.test(src)</span><br><span class="line">            || &#x2F;^\s*\&#x2F;uploads|images\&#x2F;&#x2F;.test(src))) &#123;</span><br><span class="line">            &#x2F;&#x2F; For &quot;about&quot; page, the first part of &quot;src&quot; can&#39;t be removed.</span><br><span class="line">            &#x2F;&#x2F; In addition, to support multi-level local directory.</span><br><span class="line">            var linkArray &#x3D; link.split(&#39;&#x2F;&#39;).filter(function(elem)&#123;</span><br><span class="line">              return elem !&#x3D; &#39;&#39;;</span><br><span class="line">            &#125;);</span><br><span class="line">            var srcArray &#x3D; src.split(&#39;&#x2F;&#39;).filter(function(elem)&#123;</span><br><span class="line">              return elem !&#x3D; &#39;&#39; &amp;&amp; elem !&#x3D; &#39;.&#39;;</span><br><span class="line">            &#125;);</span><br><span class="line">            if(srcArray.length &gt; 1)</span><br><span class="line">            srcArray.shift();</span><br><span class="line">            src &#x3D; srcArray.join(&#39;&#x2F;&#39;);</span><br><span class="line"></span><br><span class="line">            $(this).attr(&#39;src&#39;, config.root + link + src);</span><br><span class="line">            console.info&amp;&amp;console.info(&quot;update link as:--&gt;&quot;+config.root + link + src);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">          console.info&amp;&amp;console.info(&quot;no src attr, skipped...&quot;);</span><br><span class="line">          console.info&amp;&amp;console.info($(this));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      data[key] &#x3D; $.html();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>打开<strong>根目录</strong>下的 <em>_config.yml</em>文件，找到<code>post_asset_folder</code>设置为<em>true</em>。</p>
-<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/image-1.png"></div>
-
-<p>这一项表示在新建文章的时候，会自动生成一个同名文件夹，用来存放图片。</p>
-<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/image-2.png"></div>
-
-<p>打开<strong>主题目录</strong>下的 <em>_config.yml</em>文件，找到<code>url</code>，改成部署的<code>Github</code>仓库地址。</p>
-<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/image-4.png"></div>
-
-
-<p>在博客中引用图片时也有两种方式，注意这里直接写图片名就可以了，不需要加路径。</p>
-<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/image-3.png"></div>
-
-<p>在本地编写<em>Markdown</em>文本的时候，预览中图片是加载不出来的，但是部署到服务器上再打开页面，图片可以正常显示：</p>
-<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/image-5.png"></div>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Start from Hexo</title>
-    <url>/2020/12/01/Start-from-hexo/</url>
-    <content><![CDATA[<p>这是一个自己搭建<em>Hexo</em>博客的记录，踩过的坑和耍过的花样都在这里！</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Nodejs-和-Hexo"><a href="#Nodejs-和-Hexo" class="headerlink" title="Nodejs 和 Hexo"></a>Nodejs 和 Hexo</h3><p>在安装<em>Hexo</em>之前，<a href="https://nodejs.org/en/">点这里</a>下载并安装<em>Nodejs</em>。</p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/nodejs.png" width="80%"></div>
-
-<p>在<em>windows</em>系统下，打开<em>cmd</em>，使用<code>node -v</code>和<code>npm -v</code>查看这两个是否安装成功。</p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/nodeandnpm.png" width="50%"></div>
-
-<p>之后，利用安装好的<em>npm</em>来安装<em>cnpm</em>（淘宝的一个镜像源）。<br><code>&gt; npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
-<p>最后用<br><code>&gt; cnpm install -g hexo-cli</code><br>安装Hexo。</p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/hexo.png" width="50%"></div>
-
-
-<h3 id="搭建Blog"><a href="#搭建Blog" class="headerlink" title="搭建Blog"></a>搭建Blog</h3><p>新建一个文件夹<em>test-blog</em>，作为博客的根目录，在该根目录下，运行<em>cmd</em>，使用<code>hexo init</code>初始化。</p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/hexo-init.png" width="50%"></div>
-
-<p>克隆到本地的初始化框架自带<em>landscape</em>主题，是可以用<code>hexo s</code>直接启动的。</p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/hexo-s.png" width="50%"></div>
-
-<p>在浏览器中打开端口<code>localhost:4000</code>，就可以看到一个博客页面。</p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/landscape-blog.png"></div>
-
-
-
-<h3 id="更换Blog主题"><a href="#更换Blog主题" class="headerlink" title="更换Blog主题"></a>更换Blog主题</h3><p><em>Hexo</em>官方网站上有很多收集的<a href="https://hexo.io/themes/"><em>Hexo</em>主题</a></p>
-<p>以经典的<em>NexT</em>主题为例，在<a href="https://github.com/next-theme/hexo-theme-next"><em>Github-theme-next</em></a>上<em>clone</em>下来。在博客根目录下打开<em>Git</em>。</p>
-<p>使用<br><code>&gt; git clone https://github.com/next-theme/hexo-theme-next themes/next</code></p>
-<p>将<em>NexT</em>主题<em>clone</em>到<em>themes</em>下的<em>next</em>文件夹中，但是这个过程会非常慢，在链接中<em>github.com</em>后面加上<code>cnpmjs.org</code>可以更换源。即</p>
-<p><code>&gt; git clone https://github.com.cnpm.org/next-theme/hexo-theme-next themes/next</code></p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/git-clone-next.png" width="80%"></div>
-
-<p>然后，打开根目录下的 <em>_config.yml</em> 文件，将<em>theme</em>改为<em>next</em>。</p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/theme-next.png" width="60%"></div>
-
-<p>在<em>cmd</em>中，先后执行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; hexo clean</span><br><span class="line">&gt; hexo g</span><br><span class="line">&gt; hexo s</span><br></pre></td></tr></table></figure>
-<p>再次打开<code>localhost:4000</code>，可以看到<em>next</em>主题下的博客。</p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/next-blog.png"></div>
-
-<h3 id="将Hexo部署到服务器"><a href="#将Hexo部署到服务器" class="headerlink" title="将Hexo部署到服务器"></a>将Hexo部署到服务器</h3><p>服务器选用<em>Github</em>的个人仓库 <em>(Repositories)<em>，首先登陆</em>Github</em>，新建一个<em>Repositories</em>，<strong>仓库的名称一定要写成：</strong><code>Github_id.github.io</code></p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/github-repo.png" width="80%"></div>
-
-<p>之后我们要将本地的博客部署到这个仓库中，第一次部署时需要安装<em>Hexo</em>部署组件，在<em>cmd</em>中：</p>
-<p><code>&gt; cnpm install --save hexo-deployer-git</code></p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/deployer-install.png" width="80%"></div>
-
-<p>另外，还需要在根目录下的 <em>_config.yml</em> 文件中，添加部署的参数：</p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/deployment.png" width="80%"></div>
-
-<p>在<em>cmd</em>中，执行：</p>
-<p><code>&gt; hexo d</code></p>
-<p>（<strong>注意</strong>在初次部署时，要使用</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; git config --global user.email &quot;your%example.com&quot;</span><br><span class="line">&gt; git config --global user.name &quot;your name&quot;</span><br></pre></td></tr></table></figure>
-<p>初始化一下。）<br>在<em>Github</em>上的仓库中可以看到文件已经部署上去了。</p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/github-deployment.png"></div>
-
-
-
-<p>在浏览器中打开 <a href="https://givme1sec.github.io,就可以访问热乎出炉的博客啦!/">https://givme1sec.github.io，就可以访问热乎出炉的博客啦！</a></p>
-<div align="center"><img src="/2020/12/01/Start-from-hexo/givme1sec-1.png"></div>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Hexo blog embellishing</title>
+      <link href="2020/12/03/Hexo-blog-embellishing/"/>
+      <url>2020/12/03/Hexo-blog-embellishing/</url>
+      
+        <content type="html"><![CDATA[<p>记录建立<em>Hexo</em>博客后，逐步优化的过程。</p><h2 id="Menu"><a href="#Menu" class="headerlink" title="Menu"></a>Menu</h2><h3 id="1-启用Menu"><a href="#1-启用Menu" class="headerlink" title="1.启用Menu"></a>1.启用Menu</h3><p>默认的<em>Hexo</em>页面中<em>Menu</em>是没有被启动的。</p><div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/menu-1.png"></div><p>启动<em>Menu</em>需要到主题文件夹<code>themes/next</code>中修改 <em>_config.yml</em>文件，启用<em>home</em>、<em>tags</em>、<em>categories</em>、<em>archives</em>。</p><div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/menu-2.png"></div><p>再重新部署启动：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo clean</span><br><span class="line">&gt; hexo g</span><br><span class="line">&gt; hexo d</span><br></pre></td></tr></table></figure><p>启用<em>Menu</em>后的页面如下：</p><div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/menu-3.png"></div><p>但是这时候<em>Menu</em>里的<em>Tags</em>、<em>Categories</em>这些页面是不能打开的，需要在根目录下新建页面文件夹。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo new page tags</span><br><span class="line">&gt; hexo new page categories</span><br><span class="line">&gt; hexo new page archives</span><br></pre></td></tr></table></figure><p>根目录下的<code>source</code>文件夹中就会生成这几个页面对应的文件：</p><div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/page-1.png"></div><h3 id="2-设置语言"><a href="#2-设置语言" class="headerlink" title="2.设置语言"></a>2.设置语言</h3><p>咳， <del>英语不好就不勉强自己看英文界面了</del>，而且由于语言是英文，每次打开页面<em>Edge</em>都弹出询问翻译，很是恼人，所以干脆一劳永逸把语言改成中文。</p><p><strong>主题目录</strong>下有一个<code>language</code>文件夹，里面可以查看主题支持的语言，<em>NexT</em>支持的语言就包括中文：</p><div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/lang-1.png"></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">再打开**博客根目录**下的 *_config.yml*文件，将*language*设置成中文：</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;Hexo-blog-embellishing&#x2F;lang-2.png&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">重新部署启动：</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;Hexo-blog-embellishing&#x2F;lang-3.png&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">### 3.添加搜索栏</span><br><span class="line">还可以给*Menu*加一个搜索的栏目，方便以后查找文章。在博客**根目录**下：</span><br></pre></td></tr></table></figure><blockquote><p>cnpm install hexo-generator-search –save<br>cnpm install hexo-generator–searchdb –save</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">安装之后会在&#96;&#96;&#96;public&#96;&#96;&#96;文件夹下生成一个&#96;&#96;&#96;search.xml&#96;&#96;&#96;文件。（如果没有就执行一遍&#96;&#96;&#96;hexo clean&#96;&#96;&#96;和&#96;&#96;&#96;hexo g&#96;&#96;&#96;)</span><br><span class="line"></span><br><span class="line">然后修改**根目录**下的 *_config.yml*文件，在后面添加：</span><br></pre></td></tr></table></figure><p>search:<br>  path: search.xml<br>  field: post<br>  format: html<br>  limit: 10000</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">并修改**主题目录**下的 *_config.yml*文件，将&#96;&#96;&#96;local_search&#96;&#96;&#96;启动：</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;Hexo-blog-embellishing&#x2F;search-1.png&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">重新部署启动：</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;Hexo-blog-embellishing&#x2F;search-2.png&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;Hexo-blog-embellishing&#x2F;search-3.png&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">## Image</span><br><span class="line"></span><br><span class="line">写文章，最重要的是咩？</span><br><span class="line"></span><br><span class="line">图 文 并 茂！</span><br><span class="line"></span><br><span class="line">*Hexo*中引用图片需要先安装插件：</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;&gt; cnpm install hexo-asset-image --save&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">但是这个插件的内容需要修改,不然可能出*bug*，打开&#96;&#96;&#96;&#x2F;node_modules&#x2F;hexo-asset-image&#x2F;index.js&#96;&#96;&#96;，内容替换为：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;js</span><br><span class="line">&#39;use strict&#39;;</span><br><span class="line">var cheerio &#x3D; require(&#39;cheerio&#39;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; http:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;14480345&#x2F;how-to-get-the-nth-occurrence-in-a-string</span><br><span class="line">function getPosition(str, m, i) &#123;</span><br><span class="line">  return str.split(m, i).join(m).length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hexo.extend.filter.register(&#39;after_post_render&#39;, function(data)&#123;</span><br><span class="line">  var config &#x3D; hexo.config;</span><br><span class="line">  if(config.post_asset_folder)&#123;</span><br><span class="line">    var link &#x3D; data.permalink;</span><br><span class="line">    var beginPos &#x3D; getPosition(link, &#39;&#x2F;&#39;, 3) + 1;</span><br><span class="line">    var appendLink &#x3D; &#39;&#39;;</span><br><span class="line">    &#x2F;&#x2F; In hexo 3.1.1, the permalink of &quot;about&quot; page is like &quot;...&#x2F;about&#x2F;index.html&quot;.</span><br><span class="line">    &#x2F;&#x2F; if not with index.html endpos &#x3D; link.lastIndexOf(&#39;.&#39;) + 1 support hexo-abbrlink</span><br><span class="line">    if(&#x2F;.*\&#x2F;index\.html$&#x2F;.test(link)) &#123;</span><br><span class="line">      &#x2F;&#x2F; when permalink is end with index.html, for example 2019&#x2F;02&#x2F;20&#x2F;xxtitle&#x2F;index.html</span><br><span class="line">      &#x2F;&#x2F; image in xxtitle&#x2F; will go to xxtitle&#x2F;index&#x2F;</span><br><span class="line">      appendLink &#x3D; &#39;index&#x2F;&#39;;</span><br><span class="line">      var endPos &#x3D; link.lastIndexOf(&#39;&#x2F;&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">      var endPos &#x3D; link.lastIndexOf(&#39;.&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    link &#x3D; link.substring(beginPos, endPos) + &#39;&#x2F;&#39; + appendLink;</span><br><span class="line"></span><br><span class="line">    var toprocess &#x3D; [&#39;excerpt&#39;, &#39;more&#39;, &#39;content&#39;];</span><br><span class="line">    for(var i &#x3D; 0; i &lt; toprocess.length; i++)&#123;</span><br><span class="line">      var key &#x3D; toprocess[i];</span><br><span class="line"></span><br><span class="line">      var $ &#x3D; cheerio.load(data[key], &#123;</span><br><span class="line">        ignoreWhitespace: false,</span><br><span class="line">        xmlMode: false,</span><br><span class="line">        lowerCaseTags: false,</span><br><span class="line">        decodeEntities: false</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      $(&#39;img&#39;).each(function()&#123;</span><br><span class="line">        if ($(this).attr(&#39;src&#39;))&#123;</span><br><span class="line">          &#x2F;&#x2F; For windows style path, we replace &#39;\&#39; to &#39;&#x2F;&#39;.</span><br><span class="line">          var src &#x3D; $(this).attr(&#39;src&#39;).replace(&#39;\\&#39;, &#39;&#x2F;&#39;);</span><br><span class="line">          if(!(&#x2F;http[s]*.*|\&#x2F;\&#x2F;.*&#x2F;.test(src)</span><br><span class="line">            || &#x2F;^\s+\&#x2F;&#x2F;.test(src)</span><br><span class="line">            || &#x2F;^\s*\&#x2F;uploads|images\&#x2F;&#x2F;.test(src))) &#123;</span><br><span class="line">            &#x2F;&#x2F; For &quot;about&quot; page, the first part of &quot;src&quot; can&#39;t be removed.</span><br><span class="line">            &#x2F;&#x2F; In addition, to support multi-level local directory.</span><br><span class="line">            var linkArray &#x3D; link.split(&#39;&#x2F;&#39;).filter(function(elem)&#123;</span><br><span class="line">              return elem !&#x3D; &#39;&#39;;</span><br><span class="line">            &#125;);</span><br><span class="line">            var srcArray &#x3D; src.split(&#39;&#x2F;&#39;).filter(function(elem)&#123;</span><br><span class="line">              return elem !&#x3D; &#39;&#39; &amp;&amp; elem !&#x3D; &#39;.&#39;;</span><br><span class="line">            &#125;);</span><br><span class="line">            if(srcArray.length &gt; 1)</span><br><span class="line">            srcArray.shift();</span><br><span class="line">            src &#x3D; srcArray.join(&#39;&#x2F;&#39;);</span><br><span class="line"></span><br><span class="line">            $(this).attr(&#39;src&#39;, config.root + link + src);</span><br><span class="line">            console.info&amp;&amp;console.info(&quot;update link as:--&gt;&quot;+config.root + link + src);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">          console.info&amp;&amp;console.info(&quot;no src attr, skipped...&quot;);</span><br><span class="line">          console.info&amp;&amp;console.info($(this));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      data[key] &#x3D; $.html();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>打开<strong>根目录</strong>下的 <em>_config.yml</em>文件，找到<code>post_asset_folder</code>设置为<em>true</em>。</p><div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/image-1.png"></div><p>这一项表示在新建文章的时候，会自动生成一个同名文件夹，用来存放图片。</p><div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/image-2.png"></div><p>打开<strong>主题目录</strong>下的 <em>_config.yml</em>文件，找到<code>url</code>，改成部署的<code>Github</code>仓库地址。</p><div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/image-4.png"></div><p>在博客中引用图片时也有两种方式，注意这里直接写图片名就可以了，不需要加路径。</p><div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/image-3.png"></div><p>在本地编写<em>Markdown</em>文本的时候，预览中图片是加载不出来的，但是部署到服务器上再打开页面，图片可以正常显示：</p><div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/image-5.png"></div>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Start from Hexo</title>
+      <link href="2020/12/01/Start-from-hexo/"/>
+      <url>2020/12/01/Start-from-hexo/</url>
+      
+        <content type="html"><![CDATA[<p>这是一个自己搭建<em>Hexo</em>博客的记录，踩过的坑和耍过的花样都在这里！</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Nodejs-和-Hexo"><a href="#Nodejs-和-Hexo" class="headerlink" title="Nodejs 和 Hexo"></a>Nodejs 和 Hexo</h3><p>在安装<em>Hexo</em>之前，<a href="https://nodejs.org/en/">点这里</a>下载并安装<em>Nodejs</em>。</p><div align="center"><img src="/2020/12/01/Start-from-hexo/nodejs.png" width="80%"></div><p>在<em>windows</em>系统下，打开<em>cmd</em>，使用<code>node -v</code>和<code>npm -v</code>查看这两个是否安装成功。</p><div align="center"><img src="/2020/12/01/Start-from-hexo/nodeandnpm.png" width="50%"></div><p>之后，利用安装好的<em>npm</em>来安装<em>cnpm</em>（淘宝的一个镜像源）。<br><code>&gt; npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p><p>最后用<br><code>&gt; cnpm install -g hexo-cli</code><br>安装Hexo。</p><div align="center"><img src="/2020/12/01/Start-from-hexo/hexo.png" width="50%"></div><h3 id="搭建Blog"><a href="#搭建Blog" class="headerlink" title="搭建Blog"></a>搭建Blog</h3><p>新建一个文件夹<em>test-blog</em>，作为博客的根目录，在该根目录下，运行<em>cmd</em>，使用<code>hexo init</code>初始化。</p><div align="center"><img src="/2020/12/01/Start-from-hexo/hexo-init.png" width="50%"></div><p>克隆到本地的初始化框架自带<em>landscape</em>主题，是可以用<code>hexo s</code>直接启动的。</p><div align="center"><img src="/2020/12/01/Start-from-hexo/hexo-s.png" width="50%"></div><p>在浏览器中打开端口<code>localhost:4000</code>，就可以看到一个博客页面。</p><div align="center"><img src="/2020/12/01/Start-from-hexo/landscape-blog.png"></div><h3 id="更换Blog主题"><a href="#更换Blog主题" class="headerlink" title="更换Blog主题"></a>更换Blog主题</h3><p><em>Hexo</em>官方网站上有很多收集的<a href="https://hexo.io/themes/"><em>Hexo</em>主题</a></p><p>以经典的<em>NexT</em>主题为例，在<a href="https://github.com/next-theme/hexo-theme-next"><em>Github-theme-next</em></a>上<em>clone</em>下来。在博客根目录下打开<em>Git</em>。</p><p>使用<br><code>&gt; git clone https://github.com/next-theme/hexo-theme-next themes/next</code></p><p>将<em>NexT</em>主题<em>clone</em>到<em>themes</em>下的<em>next</em>文件夹中，但是这个过程会非常慢，在链接中<em>github.com</em>后面加上<code>cnpmjs.org</code>可以更换源。即</p><p><code>&gt; git clone https://github.com.cnpm.org/next-theme/hexo-theme-next themes/next</code></p><div align="center"><img src="/2020/12/01/Start-from-hexo/git-clone-next.png" width="80%"></div><p>然后，打开根目录下的 <em>_config.yml</em> 文件，将<em>theme</em>改为<em>next</em>。</p><div align="center"><img src="/2020/12/01/Start-from-hexo/theme-next.png" width="60%"></div><p>在<em>cmd</em>中，先后执行</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo clean</span><br><span class="line">&gt; hexo g</span><br><span class="line">&gt; hexo s</span><br></pre></td></tr></table></figure><p>再次打开<code>localhost:4000</code>，可以看到<em>next</em>主题下的博客。</p><div align="center"><img src="/2020/12/01/Start-from-hexo/next-blog.png"></div><h3 id="将Hexo部署到服务器"><a href="#将Hexo部署到服务器" class="headerlink" title="将Hexo部署到服务器"></a>将Hexo部署到服务器</h3><p>服务器选用<em>Github</em>的个人仓库 <em>(Repositories)<em>，首先登陆</em>Github</em>，新建一个<em>Repositories</em>，<strong>仓库的名称一定要写成：</strong><code>Github_id.github.io</code></p><div align="center"><img src="/2020/12/01/Start-from-hexo/github-repo.png" width="80%"></div><p>之后我们要将本地的博客部署到这个仓库中，第一次部署时需要安装<em>Hexo</em>部署组件，在<em>cmd</em>中：</p><p><code>&gt; cnpm install --save hexo-deployer-git</code></p><div align="center"><img src="/2020/12/01/Start-from-hexo/deployer-install.png" width="80%"></div><p>另外，还需要在根目录下的 <em>_config.yml</em> 文件中，添加部署的参数：</p><div align="center"><img src="/2020/12/01/Start-from-hexo/deployment.png" width="80%"></div><p>在<em>cmd</em>中，执行：</p><p><code>&gt; hexo d</code></p><p>（<strong>注意</strong>在初次部署时，要使用</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; git config --global user.email &quot;your%example.com&quot;</span><br><span class="line">&gt; git config --global user.name &quot;your name&quot;</span><br></pre></td></tr></table></figure><p>初始化一下。）<br>在<em>Github</em>上的仓库中可以看到文件已经部署上去了。</p><div align="center"><img src="/2020/12/01/Start-from-hexo/github-deployment.png"></div><p>在浏览器中打开 <a href="https://givme1sec.github.io,就可以访问热乎出炉的博客啦!/">https://givme1sec.github.io，就可以访问热乎出炉的博客啦！</a></p><div align="center"><img src="/2020/12/01/Start-from-hexo/givme1sec-1.png"></div>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
 </search>
