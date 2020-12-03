@@ -5,7 +5,7 @@
     <url>/2020/12/03/Hexo-blog-embellishing/</url>
     <content><![CDATA[<p>记录建立<em>Hexo</em>博客后，逐步优化的过程。</p>
 <h2 id="Menu"><a href="#Menu" class="headerlink" title="Menu"></a>Menu</h2><h3 id="启用Menu"><a href="#启用Menu" class="headerlink" title="启用Menu"></a>启用Menu</h3><p>默认的<em>Hexo</em>页面中<em>Menu</em>是没有被启动的。</p>
-<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/menu-1.png"></div>
+<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/menu-1.png" width="60%"></div>
 
 <p>启动<em>Menu</em>需要到主题文件夹<code>themes/next</code>中修改 <em>_config.yml</em>文件，启用<em>home</em>、<em>tags</em>、<em>categories</em>、<em>archives</em>。</p>
 <div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/menu-2.png"></div>
