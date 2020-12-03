@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo blog embellishing</title>
+    <title>Start from Hexo. Chapter 2</title>
     <url>/2020/12/03/Hexo-blog-embellishing/</url>
-    <content><![CDATA[<p>记录建立<em>Hexo</em>博客后，逐步优化的过程。<br>目前包括<em>Hexo Menu设置</em>、<em>Hexo语言设置</em>、<em>搜索栏启用</em>、<em>Hexo图片引用</em>……</p>
+    <content><![CDATA[<p>记录建立<em>Hexo</em>博客后，逐步优化的过程。<br>目前包括<em>Hexo Menu设置</em>、<em>Hexo语言设置</em>、<em>搜索栏启用</em>、<em>Hexo图片引用</em>、<em>分类与标签</em>、<em>个人资料格式</em>。</p>
+<div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/1.jpg"></div>
+
 <a id="more"></a>
 
-<h2 id="Menu"><a href="#Menu" class="headerlink" title="Menu"></a>Menu</h2><h3 id="启用Menu"><a href="#启用Menu" class="headerlink" title="启用Menu"></a>启用Menu</h3><p>默认的<em>Hexo</em>页面中<em>Menu</em>是没有被启动的。</p>
+<h2 id="Menu"><a href="#Menu" class="headerlink" title="Menu"></a>Menu</h2><h3 id="启用Menu"><a href="#启用Menu" class="headerlink" title="启用Menu"></a>启用Menu</h3><p>默认的<em>Hexo</em>页面中<em>Menu</em>是没有被启用的。</p>
 <div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/menu-1.png" width="60%"></div>
 
 <p>启动<em>Menu</em>需要到主题文件夹<code>themes/next</code>中修改 <em>_config.yml</em>文件，启用<em>home</em>、<em>tags</em>、<em>categories</em>、<em>archives</em>。</p>
@@ -91,16 +93,18 @@
 <h3 id="个人链接"><a href="#个人链接" class="headerlink" title="个人链接"></a>个人链接</h3><div align="center"><img src="/2020/12/03/Hexo-blog-embellishing/social-1.png" , width="80%"></div>
 ]]></content>
       <categories>
-        <category>编程</category>
+        <category>杂技</category>
       </categories>
       <tags>
         <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
-    <title>Start from Hexo</title>
+    <title>Start from Hexo. Chapter 1</title>
     <url>/2020/12/01/Start-from-hexo/</url>
     <content><![CDATA[<p>这是一个自己搭建<em>Hexo</em>博客的记录，踩过的坑和耍过的花样都在这里！</p>
+<div align="center"><img src="/2020/12/01/Start-from-hexo/1.jpg"></div>
+
 <a id="more"></a>
 
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Nodejs-和-Hexo"><a href="#Nodejs-和-Hexo" class="headerlink" title="Nodejs 和 Hexo"></a>Nodejs 和 Hexo</h3><p>在安装<em>Hexo</em>之前，<a href="https://nodejs.org/en/">点这里</a>下载并安装<em>Nodejs</em>。</p>
@@ -163,7 +167,7 @@
 <div align="center"><img src="/2020/12/01/Start-from-hexo/givme1sec-1.png"></div>
 ]]></content>
       <categories>
-        <category>编程</category>
+        <category>杂技</category>
       </categories>
       <tags>
         <tag>Hexo</tag>
