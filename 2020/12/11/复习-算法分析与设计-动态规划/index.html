@@ -29,7 +29,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://givme1sec.github.io/2020/12/11/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/a.jpg">
 <meta property="article:published_time" content="2020-12-11T07:53:52.000Z">
-<meta property="article:modified_time" content="2020-12-15T15:12:38.398Z">
+<meta property="article:modified_time" content="2020-12-17T12:44:32.110Z">
 <meta property="article:author" content="Etin Ban">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="数据结构">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-15 23:12:38" itemprop="dateModified" datetime="2020-12-15T23:12:38+08:00">2020-12-15</time>
+                <time title="修改时间：2020-12-17 20:44:32" itemprop="dateModified" datetime="2020-12-17T20:44:32+08:00">2020-12-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -300,7 +300,7 @@ x_i \in \{0, 1\}\qquad & \qquad 2 \le i \le n
 <script type="math/tex; mode=display">
 m(i,j)=\left\{
 \begin{aligned}
-\max\{m(i+1), m(i+1, j-w_i)+v_i\} & \qquad j \le w_i \\
+\max\{m(i,j), m(i+1, j-w_i)+v_i\} & \qquad j \le w_i \\
 m(i+1, j) \qquad \qquad \qquad& \qquad 0 \le j \le w_i
 \end{aligned}
 \right.</script><p><strong>算法描述</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Knapsack</span><span class="params">(Comparable v, <span class="keyword">int</span> w, <span class="keyword">int</span> c, <span class="keyword">int</span> n, Comparable** m)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> jMax = Math.min(w[n]-<span class="number">1</span>, c);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= jMax; j++)&#123;</span><br><span class="line">        m[n][j] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = w[n]; j &lt;= c; j++)&#123;</span><br><span class="line">        m[n][j] = v[n];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n-<span class="number">1</span>; i &gt; <span class="number">1</span>; i--)&#123;</span><br><span class="line">        jMax = Math.min(w[i]-<span class="number">1</span>, c);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= jMax; j++)&#123;</span><br><span class="line">            m[i][j] = m[i+<span class="number">1</span>][j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = w[i]; j &lt;= c; j++)&#123;</span><br><span class="line">            m[i][j] = Math.max(m[i+<span class="number">1</span>][j], m[i+<span class="number">1</span>][j-w[i]]+v[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        m[<span class="number">1</span>][c] = m[<span class="number">2</span>][c];</span><br><span class="line">        <span class="keyword">if</span>(c &gt;= w[<span class="number">1</span>])&#123;</span><br><span class="line">            m[<span class="number">1</span>][c] = Math.max(m[<span class="number">1</span>][c], m[<span class="number">2</span>][c-w[<span class="number">1</span>]]+v[<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Traceback</span><span class="params">(Comparable **m, <span class="keyword">int</span> w, <span class="keyword">int</span> n, <span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(m[i][c] == m[i+<span class="number">1</span>][c])&#123;</span><br><span class="line">            x[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            x[i] = <span class="number">1</span>;</span><br><span class="line">            c -= w[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    x[n] = (m[n][c]) ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -308,7 +308,7 @@ m(i+1, j) \qquad \qquad \qquad& \qquad 0 \le j \le w_i
 <p>给定一个由$n$个互异的关键字组成的有序序列$S=\{x_1, x_2,…, x_n\}$和它们被查询的概率$P=\{p_1, p_2,…, p_n\}$，要求构造一颗二叉搜索树$T$，使得查询所有元素的总的代价最小。对于一个搜索树，当搜索的元素在树内时，表示搜索成功；当不在树内时，表示搜索失败，用一个“虚叶子结点”来表示搜索失败的情况，因此需要$n+1$个虚叶子结点$\{d_0, d_1,…, d_n\}$，对应于$d_i$的概率序列是$Q=\{q_0, q_1,…, q_n\}$，其中$d_0$表示搜索元素小于$x_1$的失败情况，$d_n$表示搜索元素大于$x_n$的失败情况。$d_i(0&lt;i&lt;n)$表示搜索结点在$x_i$和$x_{i+1}$之间时的失败情况。因此有：</p>
 <p>$\sum_{i=1}^np_i+\sum_{i=0}^nq_i=1$</p>
 <p>由每个结点和每个虚拟结点被搜索的概率，可以确定在一颗给定的二叉搜索树$T$内一次搜索的期望代价$E(T)$。</p>
-<p>$E(T)=\sum_{i=1}^n(depth_T(x_i)+1)<em>p_i+\sum_{i=0}^n(depth_T(d_i)+1)</em>q_i$<br>$=1+\sum_{i=1}^ndepth_T(x_i)<em>p_i+\sum_{i=0}^ndepth_T(d_i)</em>q_i$</p>
+<p>$E(T)=\sum_{i=1}^n(depth_T(x_i)+1)<em>p_i+\sum_{i=0}^n(depth_T(d_i)+1)</em>q_i=1+\sum_{i=1}^ndepth_T(x_i)<em>p_i+\sum_{i=0}^ndepth_T(d_i)</em>q_i$</p>
 <p><strong>需要注意的是，一颗最优二叉搜索树不一定是一颗整体高度最小的树，也不一定总是把最大概率的结点放在根部。</strong></p>
 <p>定义$e_{i,j}$为搜索一颗包含关键字$x_i,x_{i+1},…,x_j$的最优二叉搜索树的期望代价。$e_{i,j}=w_{i,j}*distance_{i,j}$，$distance_{i,j}$为二叉树$T_{i,j}$的平均路长。<br>当 $j=i-1$ 时：<br>此时只有虚拟结点$d_{i-1}$，故$e_{i,i-1}=q_{i-1}$</p>
 <p>当 $j \ge i$ 时：<br>需要从$x_i,…,x_j$中选择一个$x_k$，来构造一颗最优二叉搜索树，其中$x_i,…,x_{k-1}$作为左子树，$x_{k+1},…,x_j$作为右子树。定义概率总和为：</p>
@@ -340,7 +340,10 @@ m(i+1, j) \qquad \qquad \qquad& \qquad 0 \le j \le w_i
     <a href="/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E5%88%86%E6%B2%BB%E6%B3%95/" rel="prev" title="[复习]算法分析与设计-分治篇">
       <i class="fa fa-chevron-left"></i> [复习]算法分析与设计-分治篇
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" rel="next" title="JVM学习笔记1-内存与垃圾回收">
+      JVM学习笔记1-内存与垃圾回收 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -415,20 +418,20 @@ m(i+1, j) \qquad \qquad \qquad& \qquad 0 \le j \le w_i
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -463,7 +466,7 @@ m(i+1, j) \qquad \qquad \qquad& \qquad 0 \le j \le w_i
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
