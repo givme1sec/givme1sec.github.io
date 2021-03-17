@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://givme1sec.github.io/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/jdk7heap.png">
 <meta property="og:image" content="https://givme1sec.github.io/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/jdk8heap.png">
 <meta property="article:published_time" content="2021-03-11T12:46:46.000Z">
-<meta property="article:modified_time" content="2021-03-16T10:26:53.022Z">
+<meta property="article:modified_time" content="2021-03-17T01:32:36.642Z">
 <meta property="article:author" content="Etin Ban">
 <meta property="article:tag" content="JVM">
 <meta property="article:tag" content="Garbage Collection">
@@ -237,7 +237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-16 18:26:53" itemprop="dateModified" datetime="2021-03-16T18:26:53+08:00">2021-03-16</time>
+                <time title="修改时间：2021-03-17 09:32:36" itemprop="dateModified" datetime="2021-03-17T09:32:36+08:00">2021-03-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,10 +272,9 @@
 <h2 id="JVM发展史"><a href="#JVM发展史" class="headerlink" title="JVM发展史"></a>JVM发展史</h2><p>这一部分就简要介绍一下吧，Java虚拟机的发展按顺序可以写为：<br><em>Sun Classic/Exact VM</em>——&gt;<em>HotSpot VM</em>——&gt;<em>Mobile VM</em>——&gt;<em>JRockit 9</em>——&gt;<em>Liquid VM</em>、<em>Azul VM</em>——&gt;<em>Dalvik VM</em></p>
 <h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><p>虚拟机可以分为<strong>系统虚拟机</strong>和<strong>程序虚拟机</strong>。系统虚拟机，如VMWare，是对物理计算机的仿真，提供一个可运行完整操作系统的平台。程序虚拟机，如JVM，专门为执行单个计算机指令而设计。<br>Java虚拟机是一台执行Java字节码的虚拟计算机，其运行的Java字节码不一定由Java语言编译而成。特点<strong>①一次编译，到处运行②自动内存管理③自动垃圾回收</strong>。</p>
 <h3 id="JVM的位置"><a href="#JVM的位置" class="headerlink" title="JVM的位置"></a>JVM的位置</h3><div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/jvmposition.png" width="80%"></div>
-JVM运行在操作系统之上，与硬件没有直接交互。
 
-## JVM整体结构
-<div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/jvmstructure.png" width="80%"></div>
+<p>JVM运行在操作系统之上，与硬件没有直接交互。</p>
+<h2 id="JVM整体结构"><a href="#JVM整体结构" class="headerlink" title="JVM整体结构"></a>JVM整体结构</h2><div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/jvmstructure.png" width="80%"></div>
 
 <h3 id="类加载子系统"><a href="#类加载子系统" class="headerlink" title="类加载子系统"></a>类加载子系统</h3><p>$\bullet$ 类加载子系统负责从文件系统或者网络中加载Class文件，至于它是否可以运行，则由执行引擎决定。<br>$\bullet$ 加载的类信息存在方法区中。</p>
 <div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/classloader.png" width="80%"></div>
@@ -421,7 +420,7 @@ JVM运行在操作系统之上，与硬件没有直接交互。
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E5%8F%91%E5%B1%95%E5%8F%B2"><span class="nav-number">1.</span> <span class="nav-text">JVM发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">2.</span> <span class="nav-text">虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">2.1.</span> <span class="nav-text">JVM的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.2.</span> <span class="nav-text">类加载子系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text">类的加载过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%EF%BC%88%E5%AF%B9%E5%BA%94%E5%9B%9B%E4%B8%AA%EF%BC%89%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text">两种（对应四个）类加载器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">2.2.3.</span> <span class="nav-text">双亲委派机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">2.2.4.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E4%B8%BB%E5%8A%A8%E4%BD%BF%E7%94%A8%E5%92%8C%E8%A2%AB%E5%8A%A8%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.5.</span> <span class="nav-text">类的主动使用和被动使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA"><span class="nav-number">2.3.</span> <span class="nav-text">运行时数据区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.3.1.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88%E6%97%A0OOM%E3%80%81%E6%97%A0GC%EF%BC%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">程序计数器（无OOM、无GC）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%EF%BC%88%E6%9C%89OOM%E3%80%81%E6%9C%89SOF%E3%80%81%E6%97%A0GC%EF%BC%89"><span class="nav-number">2.3.3.</span> <span class="nav-text">虚拟机栈（有OOM、有SOF、无GC）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%88%E8%BF%90%E8%A1%8C%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">栈运行的原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A1%A8%EF%BC%88Local-Variables%EF%BC%89"><span class="nav-number">2.3.3.2.</span> <span class="nav-text">局部变量表（Local Variables）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%EF%BC%88Operand-Stack%EF%BC%89"><span class="nav-number">2.3.3.3.</span> <span class="nav-text">操作数栈（Operand Stack）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%BF%9E%E6%8E%A5%EF%BC%88Dynamic-Linking%EF%BC%89"><span class="nav-number">2.3.3.4.</span> <span class="nav-text">动态连接（Dynamic Linking）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%87%BA%E5%8F%A3%EF%BC%88Return-Address%EF%BC%89"><span class="nav-number">2.3.3.5.</span> <span class="nav-text">方法出口（Return Address）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88"><span class="nav-number">2.3.4.</span> <span class="nav-text">本地方法栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A0%86%EF%BC%88%E6%9C%89OOM%EF%BC%8C%E6%9C%89GC%EF%BC%89"><span class="nav-number">2.3.5.</span> <span class="nav-text">堆（有OOM，有GC）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E7%A9%BA%E9%97%B4%E7%9A%84%E5%88%92%E5%88%86%EF%BC%88%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%90%86%E8%AE%BA%EF%BC%89%EF%BC%9A"><span class="nav-number">2.3.5.1.</span> <span class="nav-text">堆空间的划分（分代收集理论）：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D%E8%BF%87%E7%A8%8B"><span class="nav-number">2.3.5.2.</span> <span class="nav-text">对象分配过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E7%A9%BA%E9%97%B4%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="nav-number">2.3.5.3.</span> <span class="nav-text">堆空间设置参数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="nav-number">2.3.6.</span> <span class="nav-text">方法区</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E"><span class="nav-number">2.4.</span> <span class="nav-text">执行引擎</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E5%8F%91%E5%B1%95%E5%8F%B2"><span class="nav-number">1.</span> <span class="nav-text">JVM发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">2.</span> <span class="nav-text">虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">2.1.</span> <span class="nav-text">JVM的位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">JVM整体结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.1.</span> <span class="nav-text">类加载子系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-number">3.1.1.</span> <span class="nav-text">类的加载过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%EF%BC%88%E5%AF%B9%E5%BA%94%E5%9B%9B%E4%B8%AA%EF%BC%89%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">3.1.2.</span> <span class="nav-text">两种（对应四个）类加载器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">3.1.3.</span> <span class="nav-text">双亲委派机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.1.4.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E4%B8%BB%E5%8A%A8%E4%BD%BF%E7%94%A8%E5%92%8C%E8%A2%AB%E5%8A%A8%E4%BD%BF%E7%94%A8"><span class="nav-number">3.1.5.</span> <span class="nav-text">类的主动使用和被动使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA"><span class="nav-number">3.2.</span> <span class="nav-text">运行时数据区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B"><span class="nav-number">3.2.1.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88%E6%97%A0OOM%E3%80%81%E6%97%A0GC%EF%BC%89"><span class="nav-number">3.2.2.</span> <span class="nav-text">程序计数器（无OOM、无GC）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%EF%BC%88%E6%9C%89OOM%E3%80%81%E6%9C%89SOF%E3%80%81%E6%97%A0GC%EF%BC%89"><span class="nav-number">3.2.3.</span> <span class="nav-text">虚拟机栈（有OOM、有SOF、无GC）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%88%E8%BF%90%E8%A1%8C%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">栈运行的原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A1%A8%EF%BC%88Local-Variables%EF%BC%89"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">局部变量表（Local Variables）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%EF%BC%88Operand-Stack%EF%BC%89"><span class="nav-number">3.2.3.3.</span> <span class="nav-text">操作数栈（Operand Stack）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%BF%9E%E6%8E%A5%EF%BC%88Dynamic-Linking%EF%BC%89"><span class="nav-number">3.2.3.4.</span> <span class="nav-text">动态连接（Dynamic Linking）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%87%BA%E5%8F%A3%EF%BC%88Return-Address%EF%BC%89"><span class="nav-number">3.2.3.5.</span> <span class="nav-text">方法出口（Return Address）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88"><span class="nav-number">3.2.4.</span> <span class="nav-text">本地方法栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A0%86%EF%BC%88%E6%9C%89OOM%EF%BC%8C%E6%9C%89GC%EF%BC%89"><span class="nav-number">3.2.5.</span> <span class="nav-text">堆（有OOM，有GC）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E7%A9%BA%E9%97%B4%E7%9A%84%E5%88%92%E5%88%86%EF%BC%88%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%90%86%E8%AE%BA%EF%BC%89%EF%BC%9A"><span class="nav-number">3.2.5.1.</span> <span class="nav-text">堆空间的划分（分代收集理论）：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D%E8%BF%87%E7%A8%8B"><span class="nav-number">3.2.5.2.</span> <span class="nav-text">对象分配过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E7%A9%BA%E9%97%B4%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="nav-number">3.2.5.3.</span> <span class="nav-text">堆空间设置参数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="nav-number">3.2.6.</span> <span class="nav-text">方法区</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E"><span class="nav-number">3.3.</span> <span class="nav-text">执行引擎</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -568,6 +567,59 @@ JVM运行在操作系统之上，与硬件没有直接交互。
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
