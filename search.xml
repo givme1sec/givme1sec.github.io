@@ -94,16 +94,16 @@
       </tags>
   </entry>
   <entry>
-    <title>JVM学习笔记3-性能监控与调优</title>
-    <url>/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03-%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98/</url>
+    <title>JVM学习笔记2-字节码与类的加载</title>
+    <url>/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>JVM</category>
       </categories>
   </entry>
   <entry>
-    <title>JVM学习笔记2-字节码与类的加载</title>
-    <url>/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/</url>
+    <title>JVM学习笔记3-性能监控与调优</title>
+    <url>/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03-%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>JVM</category>
@@ -415,14 +415,14 @@ x_i \in \{0, 1\},1 \le i \le n
 <div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/1.png"></div>
 
 <a id="more"></a>
-<h2 id="JVM发展史"><a href="#JVM发展史" class="headerlink" title="JVM发展史"></a>JVM发展史</h2><p>这一部分就简要介绍一下吧，Java虚拟机的发展按顺序可以写为：<br><em>Sun Classic/Exact VM</em>——&gt;<em>HotSpot VM</em>——&gt;<em>Mobile VM</em>——&gt;<em>JRockit 9</em>——&gt;<em>Liquid VM</em>、<em>Azul VM</em>——&gt;<em>Dalvik VM</em></p>
+<h2 id="JVM发展史"><a href="#JVM发展史" class="headerlink" title="JVM发展史"></a>JVM发展史</h2><p>这一部分就简要介绍一下吧，Java虚拟机的发展按顺序可以写为：t1<br><em>Sun Classic/Exact VM</em>——&gt;<em>HotSpot VM</em>——&gt;<em>Mobile VM</em>——&gt;<em>JRockit 9</em>——&gt;<em>Liquid VM</em>、<em>Azul VM</em>——&gt;<em>Dalvik VM</em></p>
 <h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><p>虚拟机可以分为<strong>系统虚拟机</strong>和<strong>程序虚拟机</strong>。系统虚拟机，如VMWare，是对物理计算机的仿真，提供一个可运行完整操作系统的平台。程序虚拟机，如JVM，专门为执行单个计算机指令而设计。<br>Java虚拟机是一台执行Java字节码的虚拟计算机，其运行的Java字节码不一定由Java语言编译而成。特点<strong>①一次编译，到处运行②自动内存管理③自动垃圾回收</strong>。</p>
 <h3 id="JVM的位置"><a href="#JVM的位置" class="headerlink" title="JVM的位置"></a>JVM的位置</h3><div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/jvmposition.png" width="80%"></div>
 
 <p>JVM运行在操作系统之上，与硬件没有直接交互。</p>
-<h2 id="JVM整体结构"><a href="#JVM整体结构" class="headerlink" title="JVM整体结构"></a>JVM整体结构</h2><div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/jvmstructure.png" width="80%"></div>
+<h2 id="JVM整体结构"><a href="#JVM整体结构" class="headerlink" title="JVM整体结构"></a>JVM整体结构</h2><div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/jvmstructure.png" width="60%"></div>
 
-<h3 id="类加载子系统"><a href="#类加载子系统" class="headerlink" title="类加载子系统"></a>类加载子系统</h3><p>$\bullet$ 类加载子系统负责从文件系统或者网络中加载Class文件，至于它是否可以运行，则由执行引擎决定。<br>$\bullet$ 加载的类信息存在方法区中。   </p>
+<h3 id="类加载子系统"><a href="#类加载子系统" class="headerlink" title="类加载子系统"></a>类加载子系统</h3><p>$\bullet$ 类加载子系统负责从文件系统或者网络中加载Class文件，至于它是否可以运行，则由执行引擎决定。<br><br>$\bullet$ 加载的类信息存在方法区中。   </p>
 <div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/classloader.png" width="80%"></div>
 
 <h4 id="类的加载过程"><a href="#类的加载过程" class="headerlink" title="类的加载过程"></a>类的加载过程</h4><p><strong>加载阶段：</strong><br>在内存中生成一个代表这个类的java.lang.Class对象，作为方法区这个类的各种数据的访问入口。</p>
@@ -701,7 +701,7 @@ x_i \in \{0, 1\},1 \le i \le n
 </div>
 <div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/gczuhe2.png" width="80%"></div>
 
-<p><strong>——黑色实线</strong> 表示两个回收器可以搭配使用；<br>$\color{red}- -红色虚线$ 表示JDK 8时将Serial+CMS、ParNew+Serial Old声明废弃，并在JDK 9中完全取消。<br>$\color{green}- -绿色虚线$ 表示在JDK 14中弃用Parallel Scavenge+SerialOld。<br>$\color{blue}- -青色虚线$ 表示在JDK 14中删除CMS。<br>$\color{gray}CMS与Parallel Scavenge不兼容，CMS与Serial Old作为储备方案。不同的GC适用不同的场景，要妥善选择。$</p>
+<p><strong>——黑色实线</strong> 表示两个回收器可以搭配使用；<br>$\color{red}- -红色虚线$ 表示JDK 8时将Serial+CMS、ParNew+Serial Old声明废弃，并在JDK 9中完全取消。<br>$\color{green}- -绿色虚线$ 表示在JDK 14中弃用Parallel Scavenge+SerialOld。<br>$\color{blue}- -青色虚线$ 表示在JDK 14中删除CMS。<br>CMS与Parallel Scavenge不兼容，CMS与Serial Old作为储备方案。不同的GC适用不同的场景，要妥善选择。</p>
 <h5 id="GC的主要性能指标"><a href="#GC的主要性能指标" class="headerlink" title="GC的主要性能指标"></a>GC的主要性能指标</h5><p><strong>吞吐量（Throughput）：</strong> 运行用户代码的时间占总运行时间的比例。</p>
 <p>$吞吐量={运行用户代码时间 \over 运行用户代码时间+垃圾收集时间}$</p>
 <p>吞吐量优先，意味着在单位时间内，STW时间最短。<br><strong>暂停时间（Pause Time）：</strong> 执行垃圾收集时，程序的工作线程被暂停的时间。<br>暂停时间短一般回收频率高，延迟低。暂停时间和吞吐量之间的关系是此消彼长的，二者的折衷方案是，<strong>最大吞吐量优先的情况下，降低停顿时间</strong>。<br><strong>内存占用：</strong> Java堆区所占的内存大小。</p>
