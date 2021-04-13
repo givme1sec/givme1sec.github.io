@@ -45,7 +45,7 @@
 <meta property="og:image" content="https://givme1sec.github.io/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/classunload.png">
 <meta property="og:image" content="https://givme1sec.github.io/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/hotexchange.png">
 <meta property="article:published_time" content="2021-03-11T12:51:44.000Z">
-<meta property="article:modified_time" content="2021-04-13T13:36:41.697Z">
+<meta property="article:modified_time" content="2021-04-13T13:42:19.046Z">
 <meta property="article:author" content="Etin Ban">
 <meta property="article:tag" content="字节码">
 <meta property="article:tag" content="类">
@@ -244,7 +244,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-13 21:36:41" itemprop="dateModified" datetime="2021-04-13T21:36:41+08:00">2021-04-13</time>
+                <time title="修改时间：2021-04-13 21:42:19" itemprop="dateModified" datetime="2021-04-13T21:42:19+08:00">2021-04-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -311,18 +311,14 @@
 <div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/classfile1.png" width="80%"></div>
 
 <h3 id="解读字节码文件"><a href="#解读字节码文件" class="headerlink" title="解读字节码文件"></a>解读字节码文件</h3><p>① Jclasslib（或IDEA中Jclasslib插件）<br>② javap指令：JDK自带的反解析工具 <code>javap -v Test.class</code>或<code>javap -v Test.class &gt; Test.txt</code><br>④ Binary Viewer<br>③ Notepad++中HEX-editor插件</p>
-<h3 id="字节码文件格式"><a href="#字节码文件格式" class="headerlink" title="字节码文件格式"></a>字节码文件格式</h3><p>Class文件没有分隔符，其中的字节顺序、数量都被严格限制。<br>Class文件格式用类似C语言结构体的方式进行数据存储，这种结构只有两种数据类型：<strong>无符号数</strong>和<strong>表</strong>。<br>$\bullet$ 无符号数属于基本的数据类型，以u1、u2、u4、u8来分别代表1个字节、2个字节、4个字节和8个字节无符号数，无符号数可以用来描述数字、索引引用、数量值或者按照UTF-8编码构成字符串值。<br>$\bullet$ 表示由多个无符号数或者其他表作为数据项构成的复合数据类型，所有表都习惯性地以<code>_info</code>结尾。表用于描述有层次关系的复合结构的数据，整个Class文件本质上就是一张表。由于表没有固定长度，所以通常会在其前面加上个数说明。</p>
+<h3 id="字节码文件格式"><a href="#字节码文件格式" class="headerlink" title="字节码文件格式"></a>字节码文件格式</h3><p>Class文件没有分隔符，其中的字节顺序、数量都被严格限制。<br>Class文件格式用类似C语言结构体的方式进行数据存储，这种结构只有两种数据类型：<strong>无符号数</strong>和<strong>表</strong>。<br>$\bullet$ 无符号数属于基本的数据类型，以u1、u2、u4、u8来分别代表1个字节、2个字节、4个字节和8个字节无符号数，无符号数可以用来描述数字、索引引用、数量值或者按照UTF-8编码构成字符串值。<br><br>$\bullet$ 表示由多个无符号数或者其他表作为数据项构成的复合数据类型，所有表都习惯性地以<code>_info</code>结尾。表用于描述有层次关系的复合结构的数据，整个Class文件本质上就是一张表。由于表没有固定长度，所以通常会在其前面加上个数说明。</p>
 <h3 id="字节码文件结构"><a href="#字节码文件结构" class="headerlink" title="字节码文件结构"></a>字节码文件结构</h3><p>字节码文件的基本结构和框架是非常稳定的，如下：</p>
-<div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/classfilestruc.png"></div><br>
+<div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/classfilestruc.png"></div>
 
-以**Demo.class**的字节码文件为例：
-
+<p>以<strong>Demo.class</strong>的字节码文件为例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Demo.class</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ind <span class="title">add</span><span class="params">()</span></span>&#123;</span><br><span class="line">        num = num + <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-*编译Demo.class后得到的字节码文件：*
-
+<p><em>编译Demo.class后得到的字节码文件：</em></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">ca	fe	ba	be	00	00	00	34	00	16	0a	00	04	00	12	09</span><br><span class="line">00	03	00	13	07	00	14	07	00	15	01	00	03	6e	75	6d</span><br><span class="line">01	00	01	49	01	00	06	3c	69	6e	69	74	3e	01	00	03</span><br><span class="line">28	29	56	01	00	04	43	6f	64	65	01	00	0f	4c	69	6e</span><br><span class="line">65	4e	75	6d	62	65	72	54	61	62	6c	65	01	00	12	4c</span><br><span class="line">6f	63	61	6c	56	61	72	69	61	62	6c	65	54	61	62	6c</span><br><span class="line">65	01	00	04	74	68	69	73	01	00	13	4c	63	6f	6d	2f</span><br><span class="line">63	6f	6d	70	61	6e	79	2f	44	65	6d	6f	31	3b	01	00</span><br><span class="line">03	61	64	64	01	00	03	28	29	49	01	00	0a	53	6f	75</span><br><span class="line">72	63	65	46	69	6c	65	01	00	0a	44	65	6d	6f	31	2e</span><br><span class="line">6a	61	76	61	0c	00	07	00	08	0c	00	05	00	06	01	00</span><br><span class="line">11	63	6f	6d	2f	63	6f	6d	70	61	6e	79	2f	44	65	6d</span><br><span class="line">6f	31	01	00	10	6a	61	76	61	2f	6c	61	6e	67	2f	4f</span><br><span class="line">62	6a	65	63	74	00	21	00	03	00	04	00	00	00	01	00</span><br><span class="line">02	00	05	00	06	00	00	00	02	00	01	00	07	00	08	00</span><br><span class="line">01	00	09	00	00	00	38	00	02	00	01	00	00	00	0a	2a</span><br><span class="line">b7	00	01	2a	04	b5	00	02	b1	00	00	00	02	00	0a	00</span><br><span class="line">00	00	0a	00	02	00	00	00	03	00	04	00	04	00	0b	00</span><br><span class="line">00	00	0c	00	01	00	00	00	0a	00	0c	00	0d	00	00	00</span><br><span class="line">01	00	0e	00	0f	00	01	00	09	00	00	00	3d	00	03	00</span><br><span class="line">01	00	00	00	0f	2a	2a	b4	00	02	05	60	b5	00	02	2a</span><br><span class="line">b4	00	02	ac	00	00	00	02	00	0a	00	00	00	0a	00	02</span><br><span class="line">00	00	00	06	00	0a	00	07	00	0b	00	00	00	0c	00	01</span><br><span class="line">00	00	00	0f	00	0c	00	0d	00	00	00	01	00	10	00	00</span><br><span class="line">00	02	00	11											</span><br></pre></td></tr></table></figure>
-
 <div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/classfile2.jpg"></div>
 
 
@@ -404,100 +400,328 @@
 <p>常量池是Class文件中的资源仓库，是Class文件结构中与其他项目关联最多的数据类型，也是占用Class文件空间最大的数据项目之一。<br></p>
 <p>$\bullet$ 之后是<strong>访问标识（access_flag）</strong>，<strong>2个字节</strong>，用来识别一些类或者接口层次访问信息。</p>
 <p>在<code>Demo.class</code>文件中<code>access_flag</code>的值为<code>0x0021</code>，是<code>ACC_PUBLIC</code>和<code>ACC_SUPER</code>的加和。</p>
-<div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/accessflag.png" width="90%"></div><br>
+<div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/accessflag.png" width="90%"></div>
 
-① 如果一个Class文件被设置了```ACC_INTERFACE```标志，那么同时也要设置```ACC_ABSTRACT```标志，并不能再设置```ACC_FINAL```、```ACC_SUPER```和```ACC_ENUM```。
-
-② 如果没有设置```ACC_INTERFACE```标志，那么这个Class文件可以设置上表中除```ACC_ANNOTATION```以外的所有标志，但```ACC_FINAL```和```ACC_ABSTRACT```是互斥的不可同时设置。
-
-③ 针对Java虚拟机指令集的编译器都应当设置```ACC_SUPER```。
-
-④ 注解类型必须设置```ACC_ANNOTATION```标志。
-
-$\bullet$ 访问标记后，会指定该**类的类别、父类类别以及实现的接口**，格式如下：
-
-|长度|含义|
-|-|-|
-|u2|this_class|
-|u2|super_class|
-|u2|interfaces_count|
-|u2|interfaces[interfaces_count]|
-
-$\bullet$ **字段表集合**用于描述接口或类中声明的变量，**包括**类级变量以及实例级变量，**不包括**方法内部、代码块内部声明的局部变量和从父类、实现的接口中继承的字段。字段表集合指向常量池索引的集合。
-字段表结构如下：
-
-|类型|名称|含义|数量|
-|-|-|-|-|
-|u2|access_flags|访问标志|1|
-|u2|name_index|字段名索引|1|
-|u2|descriptor_index|描述符索引|1|
-|u2|attributes_count|属性计数器|1|
-|attribute_info|attributes|属性集合|attributes_count|
-
-其中，字段表访问标志：
-
-|标志名称|标志值|含义|
-|-|-|-|
-|ACC_PUBLIC|0x0001|字段是否为public|
-|ACC_PRIVATE|0x0002|字段是否为private|
-|ACC_PROTECTED|0x0004|字段是否为protected|
-|ACC_STATIC|0x0008|字段是否为static|
-|ACC_FINAL|0x0010|字段是否为final|
-|ACC_VOLATILE|0x0040|字段是否为volatile|
-|ACC_TRANSIENT|0x0080|字段是否为transient|
-|ACC_SYNCHETIC|0x1000|字段是否由编译器自动产生|
-|ACC_ENUM|0x4000|字段是否为enum|
-
-
-$\bullet$ **方法表集合**指向常量池索引集合，描述每个方法的签名。字节码文件中每一个method_info都对应这一个类或者接口中的方法信息。methods表**包括**当前类或接口中的方法，**不包括**从父类或接口中继承的方法。
-方法表结构与字段表一样，如下：
-
-|类型|名称|含义|数量|
-|-|-|-|-|
-|u2|access_flags|访问标志|1|
-|u2|name_index|方法名索引|1|
-|u2|descriptor_index|描述符索引|1|
-|u2|attributes_count|属性计数器|1|
-|attribute_info|attributes|属性集合|attributes_count|
-
-访问标志：
-
-|标志名称|标志值|含义|
-|-|-|-|
-|ACC_PUBLIC|0x0001|public，方法可以从包外访问|
-|ACC_PRIVATE|0x0002|private，方法之能本类中访问|
-|ACC_PROTECTED|0x0004|protected，方法在自身和子类可以访问|
-|ACC_STATIC|0x0008|static，静态方法|
-|ACC_FINAL|0x0010|final|
-|ACC_VOLATILE|0x0040|volatile|
-|ACC_TRANSIENT|0x0080|transient|
-|ACC_SYNCHETIC|0x1000|字段是否由编译器自动产生|
-|ACC_ENUM|0x4000|enum|
-
-$\bullet$ **属性表集合**描述Class文件携带的辅助信息，通常被用于Java虚拟机的验证和运行，以及Java程序的调试，一般无须深入了解。
-
-以属性表的Code属性为例，Code属性表结构如下：
-
-|类型|名称|数量|含义|
-|-|-|-|-|
-|u2|attribute_name_index|1|属性名索引|
-|u4|attribute_length|1|属性长度|
-|u2|max_stack|1|操作数栈深度的最大值|
-|u2|max_locals|1|局部变量表所需的存续空间|
-|u4|code_length|1|字节码指令的长度|
-|u1|code|code_length|存储字节码指令|
-|u2|exception_table_length|1|异常表长度|
-|exception_info|exception_table|exception_length|异常表|
-|u2|attributes_count|1|属性集合计数器|
-|attribute_info|attributes|attributes_count|属性集合|
-
-Code属性中还有```LineNumberTable```和```LocalVariableTable```两个内部属性。
-
-### 指令解析Class文件
-#### 编译指令
-<figure class="highlight plain"><figcaption><span>-g```的区别：</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">&#96;&#96;&#96;javac test.java&#96;&#96;&#96;编译后得到的字节码文件不会生成对应的局部变量表等信息。&#96;&#96;&#96;javac -g test.java&#96;&#96;&#96;则可以。默认情况下，Eclipse和IEDA在编译时也会生成局部变量表、指令和代码行偏移量映射表等信息。</span><br><span class="line"></span><br><span class="line">#### 反编译指令</span><br><span class="line">使用&#96;&#96;&#96;javap&#96;&#96;&#96;或&#96;&#96;&#96;javap -help&#96;&#96;&#96;可以看到可用选项。</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;javap.png&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">使用&#96;&#96;&#96;javap -v Demo.class &gt; Demo.txt&#96;&#96;&#96;反解析字节码文件存入&#96;&#96;&#96;Demo.txt&#96;&#96;&#96;中：</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;javap1.png&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;javap2.png&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">## 字节码指令</span><br><span class="line"></span><br><span class="line">Java字节码对于虚拟机，就好像汇编语言对于计算机，属于基本执行指令。</span><br><span class="line"></span><br><span class="line">Java虚拟机的指令由一个字节长度的、代表着某种特定操作含义的数字（称为操作码，Opcode）以及跟随其后的零至多个代表此操作所需参数（称为操作数，Operands）而构成。由于Java虚拟机采用面向操作数栈而不是寄存器的结构，所以大多数的指令都不包含操作数，只有一个操作码。</span><br><span class="line"></span><br><span class="line">对于大部分与数据类型相关的字节码指令，它们的操作码助记符中都有特殊的字符来表明专门为哪种数据类型服务。</span><br><span class="line"></span><br><span class="line">**i** 代表对 **int** 类型的数据操作</span><br><span class="line">**l** 代表 **long**</span><br><span class="line">**s** 代表 **short**</span><br><span class="line">**b** 代表 **byte**</span><br><span class="line">**c** 代表 **char**</span><br><span class="line">**f** 代表 **float**</span><br><span class="line">**d** 代表 **double**</span><br><span class="line"></span><br><span class="line">由于大部分指令都没有支持整数类型byte、char、short和boolean，编译器会在编译期或运行期将byte和short类型的数据（和数组）带符号扩展为相应的int类型数据。</span><br><span class="line"></span><br><span class="line">JVM中的字节码指令集按照用途大致可以分成9类：</span><br><span class="line">$\bullet$ 加载与存储指令 &lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 算术指令&lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 对象的创建与访问指令&lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 方法调用与返回指令&lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 操作数栈管理指令&lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 比较控制指令&lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 异常处理指令&lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 同步控制指令&lt;br &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">### 加载与存储指令</span><br><span class="line">加载和存储指令用于将数据从栈帧的局部变量表和操作数栈之间来回传递。</span><br><span class="line">**常用指令：**</span><br><span class="line">① 带有&#96;&#96;&#96;load&#96;&#96;&#96;、&#96;&#96;&#96;push&#96;&#96;&#96;、&#96;&#96;&#96;const&#96;&#96;&#96;、&#96;&#96;&#96;ldc&#96;&#96;&#96;的指令都是把数据压入操作数栈。</span><br><span class="line">② 带有&#96;&#96;&#96;store&#96;&#96;&#96;的指令都是把数据保存在栈帧的局部变量表中。</span><br><span class="line"></span><br><span class="line">**局部变量压栈指令：**</span><br><span class="line">将一个局部变量加载到操作数栈。</span><br><span class="line">① &#96;&#96;&#96;[x]load&#96;&#96;&#96;、&#96;&#96;&#96;[x]load_&lt;n&gt;&#96;&#96;&#96;</span><br><span class="line">其中&#96;&#96;&#96;x&#96;&#96;&#96;为&#96;&#96;&#96;i&#96;&#96;&#96;、&#96;&#96;&#96;l&#96;&#96;&#96;、&#96;&#96;&#96;f&#96;&#96;&#96;、&#96;&#96;&#96;d&#96;&#96;&#96;、&#96;&#96;&#96;a&#96;&#96;&#96;、&#96;&#96;&#96;n&#96;&#96;&#96;</span><br><span class="line">其中&#96;&#96;&#96;n&#96;&#96;&#96;为&#96;&#96;&#96;0&#96;&#96;&#96;、&#96;&#96;&#96;1&#96;&#96;&#96;、&#96;&#96;&#96;2&#96;&#96;&#96;、&#96;&#96;&#96;3&#96;&#96;&#96;</span><br><span class="line">如&#96;&#96;&#96;iload_3&#96;&#96;&#96;、&#96;&#96;&#96;iload 4&#96;&#96;&#96; n </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**常用入栈指令：**</span><br><span class="line">将一个常量加载到操作数栈。</span><br><span class="line">①&#96;&#96;&#96;bipush&#96;&#96;&#96;、&#96;&#96;&#96;sipush&#96;&#96;&#96;、&#96;&#96;&#96;ldc&#96;&#96;&#96;、&#96;&#96;&#96;ldc_w&#96;&#96;&#96;、&#96;&#96;&#96;ldc2_w&#96;&#96;&#96;、&#96;&#96;&#96;aconst_null&#96;&#96;&#96;、&#96;&#96;&#96;iconst_ml&#96;&#96;&#96;、&#96;&#96;&#96;iconst_&lt;i&gt;&#96;&#96;&#96;、&#96;&#96;&#96;lconst_&lt;l&gt;&#96;&#96;&#96;、&#96;&#96;&#96;fconst_&lt;f&gt;&#96;&#96;&#96;、&#96;&#96;&#96;dconst_&lt;d&gt;&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">**出栈装入局部变量表指令：**</span><br><span class="line">将一个数值从操作数栈存储到局部变量表。</span><br><span class="line">① &#96;&#96;&#96;xstore&#96;&#96;&#96;、&#96;&#96;&#96;xstore_&lt;n&gt;&#96;&#96;&#96;</span><br><span class="line">其中&#96;&#96;&#96;x&#96;&#96;&#96;为&#96;&#96;&#96;i&#96;&#96;&#96;、&#96;&#96;&#96;l&#96;&#96;&#96;、&#96;&#96;&#96;f&#96;&#96;&#96;、&#96;&#96;&#96;d&#96;&#96;&#96;、&#96;&#96;&#96;a&#96;&#96;&#96;、&#96;&#96;&#96;n&#96;&#96;&#96;</span><br><span class="line">其中&#96;&#96;&#96;n&#96;&#96;&#96;为&#96;&#96;&#96;0&#96;&#96;&#96;、&#96;&#96;&#96;1&#96;&#96;&#96;、&#96;&#96;&#96;2&#96;&#96;&#96;、&#96;&#96;&#96;3&#96;&#96;&#96;</span><br><span class="line">② &#96;&#96;&#96;xastore&#96;&#96;&#96;</span><br><span class="line">其中&#96;&#96;&#96;x&#96;&#96;&#96;为&#96;&#96;&#96;i&#96;&#96;&#96;、&#96;&#96;&#96;l&#96;&#96;&#96;、&#96;&#96;&#96;f&#96;&#96;&#96;、&#96;&#96;&#96;d&#96;&#96;&#96;、&#96;&#96;&#96;a&#96;&#96;&#96;、&#96;&#96;&#96;b&#96;&#96;&#96;、&#96;&#96;&#96;c&#96;&#96;&#96;、&#96;&#96;&#96;s&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 复习：操作数栈与局部变量表</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;stackframe.png&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">**操作数栈**用于存放计算的操作数以及返回结果。执行每一条指令之前，Java虚拟机要求该指令的操作数已经被压入操作数栈中。执行指令时，Java虚拟机将该指令所需的操作数弹出，并将指令的结果压入栈中。</span><br><span class="line">**局部变量表**中存放计算的缓存结果。局部变量表中按照Slot进行划分，一个Slot可以存放4个字节的数据，且非静态方法中索引为0的位置存放this。</span><br><span class="line"></span><br><span class="line">#### 局部变量表压栈指令</span><br><span class="line"></span><br><span class="line">**代码：**</span><br><span class="line">&#96;&#96;&#96;java</span><br><span class="line">public class LoadAndStoreTest &#123;</span><br><span class="line">    public void load(int num, Object obj, long count, boolean flag, short[] arr)&#123;</span><br><span class="line">        System.out.println(num);</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">        System.out.println(count);</span><br><span class="line">        System.out.println(flag);</span><br><span class="line">        System.out.println(arr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-**字节码指令：**
-
+<p>① 如果一个Class文件被设置了<code>ACC_INTERFACE</code>标志，那么同时也要设置<code>ACC_ABSTRACT</code>标志，并不能再设置<code>ACC_FINAL</code>、<code>ACC_SUPER</code>和<code>ACC_ENUM</code>。</p>
+<p>② 如果没有设置<code>ACC_INTERFACE</code>标志，那么这个Class文件可以设置上表中除<code>ACC_ANNOTATION</code>以外的所有标志，但<code>ACC_FINAL</code>和<code>ACC_ABSTRACT</code>是互斥的不可同时设置。</p>
+<p>③ 针对Java虚拟机指令集的编译器都应当设置<code>ACC_SUPER</code>。</p>
+<p>④ 注解类型必须设置<code>ACC_ANNOTATION</code>标志。</p>
+<p>$\bullet$ 访问标记后，会指定该<strong>类的类别、父类类别以及实现的接口</strong>，格式如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>长度</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u2</td>
+<td>this_class</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>super_class</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>interfaces_count</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>interfaces[interfaces_count]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>$\bullet$ <strong>字段表集合</strong>用于描述接口或类中声明的变量，<strong>包括</strong>类级变量以及实例级变量，<strong>不包括</strong>方法内部、代码块内部声明的局部变量和从父类、实现的接口中继承的字段。字段表集合指向常量池索引的集合。<br>字段表结构如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>名称</th>
+<th>含义</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u2</td>
+<td>access_flags</td>
+<td>访问标志</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>name_index</td>
+<td>字段名索引</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>descriptor_index</td>
+<td>描述符索引</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>attributes_count</td>
+<td>属性计数器</td>
+<td>1</td>
+</tr>
+<tr>
+<td>attribute_info</td>
+<td>attributes</td>
+<td>属性集合</td>
+<td>attributes_count</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其中，字段表访问标志：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标志名称</th>
+<th>标志值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACC_PUBLIC</td>
+<td>0x0001</td>
+<td>字段是否为public</td>
+</tr>
+<tr>
+<td>ACC_PRIVATE</td>
+<td>0x0002</td>
+<td>字段是否为private</td>
+</tr>
+<tr>
+<td>ACC_PROTECTED</td>
+<td>0x0004</td>
+<td>字段是否为protected</td>
+</tr>
+<tr>
+<td>ACC_STATIC</td>
+<td>0x0008</td>
+<td>字段是否为static</td>
+</tr>
+<tr>
+<td>ACC_FINAL</td>
+<td>0x0010</td>
+<td>字段是否为final</td>
+</tr>
+<tr>
+<td>ACC_VOLATILE</td>
+<td>0x0040</td>
+<td>字段是否为volatile</td>
+</tr>
+<tr>
+<td>ACC_TRANSIENT</td>
+<td>0x0080</td>
+<td>字段是否为transient</td>
+</tr>
+<tr>
+<td>ACC_SYNCHETIC</td>
+<td>0x1000</td>
+<td>字段是否由编译器自动产生</td>
+</tr>
+<tr>
+<td>ACC_ENUM</td>
+<td>0x4000</td>
+<td>字段是否为enum</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>$\bullet$ <strong>方法表集合</strong>指向常量池索引集合，描述每个方法的签名。字节码文件中每一个method_info都对应这一个类或者接口中的方法信息。methods表<strong>包括</strong>当前类或接口中的方法，<strong>不包括</strong>从父类或接口中继承的方法。<br>方法表结构与字段表一样，如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>名称</th>
+<th>含义</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u2</td>
+<td>access_flags</td>
+<td>访问标志</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>name_index</td>
+<td>方法名索引</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>descriptor_index</td>
+<td>描述符索引</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>attributes_count</td>
+<td>属性计数器</td>
+<td>1</td>
+</tr>
+<tr>
+<td>attribute_info</td>
+<td>attributes</td>
+<td>属性集合</td>
+<td>attributes_count</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>访问标志：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标志名称</th>
+<th>标志值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACC_PUBLIC</td>
+<td>0x0001</td>
+<td>public，方法可以从包外访问</td>
+</tr>
+<tr>
+<td>ACC_PRIVATE</td>
+<td>0x0002</td>
+<td>private，方法之能本类中访问</td>
+</tr>
+<tr>
+<td>ACC_PROTECTED</td>
+<td>0x0004</td>
+<td>protected，方法在自身和子类可以访问</td>
+</tr>
+<tr>
+<td>ACC_STATIC</td>
+<td>0x0008</td>
+<td>static，静态方法</td>
+</tr>
+<tr>
+<td>ACC_FINAL</td>
+<td>0x0010</td>
+<td>final</td>
+</tr>
+<tr>
+<td>ACC_VOLATILE</td>
+<td>0x0040</td>
+<td>volatile</td>
+</tr>
+<tr>
+<td>ACC_TRANSIENT</td>
+<td>0x0080</td>
+<td>transient</td>
+</tr>
+<tr>
+<td>ACC_SYNCHETIC</td>
+<td>0x1000</td>
+<td>字段是否由编译器自动产生</td>
+</tr>
+<tr>
+<td>ACC_ENUM</td>
+<td>0x4000</td>
+<td>enum</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>$\bullet$ <strong>属性表集合</strong>描述Class文件携带的辅助信息，通常被用于Java虚拟机的验证和运行，以及Java程序的调试，一般无须深入了解。</p>
+<p>以属性表的Code属性为例，Code属性表结构如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>名称</th>
+<th>数量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u2</td>
+<td>attribute_name_index</td>
+<td>1</td>
+<td>属性名索引</td>
+</tr>
+<tr>
+<td>u4</td>
+<td>attribute_length</td>
+<td>1</td>
+<td>属性长度</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>max_stack</td>
+<td>1</td>
+<td>操作数栈深度的最大值</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>max_locals</td>
+<td>1</td>
+<td>局部变量表所需的存续空间</td>
+</tr>
+<tr>
+<td>u4</td>
+<td>code_length</td>
+<td>1</td>
+<td>字节码指令的长度</td>
+</tr>
+<tr>
+<td>u1</td>
+<td>code</td>
+<td>code_length</td>
+<td>存储字节码指令</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>exception_table_length</td>
+<td>1</td>
+<td>异常表长度</td>
+</tr>
+<tr>
+<td>exception_info</td>
+<td>exception_table</td>
+<td>exception_length</td>
+<td>异常表</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>attributes_count</td>
+<td>1</td>
+<td>属性集合计数器</td>
+</tr>
+<tr>
+<td>attribute_info</td>
+<td>attributes</td>
+<td>attributes_count</td>
+<td>属性集合</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Code属性中还有<code>LineNumberTable</code>和<code>LocalVariableTable</code>两个内部属性。</p>
+<h3 id="指令解析Class文件"><a href="#指令解析Class文件" class="headerlink" title="指令解析Class文件"></a>指令解析Class文件</h3><h4 id="编译指令"><a href="#编译指令" class="headerlink" title="编译指令"></a>编译指令</h4><figure class="highlight plain"><figcaption><span>-g```的区别：</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">&#96;&#96;&#96;javac test.java&#96;&#96;&#96;编译后得到的字节码文件不会生成对应的局部变量表等信息。&#96;&#96;&#96;javac -g test.java&#96;&#96;&#96;则可以。默认情况下，Eclipse和IEDA在编译时也会生成局部变量表、指令和代码行偏移量映射表等信息。</span><br><span class="line"></span><br><span class="line">#### 反编译指令</span><br><span class="line">使用&#96;&#96;&#96;javap&#96;&#96;&#96;或&#96;&#96;&#96;javap -help&#96;&#96;&#96;可以看到可用选项。</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;javap.png&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">使用&#96;&#96;&#96;javap -v Demo.class &gt; Demo.txt&#96;&#96;&#96;反解析字节码文件存入&#96;&#96;&#96;Demo.txt&#96;&#96;&#96;中：</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;javap1.png&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;javap2.png&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">## 字节码指令</span><br><span class="line"></span><br><span class="line">Java字节码对于虚拟机，就好像汇编语言对于计算机，属于基本执行指令。</span><br><span class="line"></span><br><span class="line">Java虚拟机的指令由一个字节长度的、代表着某种特定操作含义的数字（称为操作码，Opcode）以及跟随其后的零至多个代表此操作所需参数（称为操作数，Operands）而构成。由于Java虚拟机采用面向操作数栈而不是寄存器的结构，所以大多数的指令都不包含操作数，只有一个操作码。</span><br><span class="line"></span><br><span class="line">对于大部分与数据类型相关的字节码指令，它们的操作码助记符中都有特殊的字符来表明专门为哪种数据类型服务。</span><br><span class="line"></span><br><span class="line">**i** 代表对 **int** 类型的数据操作</span><br><span class="line">**l** 代表 **long**</span><br><span class="line">**s** 代表 **short**</span><br><span class="line">**b** 代表 **byte**</span><br><span class="line">**c** 代表 **char**</span><br><span class="line">**f** 代表 **float**</span><br><span class="line">**d** 代表 **double**</span><br><span class="line"></span><br><span class="line">由于大部分指令都没有支持整数类型byte、char、short和boolean，编译器会在编译期或运行期将byte和short类型的数据（和数组）带符号扩展为相应的int类型数据。</span><br><span class="line"></span><br><span class="line">JVM中的字节码指令集按照用途大致可以分成9类：</span><br><span class="line">$\bullet$ 加载与存储指令 &lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 算术指令&lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 对象的创建与访问指令&lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 方法调用与返回指令&lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 操作数栈管理指令&lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 比较控制指令&lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 异常处理指令&lt;br &#x2F;&gt;</span><br><span class="line">$\bullet$ 同步控制指令&lt;br &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">### 加载与存储指令</span><br><span class="line">加载和存储指令用于将数据从栈帧的局部变量表和操作数栈之间来回传递。</span><br><span class="line">**常用指令：**</span><br><span class="line">① 带有&#96;&#96;&#96;load&#96;&#96;&#96;、&#96;&#96;&#96;push&#96;&#96;&#96;、&#96;&#96;&#96;const&#96;&#96;&#96;、&#96;&#96;&#96;ldc&#96;&#96;&#96;的指令都是把数据压入操作数栈。</span><br><span class="line">② 带有&#96;&#96;&#96;store&#96;&#96;&#96;的指令都是把数据保存在栈帧的局部变量表中。</span><br><span class="line"></span><br><span class="line">**局部变量压栈指令：**</span><br><span class="line">将一个局部变量加载到操作数栈。</span><br><span class="line">① &#96;&#96;&#96;[x]load&#96;&#96;&#96;、&#96;&#96;&#96;[x]load_&lt;n&gt;&#96;&#96;&#96;</span><br><span class="line">其中&#96;&#96;&#96;x&#96;&#96;&#96;为&#96;&#96;&#96;i&#96;&#96;&#96;、&#96;&#96;&#96;l&#96;&#96;&#96;、&#96;&#96;&#96;f&#96;&#96;&#96;、&#96;&#96;&#96;d&#96;&#96;&#96;、&#96;&#96;&#96;a&#96;&#96;&#96;、&#96;&#96;&#96;n&#96;&#96;&#96;</span><br><span class="line">其中&#96;&#96;&#96;n&#96;&#96;&#96;为&#96;&#96;&#96;0&#96;&#96;&#96;、&#96;&#96;&#96;1&#96;&#96;&#96;、&#96;&#96;&#96;2&#96;&#96;&#96;、&#96;&#96;&#96;3&#96;&#96;&#96;</span><br><span class="line">如&#96;&#96;&#96;iload_3&#96;&#96;&#96;、&#96;&#96;&#96;iload 4&#96;&#96;&#96; n </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**常用入栈指令：**</span><br><span class="line">将一个常量加载到操作数栈。</span><br><span class="line">①&#96;&#96;&#96;bipush&#96;&#96;&#96;、&#96;&#96;&#96;sipush&#96;&#96;&#96;、&#96;&#96;&#96;ldc&#96;&#96;&#96;、&#96;&#96;&#96;ldc_w&#96;&#96;&#96;、&#96;&#96;&#96;ldc2_w&#96;&#96;&#96;、&#96;&#96;&#96;aconst_null&#96;&#96;&#96;、&#96;&#96;&#96;iconst_ml&#96;&#96;&#96;、&#96;&#96;&#96;iconst_&lt;i&gt;&#96;&#96;&#96;、&#96;&#96;&#96;lconst_&lt;l&gt;&#96;&#96;&#96;、&#96;&#96;&#96;fconst_&lt;f&gt;&#96;&#96;&#96;、&#96;&#96;&#96;dconst_&lt;d&gt;&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">**出栈装入局部变量表指令：**</span><br><span class="line">将一个数值从操作数栈存储到局部变量表。</span><br><span class="line">① &#96;&#96;&#96;xstore&#96;&#96;&#96;、&#96;&#96;&#96;xstore_&lt;n&gt;&#96;&#96;&#96;</span><br><span class="line">其中&#96;&#96;&#96;x&#96;&#96;&#96;为&#96;&#96;&#96;i&#96;&#96;&#96;、&#96;&#96;&#96;l&#96;&#96;&#96;、&#96;&#96;&#96;f&#96;&#96;&#96;、&#96;&#96;&#96;d&#96;&#96;&#96;、&#96;&#96;&#96;a&#96;&#96;&#96;、&#96;&#96;&#96;n&#96;&#96;&#96;</span><br><span class="line">其中&#96;&#96;&#96;n&#96;&#96;&#96;为&#96;&#96;&#96;0&#96;&#96;&#96;、&#96;&#96;&#96;1&#96;&#96;&#96;、&#96;&#96;&#96;2&#96;&#96;&#96;、&#96;&#96;&#96;3&#96;&#96;&#96;</span><br><span class="line">② &#96;&#96;&#96;xastore&#96;&#96;&#96;</span><br><span class="line">其中&#96;&#96;&#96;x&#96;&#96;&#96;为&#96;&#96;&#96;i&#96;&#96;&#96;、&#96;&#96;&#96;l&#96;&#96;&#96;、&#96;&#96;&#96;f&#96;&#96;&#96;、&#96;&#96;&#96;d&#96;&#96;&#96;、&#96;&#96;&#96;a&#96;&#96;&#96;、&#96;&#96;&#96;b&#96;&#96;&#96;、&#96;&#96;&#96;c&#96;&#96;&#96;、&#96;&#96;&#96;s&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 复习：操作数栈与局部变量表</span><br><span class="line"></span><br><span class="line">&lt;div align&#x3D;&quot;center&quot;&gt;&lt;img src&#x3D;&quot;stackframe.png&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">**操作数栈**用于存放计算的操作数以及返回结果。执行每一条指令之前，Java虚拟机要求该指令的操作数已经被压入操作数栈中。执行指令时，Java虚拟机将该指令所需的操作数弹出，并将指令的结果压入栈中。</span><br><span class="line">**局部变量表**中存放计算的缓存结果。局部变量表中按照Slot进行划分，一个Slot可以存放4个字节的数据，且非静态方法中索引为0的位置存放this。</span><br><span class="line"></span><br><span class="line">#### 局部变量表压栈指令</span><br><span class="line"></span><br><span class="line">**代码：**</span><br><span class="line">&#96;&#96;&#96;java</span><br><span class="line">public class LoadAndStoreTest &#123;</span><br><span class="line">    public void load(int num, Object obj, long count, boolean flag, short[] arr)&#123;</span><br><span class="line">        System.out.println(num);</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">        System.out.println(count);</span><br><span class="line">        System.out.println(flag);</span><br><span class="line">        System.out.println(arr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>字节码指令：</strong></p>
 <div align="center"><img src="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/loadandstore1.png"></div>
 
 <h4 id="常量入栈指令"><a href="#常量入栈指令" class="headerlink" title="常量入栈指令"></a>常量入栈指令</h4><h5 id="const指令"><a href="#const指令" class="headerlink" title="const指令"></a>const指令</h5><p>整型：<code>iconst_&lt;i&gt;：i∈[-1, -5]，其中iconst_m1将-1压入栈</code><br>长整型：<code>lconst_&lt;l&gt;：l∈[0, 1]</code><br>float型：<code>fconst_&lt;f&gt;：f∈[0, 2]</code><br>double型：<code>dconst_&lt;d&gt;：d∈[0, 1]</code><br>null值：<code>aconst_null</code></p>
@@ -809,7 +1033,7 @@ Code属性中还有```LineNumberTable```和```LocalVariableTable```两个内部�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E7%9C%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E7%BB%86%E8%8A%82"><span class="nav-number">1.</span> <span class="nav-text">字节码看代码执行细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B1"><span class="nav-number">1.1.</span> <span class="nav-text">举例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B2"><span class="nav-number">1.2.</span> <span class="nav-text">举例2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B3"><span class="nav-number">1.3.</span> <span class="nav-text">举例3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">Class文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">字节码文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">字节码指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E8%AF%BB%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">解读字节码文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.4.</span> <span class="nav-text">字节码文件格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">2.5.</span> <span class="nav-text">字节码文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E5%85%A5%E6%A0%88%E6%8C%87%E4%BB%A4"><span class="nav-number">2.5.1.</span> <span class="nav-text">常量入栈指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#const%E6%8C%87%E4%BB%A4"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">const指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#push%E6%8C%87%E4%BB%A4"><span class="nav-number">2.5.1.2.</span> <span class="nav-text">push指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ldc%E6%8C%87%E4%BB%A4"><span class="nav-number">2.5.1.3.</span> <span class="nav-text">ldc指令</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BA%E6%A0%88%E8%A3%85%E5%85%A5%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A1%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">2.5.2.</span> <span class="nav-text">出栈装入局部变量表指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E6%8C%87%E4%BB%A4"><span class="nav-number">2.6.</span> <span class="nav-text">算术指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%8C%87%E4%BB%A4"><span class="nav-number">2.6.1.</span> <span class="nav-text">比较指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E6%8C%87%E4%BB%A4"><span class="nav-number">2.7.</span> <span class="nav-text">类型转换指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E8%AE%BF%E9%97%AE%E6%8C%87%E4%BB%A4"><span class="nav-number">2.7.1.</span> <span class="nav-text">字段访问指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E4%B8%8E%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4"><span class="nav-number">2.8.</span> <span class="nav-text">方法调用与返回指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">2.8.1.</span> <span class="nav-text">方法调用指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4"><span class="nav-number">2.8.2.</span> <span class="nav-text">方法返回指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%AE%A1%E7%90%86%E6%8C%87%E4%BB%A4"><span class="nav-number">2.9.</span> <span class="nav-text">操作数栈管理指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">2.10.</span> <span class="nav-text">控制转移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="nav-number">2.10.1.</span> <span class="nav-text">条件跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="nav-number">2.10.2.</span> <span class="nav-text">比较条件跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="nav-number">2.10.3.</span> <span class="nav-text">多条件分支跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="nav-number">2.10.4.</span> <span class="nav-text">无条件跳转指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%8C%87%E4%BB%A4"><span class="nav-number">2.11.</span> <span class="nav-text">异常处理指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E6%8C%87%E4%BB%A4"><span class="nav-number">2.11.1.</span> <span class="nav-text">抛出异常指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%8C%87%E4%BB%A4-1"><span class="nav-number">2.11.2.</span> <span class="nav-text">异常处理指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%8E%A7%E5%88%B6%E6%8C%87%E4%BB%A4"><span class="nav-number">2.12.</span> <span class="nav-text">同步控制指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD"><span class="nav-number">3.</span> <span class="nav-text">类的加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B1%EF%BC%9ALoading%EF%BC%88%E5%8A%A0%E8%BD%BD%EF%BC%89%E9%98%B6%E6%AE%B5"><span class="nav-number">3.1.</span> <span class="nav-text">过程1：Loading（加载）阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B2%EF%BC%9ALinking%EF%BC%88%E9%93%BE%E6%8E%A5%EF%BC%89%E9%98%B6%E6%AE%B5"><span class="nav-number">3.2.</span> <span class="nav-text">过程2：Linking（链接）阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">3.2.1.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">3.2.2.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">3.2.3.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B3%EF%BC%9AInitialization%EF%BC%88%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%89%E9%98%B6%E6%AE%B5"><span class="nav-number">3.3.</span> <span class="nav-text">过程3：Initialization（初始化）阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E4%B8%BB%E5%8A%A8%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="nav-number">3.3.1.</span> <span class="nav-text">类的主动使用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E8%A2%AB%E5%8A%A8%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="nav-number">3.3.2.</span> <span class="nav-text">类的被动使用：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B4%EF%BC%9A%E7%B1%BB%E7%9A%84Using%EF%BC%88%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">过程4：类的Using（使用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B5%EF%BC%9A%E7%B1%BB%E7%9A%84Unloading%EF%BC%88%E5%8D%B8%E8%BD%BD%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">过程5：类的Unloading（卸载）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E3%80%81%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8%E3%80%81%E7%B1%BB%E7%9A%84%E5%AE%9E%E4%BE%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E5%BC%95%E7%94%A8%E5%85%B3%E7%B3%BB"><span class="nav-number">3.5.1.</span> <span class="nav-text">类、类的加载器、类的实例之间的引用关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">3.5.2.</span> <span class="nav-text">类的生命周期</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">类的加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%96%B9%E5%BC%8F"><span class="nav-number">4.1.1.</span> <span class="nav-text">类的加载方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="nav-number">4.1.2.</span> <span class="nav-text">命名空间</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8-1"><span class="nav-number">4.2.</span> <span class="nav-text">类的加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%89%98%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%BC%8A%E7%AB%AF"><span class="nav-number">4.2.1.</span> <span class="nav-text">双亲委托模式的弊端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%89%98%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%A0%B4%E5%9D%8F"><span class="nav-number">4.2.2.</span> <span class="nav-text">双亲委托模式的破坏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%83%AD%E6%9B%BF%E6%8D%A2"><span class="nav-number">4.2.3.</span> <span class="nav-text">热替换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java9%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-number">4.3.</span> <span class="nav-text">Java9新特性</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E7%9C%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E7%BB%86%E8%8A%82"><span class="nav-number">1.</span> <span class="nav-text">字节码看代码执行细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B1"><span class="nav-number">1.1.</span> <span class="nav-text">举例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B2"><span class="nav-number">1.2.</span> <span class="nav-text">举例2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B3"><span class="nav-number">1.3.</span> <span class="nav-text">举例3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">Class文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">字节码文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">字节码指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E8%AF%BB%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">解读字节码文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.4.</span> <span class="nav-text">字节码文件格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">2.5.</span> <span class="nav-text">字节码文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E8%A7%A3%E6%9E%90Class%E6%96%87%E4%BB%B6"><span class="nav-number">2.6.</span> <span class="nav-text">指令解析Class文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4"><span class="nav-number">2.6.1.</span> <span class="nav-text">编译指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E5%85%A5%E6%A0%88%E6%8C%87%E4%BB%A4"><span class="nav-number">2.6.2.</span> <span class="nav-text">常量入栈指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#const%E6%8C%87%E4%BB%A4"><span class="nav-number">2.6.2.1.</span> <span class="nav-text">const指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#push%E6%8C%87%E4%BB%A4"><span class="nav-number">2.6.2.2.</span> <span class="nav-text">push指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ldc%E6%8C%87%E4%BB%A4"><span class="nav-number">2.6.2.3.</span> <span class="nav-text">ldc指令</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BA%E6%A0%88%E8%A3%85%E5%85%A5%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A1%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">2.6.3.</span> <span class="nav-text">出栈装入局部变量表指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E6%8C%87%E4%BB%A4"><span class="nav-number">2.7.</span> <span class="nav-text">算术指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%8C%87%E4%BB%A4"><span class="nav-number">2.7.1.</span> <span class="nav-text">比较指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E6%8C%87%E4%BB%A4"><span class="nav-number">2.8.</span> <span class="nav-text">类型转换指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E8%AE%BF%E9%97%AE%E6%8C%87%E4%BB%A4"><span class="nav-number">2.8.1.</span> <span class="nav-text">字段访问指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E4%B8%8E%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4"><span class="nav-number">2.9.</span> <span class="nav-text">方法调用与返回指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">2.9.1.</span> <span class="nav-text">方法调用指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4"><span class="nav-number">2.9.2.</span> <span class="nav-text">方法返回指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%AE%A1%E7%90%86%E6%8C%87%E4%BB%A4"><span class="nav-number">2.10.</span> <span class="nav-text">操作数栈管理指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">2.11.</span> <span class="nav-text">控制转移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="nav-number">2.11.1.</span> <span class="nav-text">条件跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="nav-number">2.11.2.</span> <span class="nav-text">比较条件跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="nav-number">2.11.3.</span> <span class="nav-text">多条件分支跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="nav-number">2.11.4.</span> <span class="nav-text">无条件跳转指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%8C%87%E4%BB%A4"><span class="nav-number">2.12.</span> <span class="nav-text">异常处理指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E6%8C%87%E4%BB%A4"><span class="nav-number">2.12.1.</span> <span class="nav-text">抛出异常指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%8C%87%E4%BB%A4-1"><span class="nav-number">2.12.2.</span> <span class="nav-text">异常处理指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%8E%A7%E5%88%B6%E6%8C%87%E4%BB%A4"><span class="nav-number">2.13.</span> <span class="nav-text">同步控制指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD"><span class="nav-number">3.</span> <span class="nav-text">类的加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B1%EF%BC%9ALoading%EF%BC%88%E5%8A%A0%E8%BD%BD%EF%BC%89%E9%98%B6%E6%AE%B5"><span class="nav-number">3.1.</span> <span class="nav-text">过程1：Loading（加载）阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B2%EF%BC%9ALinking%EF%BC%88%E9%93%BE%E6%8E%A5%EF%BC%89%E9%98%B6%E6%AE%B5"><span class="nav-number">3.2.</span> <span class="nav-text">过程2：Linking（链接）阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">3.2.1.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">3.2.2.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">3.2.3.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B3%EF%BC%9AInitialization%EF%BC%88%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%89%E9%98%B6%E6%AE%B5"><span class="nav-number">3.3.</span> <span class="nav-text">过程3：Initialization（初始化）阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E4%B8%BB%E5%8A%A8%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="nav-number">3.3.1.</span> <span class="nav-text">类的主动使用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E8%A2%AB%E5%8A%A8%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="nav-number">3.3.2.</span> <span class="nav-text">类的被动使用：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B4%EF%BC%9A%E7%B1%BB%E7%9A%84Using%EF%BC%88%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">过程4：类的Using（使用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B5%EF%BC%9A%E7%B1%BB%E7%9A%84Unloading%EF%BC%88%E5%8D%B8%E8%BD%BD%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">过程5：类的Unloading（卸载）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E3%80%81%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8%E3%80%81%E7%B1%BB%E7%9A%84%E5%AE%9E%E4%BE%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E5%BC%95%E7%94%A8%E5%85%B3%E7%B3%BB"><span class="nav-number">3.5.1.</span> <span class="nav-text">类、类的加载器、类的实例之间的引用关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">3.5.2.</span> <span class="nav-text">类的生命周期</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">类的加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%96%B9%E5%BC%8F"><span class="nav-number">4.1.1.</span> <span class="nav-text">类的加载方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="nav-number">4.1.2.</span> <span class="nav-text">命名空间</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8-1"><span class="nav-number">4.2.</span> <span class="nav-text">类的加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%89%98%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%BC%8A%E7%AB%AF"><span class="nav-number">4.2.1.</span> <span class="nav-text">双亲委托模式的弊端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%89%98%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%A0%B4%E5%9D%8F"><span class="nav-number">4.2.2.</span> <span class="nav-text">双亲委托模式的破坏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%83%AD%E6%9B%BF%E6%8D%A2"><span class="nav-number">4.2.3.</span> <span class="nav-text">热替换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java9%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-number">4.3.</span> <span class="nav-text">Java9新特性</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
