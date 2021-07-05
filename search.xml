@@ -396,7 +396,7 @@ x_i \in \{0, 1\},1 \le i \le n
     <title>简单上手树莓派</title>
     <url>/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/</url>
     <content><![CDATA[<p>最近入手了一块树莓派3B+的板子，想外接墨水屏做个 <strong>天气预报+ToDoList</strong> 的常亮桌饰。（不是为了当作嵌入式系统课程的作业…🐕）</p>
-<div align="center"><img src="/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/1.png"></div>
+<div align="center"><img src="/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/tilte.jpg"></div>
 
 <a id="more"></a>
 <p>第一次玩树莓派，从淘宝下单板子到收货这段时间，还是查了很多资料的，上手的时候各种小问题层出不穷，写个blog记录一下，顺便水一篇更新。</p>
