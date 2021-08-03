@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta property="og:type" content="article">
+<meta property="og:title" content="[复习]算法分析与设计-贪心篇">
+<meta property="og:url" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Et1nnn&#39;s Notes">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/a.jpg">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/复习-算法分析与设计-贪心算法/dijkstra.png">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/prim1.png">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/prim1.jpg">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/prim2.jpg">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/prim3.jpg">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/prim4.jpg">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/prim5.jpg">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/kruskal1.jpg">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/kruskal2.jpg">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/kruskal3.jpg">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/kruskal4.jpg">
+<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/kruskal5.jpg">
+<meta property="article:published_time" content="2020-12-08T12:15:37.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:12:24.000Z">
+<meta property="article:author" content="Etin Ban">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="贪心">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/a.jpg">
+
+
+<link rel="canonical" href="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/","path":"2020/12/08/复习-算法分析与设计-贪心算法/","title":"[复习]算法分析与设计-贪心篇"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[复习]算法分析与设计-贪心篇 | Et1nnn's Notes</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Et1nnn's Notes</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">record every step</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B4%BB%E5%8A%A8%E5%AE%89%E6%8E%92%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">活动安排问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%88%E7%89%A9%E5%93%81%E5%8F%AF%E4%BB%A5%E5%88%92%E5%88%86%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">背包问题（物品可以划分）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E8%A3%85%E8%BD%BD%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">最优装载问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">哈夫曼编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="nav-number">5.</span> <span class="nav-text">单源最短路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijkstra"><span class="nav-number">5.1.</span> <span class="nav-text">Dijkstra</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E7%AE%97%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">最小生成树算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prim"><span class="nav-number">6.1.</span> <span class="nav-text">Prim</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Etin Ban</p>
+  <div class="site-description" itemprop="description">磨刀不误砍柴工，读完硕士再打工</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etin Ban">
+      <meta itemprop="description" content="磨刀不误砍柴工，读完硕士再打工">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Et1nnn's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [复习]算法分析与设计-贪心篇
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-08 20:15:37" itemprop="dateCreated datePublished" datetime="2020-12-08T20:15:37+08:00">2020-12-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-15 23:12:24" itemprop="dateModified" datetime="2020-12-15T23:12:24+08:00">2020-12-15</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div align="center"><img src="a.jpg"></div>
+
+<span id="more"></span>
+
+<h2 id="活动安排问题"><a href="#活动安排问题" class="headerlink" title="活动安排问题"></a>活动安排问题</h2><p>设有$n$个活动的集合$E={1,2,…,n}$，其中每个活动要求使用同一资源，如演讲会场，而在同一时间内只有一个活动能使用这一资源。每个活动 $i$ 都有要求使用该资源的起始时间 $s_i$ 和结束时间 $f_i$，且$s_i \lt f_i$。如果选择了活动 $i$ ，则它在半开时间区间$[s_i, f_i)$内占用资源。若区间$[s_i, f_i)$和$[s_j, f_j)$不相交，则称活动 $i$ 与活动 $j$ 是相容的。也就是说，当$s_i \ge f_j$或$s_j \ge f_i$时，活动 $i$ 与活动 $j$相容。<br>将各活动的起始时间和结束时间分别存储在数组 $s$ 和 $f$ 中，且<strong>按结束时间的非减序列</strong>：$f_1 \le f_2 \le … \le f_n$。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">GreedySelector</span><span class="params">(<span class="keyword">int</span> n, Comparable s[], Comparable f[], <span class="keyword">boolean</span> A[])</span></span>&#123;</span><br><span class="line">    A[<span class="number">1</span>] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i] &gt;= f[j])&#123;</span><br><span class="line">            A[i] = <span class="keyword">true</span>;</span><br><span class="line">            j = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            A[i] = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="背包问题（物品可以划分）"><a href="#背包问题（物品可以划分）" class="headerlink" title="背包问题（物品可以划分）"></a>背包问题（物品可以划分）</h2><p>给定$n$种物品和一背包。物品$i$的重量是$w_i$，其价值为$v_i$，背包的容量为$c$。问应如何选择装入背包中的物品，使得装入背包中物品的总价值最大？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Knapsack</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">float</span> M, <span class="keyword">float</span>[] v, <span class="keyword">float</span>[] w, <span class="keyword">float</span>[] x)</span></span>&#123;</span><br><span class="line">    # 首先计算每种物品的单位价值vi/wi</span><br><span class="line">    # 并按照从大大小的顺序排列，依次选择单位重量价值高</span><br><span class="line">    # 的物品并尽可能多的装入背包，直至背包装满</span><br><span class="line">    Sort(n, v, w);</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        x[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">float</span> c = M;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(w[i] &gt; c)&#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        x[i] = <span class="number">1</span>;</span><br><span class="line">        c -= w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i &lt;= n)&#123;</span><br><span class="line">        x[i] = c/w[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="最优装载问题"><a href="#最优装载问题" class="headerlink" title="最优装载问题"></a>最优装载问题</h2><p>有一批集装箱上要装上一艘重量为 $c$ 的轮船。其中集装箱 $i$ 的重量为 $w_i$ 。最优装载问题要求在装载体积不受限制的情况下，将尽可能多的集装箱装上轮船。即：<br>$$<br>\left{<br>\begin{aligned}<br>\max\sum_{i=1}^nx_i \qquad \<br>\sum_{i=1}^nw_ix_i \le c \qquad<br>\end{aligned}<br>x_i \in {0, 1},1 \le i \le n<br>\right.<br>$$</p>
+<p>其中，$x_i=0$表示不装入集装箱 $i$ ,$x_i=1$表示装入集装箱 $i$。<br>采用重量最轻者先装的贪心选择策略，可得到装载问题的最优解。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Loading</span><span class="params">(<span class="keyword">int</span>[] x, Comparable[] w, Comparable c, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 将重量按从小到大的顺序排列</span></span><br><span class="line">    <span class="comment">// 第i轻的货物在w中的位置为t[i]</span></span><br><span class="line">    <span class="keyword">int</span>[] t = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">    Sort(w, t, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        x[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n &amp;&amp; w[t[i]] &lt;= c; i++)&#123;</span><br><span class="line">        x[t[i]] = <span class="number">1</span>;</span><br><span class="line">        c -= w[t[i]];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h2><p>哈夫曼编码是一种广泛用于数据文件压缩的十分有效的编码方法。通过自底向上的方式构建表示最优前缀码的二叉树。如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">a: 45</span><br><span class="line">b: 13</span><br><span class="line">c: 12</span><br><span class="line">d: 16</span><br><span class="line">e: 9</span><br><span class="line">f: 5</span><br><span class="line"></span><br><span class="line">第一步合并：     第二步合并：     第三步合并：    </span><br><span class="line">  a: 45           a: 45          a: 45</span><br><span class="line">  b: 13         b,c: 25        b,c: 25 </span><br><span class="line">  c: 12           d: 16      d,e,f: 30</span><br><span class="line">  d: 16         e,f: 14</span><br><span class="line">e,f: 14</span><br><span class="line"></span><br><span class="line">       第四步合并：              第五步合并：</span><br><span class="line">        a: 45           a,b,c,d,e,f: 100</span><br><span class="line">b,c,d,e,f: 55 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                        100</span><br><span class="line">                   0   /  \   1</span><br><span class="line">                     /     \</span><br><span class="line">                  a: 45    55</span><br><span class="line">                         /    \</span><br><span class="line">                  0   /         \  1</span><br><span class="line">                   /              \ </span><br><span class="line">                 25               30</span><br><span class="line">            0  /   \  1       0  /  \  1</span><br><span class="line">             /      \          /     \</span><br><span class="line">          b: 13    c: 12    d: 16    14</span><br><span class="line">                                 0  /   \  1</span><br><span class="line">                                  /      \</span><br><span class="line">                                e: 9    f: 5</span><br><span class="line"></span><br><span class="line">故编码为：</span><br><span class="line">a: 0</span><br><span class="line">b: 100</span><br><span class="line">c: 101</span><br><span class="line">d: 110</span><br><span class="line">e: 1110</span><br><span class="line">f: 1111</span><br></pre></td></tr></table></figure>
+
+<h2 id="单源最短路径"><a href="#单源最短路径" class="headerlink" title="单源最短路径"></a>单源最短路径</h2><h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><p>$Dijkstra$算法是解决单源最短路径问题的一个贪心算法。其基本思想是，设置顶点集合$S$，并不断的做贪心选择来扩充这个集合。给定一个带权有向图$S={V, E}$，初始时，$S$中仅含有源。设$u$是$G$的一个顶点，把从源到$u$且中间只经过$S$中顶点的路称为从源到$u$的最短路径并用数组$dist$记录当前顶点所对应的最短特殊路径长度$Dijkstra$算法每次从$V-S$中取出具有最短特殊路长度的顶点$u$，将$u$添加到$S$中，同时对数组$dist$做必要的修改。一旦$S$包含了所有$V$中顶点，$dist$就记录了从源到所有其他顶点之间的最短路径长度。例如：</p>
+<div align="center"><img src="复习-算法分析与设计-贪心算法/dijkstra.png"></div>
+
+<table>
+<thead>
+<tr>
+<th>迭代</th>
+<th>S</th>
+<th>u</th>
+<th>dist[2]</th>
+<th>dist[3]</th>
+<th>dist[4]</th>
+<th>dist[5]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>初始</td>
+<td>{1}</td>
+<td>-</td>
+<td>10</td>
+<td>maxint</td>
+<td>30</td>
+<td>100</td>
+</tr>
+<tr>
+<td>1</td>
+<td>{1,2}</td>
+<td>2</td>
+<td>10</td>
+<td>60</td>
+<td>30</td>
+<td>100</td>
+</tr>
+<tr>
+<td>2</td>
+<td>{1,2,4}</td>
+<td>4</td>
+<td>10</td>
+<td>50</td>
+<td>30</td>
+<td>90</td>
+</tr>
+<tr>
+<td>3</td>
+<td>{1,2,3,4}</td>
+<td>3</td>
+<td>10</td>
+<td>50</td>
+<td>30</td>
+<td>60</td>
+</tr>
+<tr>
+<td>4</td>
+<td>{1,2,3,4,5}</td>
+<td>5</td>
+<td>10</td>
+<td>50</td>
+<td>30</td>
+<td>60</td>
+</tr>
+</tbody></table>
+<h2 id="最小生成树算法"><a href="#最小生成树算法" class="headerlink" title="最小生成树算法"></a>最小生成树算法</h2><h3 id="Prim"><a href="#Prim" class="headerlink" title="Prim"></a>Prim</h3><p>设$G=(V, E)$是连通带权图，$V={1,2,…,n}$。构造$G$的最小生成树的$Prim$算法的基本思想是：首先置$S={1}$，然后，只要$S$是$V$的真子集，就做如下贪心选择：选取满足条件$i \in S, j \in V-S$，且$c[i][j]$（即权值）最小的边，并将顶点$j$添加到$S$中。这个过程一直进行到$S=V$时为止，选取到的所有边恰好构成$G$的一颗最小生成树。</p>
+<div align="center"><img src="prim1.png"width="60%"></div>
+<div><img src="prim1.jpg" width="20%"><img src="prim2.jpg"width="20%"><img src="prim3.jpg"width="20%"><img src="prim4.jpg"width="20%"><img src="prim5.jpg"width="20%"></div>
+### Kruskal
+构造最小生成树的另一个算法是$Kruskal$算法。当图的边数为$e$时，$Kruskal$算法所需的时间是$O(eloge)$。当$e=\Omega(n^2)$时，$Kruskal$算法比$Prim$算法差，但当$e=o(n^2)$时，$Kruskal$算法却比$Prim$算法好得多。
+给定无向连通带权图$G=(V, E)$，$V=\{1,2,...,n\}$。构造$G$的最小生成树的$Kruskal$算法的基本思想是：首先将$G$的$n$个顶点看成$n$个孤立的连通分支，将所有的边按从小到大的顺序排列；然后从第一条边开始，以边权递增的顺序查看每条边，如果边的两个端点属于两个不同的连通分支，就加入该边，继续查看下一条边；如果两个端点属于同一个连通分支，直接查看下一条边。这个过程一直进行到只剩下一个连通分支。
+<div><img src="kruskal1.jpg" width="17%"> <img src="kruskal2.jpg"width="17%"> <img src="kruskal3.jpg"width="17%"> <img src="kruskal4.jpg"width="17%"> <img src="kruskal5.jpg"width="17%"></div>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"># 贪心</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/12/03/Hexo-blog-embellishing/" rel="prev" title="Start from Hexo. Chapter 2">
+                  <i class="fa fa-chevron-left"></i> Start from Hexo. Chapter 2
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E5%9B%9E%E6%BA%AF%E6%B3%95/" rel="next" title="[复习]算法分析与设计-回溯篇">
+                  [复习]算法分析与设计-回溯篇 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Etin Ban</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

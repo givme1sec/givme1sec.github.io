@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="近期入手了一块树莓派3B+的板子，想接墨水屏做个 天气预报+ToDoList 的常亮桌饰。（不是为了当作嵌入式系统课程的作业…🐕）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单上手树莓派">
+<meta property="og:url" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/index.html">
+<meta property="og:site_name" content="Et1nnn&#39;s Notes">
+<meta property="og:description" content="近期入手了一块树莓派3B+的板子，想接墨水屏做个 天气预报+ToDoList 的常亮桌饰。（不是为了当作嵌入式系统课程的作业…🐕）">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/1.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/mirror1.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/mirror2.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/mirror3.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/formatter.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/img.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/ssh.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/conn0.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/conn1.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/wifi.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/staticip1.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/staticip3.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/vnc1.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/vnc2.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/vnc3.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/vnc4.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/vnc5.png">
+<meta property="og:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/vnc6.png">
+<meta property="article:published_time" content="2021-03-11T12:46:46.000Z">
+<meta property="article:modified_time" content="2021-07-05T10:18:40.000Z">
+<meta property="article:author" content="Etin Ban">
+<meta property="article:tag" content="树莓派">
+<meta property="article:tag" content="RaspberryPi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/1.png">
+
+
+<link rel="canonical" href="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/","path":"2021/03/11/简单上手树莓派/","title":"简单上手树莓派"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>简单上手树莓派 | Et1nnn's Notes</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Et1nnn's Notes</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">record every step</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">0. 准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD%E9%95%9C%E5%83%8F"><span class="nav-number">2.</span> <span class="nav-text">1. 下载镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%B9%B6%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">2. 安装系统并初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%A0%BC%E5%BC%8F%E5%8C%96SD%E5%8D%A1"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 格式化SD卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E7%83%A7%E5%BD%95%E9%95%9C%E5%83%8F"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 烧录镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%BF%9E%E6%8E%A5%E6%A0%91%E8%8E%93%E6%B4%BE"><span class="nav-number">4.</span> <span class="nav-text">3. 连接树莓派</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%BD%BF%E7%94%A8PuTTY%E8%BF%9E%E6%8E%A5%E6%A0%91%E8%8E%93%E6%B4%BE%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 使用PuTTY连接树莓派（推荐）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Win10%E7%9A%84cmd%E7%AA%97%E5%8F%A3%E8%BF%9E%E6%8E%A5%E6%A0%91%E8%8E%93%E6%B4%BE"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 Win10的cmd窗口连接树莓派</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E5%A1%AB%E5%9D%91"><span class="nav-number">4.2.1.</span> <span class="nav-text">补充填坑</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Raspbian%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">4. Raspbian配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 修改密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E6%A0%A1%E6%AD%A3%E6%97%B6%E5%8C%BA"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 校正时区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E4%BF%AE%E6%94%B9%E9%9D%99%E6%80%81ip"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 修改静态ip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E6%BA%90"><span class="nav-number">5.4.</span> <span class="nav-text">4.3 修改系统软件源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E4%BF%AE%E6%94%B9pip%E6%BA%90"><span class="nav-number">5.5.</span> <span class="nav-text">4.4 修改pip源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-%E5%AE%89%E8%A3%85vim%E4%BB%A3%E6%9B%BFnano"><span class="nav-number">5.6.</span> <span class="nav-text">4.5 安装vim代替nano</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%BC%80%E5%90%AF%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2"><span class="nav-number">6.</span> <span class="nav-text">5. 开启远程桌面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%90%AF%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BEVNC"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 启用树莓派VNC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E5%90%AF%E7%94%A8win%E7%AB%AFVNC"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 启用win端VNC</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Etin Ban</p>
+  <div class="site-description" itemprop="description">磨刀不误砍柴工，读完硕士再打工</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etin Ban">
+      <meta itemprop="description" content="磨刀不误砍柴工，读完硕士再打工">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Et1nnn's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          简单上手树莓派
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-11 20:46:46" itemprop="dateCreated datePublished" datetime="2021-03-11T20:46:46+08:00">2021-03-11</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-07-05 18:18:40" itemprop="dateModified" datetime="2021-07-05T18:18:40+08:00">2021-07-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/" itemprop="url" rel="index"><span itemprop="name">树莓派</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>近期入手了一块树莓派3B+的板子，想接墨水屏做个 <strong>天气预报+ToDoList</strong> 的常亮桌饰。（不是为了当作嵌入式系统课程的作业…🐕）</p>
+<div align="center"><img src="1.png"></div>
+
+<span id="more"></span>
+
+<p>第一次玩树莓派，从淘宝下单板子到收货这段时间，还是查了很多资料的，上手的时候各种小问题层出不穷，写个blog记录一下，顺便水一篇更新。</p>
+<h2 id="0-准备"><a href="#0-准备" class="headerlink" title="0. 准备"></a>0. 准备</h2><p>树莓派3B+ 1GB<br>5V 3A外接电源线<br>SanDisk内存卡16GB C10<br>读卡器</p>
+<h2 id="1-下载镜像"><a href="#1-下载镜像" class="headerlink" title="1. 下载镜像"></a>1. 下载镜像</h2><p>使用Raspbian作为烧录系统：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/467335f07e05">下载地址</a></p>
+<div><img src="mirror1.png"></div>
+
+<div><img src="mirror2.png"></div>
+
+<p>下载完镜像对压缩文件进行解压缩，得到的<code>.img</code>文件就是我们要烧录的镜像文件。</p>
+<div><img src="mirror3.png"></div>
+
+<h2 id="2-安装系统并初始化"><a href="#2-安装系统并初始化" class="headerlink" title="2. 安装系统并初始化"></a>2. 安装系统并初始化</h2><h3 id="2-1-格式化SD卡"><a href="#2-1-格式化SD卡" class="headerlink" title="2.1 格式化SD卡"></a>2.1 格式化SD卡</h3><p>首先将SD卡格式化，使用<code>SDCardFormatter</code>。</p>
+<div><img src="formatter.png"></div>
+
+<h3 id="2-2-烧录镜像"><a href="#2-2-烧录镜像" class="headerlink" title="2.2 烧录镜像"></a>2.2 烧录镜像</h3><p>然后使用<code>win32diskimager</code>烧录<code>.img</code>文件。</p>
+<div><img src="img.png"></div>
+
+<h3 id="2-3-配置文件"><a href="#2-3-配置文件" class="headerlink" title="2.3 配置文件"></a>2.3 配置文件</h3><p>烧录完成后，SD卡的空间变成两个分区，其中<code>boot</code>分区就是系统的<code>\boot</code>文件夹。<br>由于没有外接显示屏，所以为了能够使用Raspberry系统终端，需要通过网络连接树莓派，有以下两个步骤：<br>①新建一个名为<code>ssh</code>的文件，无后缀，字母小写。<br>②新建网络配置文件<code>wpa_supplicant.conf</code>并写入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">country=CN</span><br><span class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span><br><span class="line">update_config=1</span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">ssid=&quot;ForRaspPi&quot;</span><br><span class="line">psk=&quot;12345678&quot;</span><br><span class="line">key_mgmt=WPA-PSK</span><br><span class="line">priority=1</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">network=&#123;</span><br><span class="line">ssid=&quot;WiFi-B&quot;     # 网络ssid</span><br><span class="line">psk=&quot;12345678&quot;    # 网络密码</span><br><span class="line">key_mgmt=WPA-PSK  # 密钥类型，手机热点就是该类型</span><br><span class="line">priority=2        # 连接优先级</span><br><span class="line">scan_ssid=1       # 连接隐藏wifi时需要指定该值为1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div><img src="ssh.png"></div>
+
+<p>设置完成后，从电脑弹出SD卡，并插入树莓派。</p>
+<h2 id="3-连接树莓派"><a href="#3-连接树莓派" class="headerlink" title="3. 连接树莓派"></a>3. 连接树莓派</h2><p>给树莓派通上5V3A的电源后，指示灯会亮起，树莓派3B+上，红色等亮起表示接通电源，绿色灯亮起表示系统在对SD进行读写。树莓派启动后，就可以通过<code>ssh</code>连接登录系统。<strong>连接树莓派的电脑和树莓派必须处于同一个网段，连接同一个路由器</strong>。这里给出两种连接方式：</p>
+<h3 id="3-1-使用PuTTY连接树莓派（推荐）"><a href="#3-1-使用PuTTY连接树莓派（推荐）" class="headerlink" title="3.1 使用PuTTY连接树莓派（推荐）"></a>3.1 使用PuTTY连接树莓派（推荐）</h3><p>在PuTTY输入IP地址和端口号（默认22）</p>
+<div><img src="conn0.png"></div>
+
+<div><img src="conn1.png"></div>
+
+<h3 id="3-2-Win10的cmd窗口连接树莓派"><a href="#3-2-Win10的cmd窗口连接树莓派" class="headerlink" title="3.2 Win10的cmd窗口连接树莓派"></a>3.2 Win10的cmd窗口连接树莓派</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 尝试过没成功</span><br><span class="line">&gt; ssh pi@172.20.10.12:22</span><br></pre></td></tr></table></figure>
+
+<h4 id="补充填坑"><a href="#补充填坑" class="headerlink" title="补充填坑"></a>补充填坑</h4><p>由于up学校的校园网需要二次登录，所以只能使用手机热点作为路由器连接树莓派。更不巧的是，up的手机是ios系统，无法查看连接热点的设备的ip😭😭😭<br>经过一番折腾，想到一个办法：用电脑也连接手机热点，然后用一个<code>Network Scanner</code>的软件扫描该网段下的所有设备。</p>
+<div><img src="wifi.png"></div>
+
+<h2 id="4-Raspbian配置"><a href="#4-Raspbian配置" class="headerlink" title="4. Raspbian配置"></a>4. Raspbian配置</h2><p>连接到树莓派后需要先登录系统，树莓派默认ssh账户名<code>pi</code>，密码<code>raspberry</code>。</p>
+<h3 id="4-1-修改密码"><a href="#4-1-修改密码" class="headerlink" title="4.1 修改密码"></a>4.1 修改密码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 修改普通账户pi的密码</span><br><span class="line">&gt; sudo passwd pi</span><br><span class="line"></span><br><span class="line"># 修改管理员账户root的密码</span><br><span class="line">&gt; sudo passwd root</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-校正时区"><a href="#4-2-校正时区" class="headerlink" title="4.2 校正时区"></a>4.2 校正时区</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo dpkg-reconfigure tzdata</span><br><span class="line"># 选择 Asia--&gt;Shanghai  </span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-修改静态ip"><a href="#4-3-修改静态ip" class="headerlink" title="4.3 修改静态ip"></a>4.3 修改静态ip</h3><p>确保树莓派每次启动都连接同一个路由的同一个ip和端口。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 树莓派终端下查看自己局域网的ip网段</span><br><span class="line">&gt; ifconfig</span><br></pre></td></tr></table></figure>
+
+<div><img src="staticip1.png"></div>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 设置静态ip</span><br><span class="line">&gt; sudo nano /etc/dhcpcd.conf</span><br><span class="line"></span><br><span class="line"># 添加如下</span><br><span class="line">#---如果是无线网卡---</span><br><span class="line">interface wlan0                         # 网卡名</span><br><span class="line">static ip_address=172.20.10.12/22       # 树莓派ip</span><br><span class="line">static routers=172.20.10.1              # 路由器ip</span><br><span class="line">static domain_name_servers=172.20.10.1  # DNS,同路由器ip</span><br><span class="line"></span><br><span class="line">#---如果是有线网卡---</span><br><span class="line">interface eth0</span><br><span class="line">static ip_address=172.20.10.12/22</span><br><span class="line">static routers=172.20.10.1</span><br><span class="line">static domain_name_servers=172.20.10.1</span><br></pre></td></tr></table></figure>
+
+<p>路由地址一般最后8位是00000001，即1。或者在连接同一路由的电脑上查看无线网属性：</p>
+<div><img src="staticip3.png"></div>
+
+<p>保存退出</p>
+<h3 id="4-3-修改系统软件源"><a href="#4-3-修改系统软件源" class="headerlink" title="4.3 修改系统软件源"></a>4.3 修改系统软件源</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 树莓派默认使用nano作为编辑器，修改完成后使用Ctrl+X退出，输入y后回车保存</span><br><span class="line">&gt; sudo nano /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line"># 修改系统源为清华大学源</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-修改pip源"><a href="#4-4-修改pip源" class="headerlink" title="4.4 修改pip源"></a>4.4 修改pip源</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; mkdir ~/.pip</span><br><span class="line">&gt; nano ~/.pip/pip.conf</span><br><span class="line"></span><br><span class="line"># 添加以下内容（豆瓣源）</span><br><span class="line">[global]</span><br><span class="line">timeout =6000</span><br><span class="line">index-url =http://pypi.douban.com/simple/</span><br><span class="line">[install]</span><br><span class="line">use-mirrors =true </span><br><span class="line">mirrors =http://pypi.douban.com/simple/ </span><br><span class="line">trusted-host =pypi.douban.com</span><br></pre></td></tr></table></figure>
+
+<p>保存并退出</p>
+<table>
+<thead>
+<tr>
+<th>国内其他源地址</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>阿里云</td>
+<td><a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/pypi/simple/">http://mirrors.aliyun.com/pypi/simple/</a></td>
+</tr>
+<tr>
+<td>中科大</td>
+<td><a target="_blank" rel="noopener" href="https://mirrors.bfsu.edu.cn/pypi/web/simple/">https://mirrors.bfsu.edu.cn/pypi/web/simple/</a></td>
+</tr>
+<tr>
+<td>豆瓣</td>
+<td><a target="_blank" rel="noopener" href="http://pypi.douban.com/simple">http://pypi.douban.com/simple</a></td>
+</tr>
+<tr>
+<td>Python官方</td>
+<td><a target="_blank" rel="noopener" href="https://pypi.python.org/simple/">https://pypi.python.org/simple/</a></td>
+</tr>
+<tr>
+<td>v2ex</td>
+<td><a target="_blank" rel="noopener" href="http://pypi.v2ex.com/simple/">http://pypi.v2ex.com/simple/</a></td>
+</tr>
+<tr>
+<td>中科院</td>
+<td><a target="_blank" rel="noopener" href="http://pypi.mirrors.opencas.cn/simple/">http://pypi.mirrors.opencas.cn/simple/</a></td>
+</tr>
+</tbody></table>
+<h3 id="4-5-安装vim代替nano"><a href="#4-5-安装vim代替nano" class="headerlink" title="4.5 安装vim代替nano"></a>4.5 安装vim代替nano</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo apt-get install vim</span><br><span class="line"># 直接使用该命令安装时，会报 Depends:vim-common (=2:7.4.1689-3raspberry1.4) but 2:8.0.1453-1raspberry1.1 is to be installed 的错误</span><br><span class="line"></span><br><span class="line"># 解决方法</span><br><span class="line">&gt; sudo apt-get purge vim-common</span><br><span class="line">&gt; sudo apt-get update</span><br><span class="line">&gt; sudo apt-get upgrade</span><br><span class="line">&gt; sudo apt-get install vim</span><br><span class="line"></span><br><span class="line"># vim配置</span><br><span class="line">&gt; sudo vim /etc/vim/vimrc</span><br><span class="line"></span><br><span class="line"># 添加以下内容</span><br><span class="line">syntax on  # 语法高亮</span><br><span class="line">set nu     # 显示行号</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-开启远程桌面"><a href="#5-开启远程桌面" class="headerlink" title="5. 开启远程桌面"></a>5. 开启远程桌面</h2><h3 id="5-1-启用树莓派VNC"><a href="#5-1-启用树莓派VNC" class="headerlink" title="5.1 启用树莓派VNC"></a>5.1 启用树莓派VNC</h3><p>Raspbian自带有VNC远程桌面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo raspi-config</span><br></pre></td></tr></table></figure>
+
+<div><img src="vnc1.png"></div>
+
+<div><img src="vnc2.png"></div>
+
+<div><img src="vnc3.png"></div>
+
+<p>启用VNC后，在树莓派终端开启VNC服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; vncserver</span><br></pre></td></tr></table></figure>
+<div><img src="vnc4.png"></div>
+
+<p>可以看到的是启用的<code>raspberry:1</code>，其中<code>:1</code>就表示树莓派服务器的端口号。</p>
+<h3 id="5-2-启用win端VNC"><a href="#5-2-启用win端VNC" class="headerlink" title="5.2 启用win端VNC"></a>5.2 启用win端VNC</h3><p><a target="_blank" rel="noopener" href="https://www.realvnc.com/en/connect/download/viewer/">下载VNC Viewer</a>并启动，通过ip和端口连接树莓派。</p>
+<div><img src="vnc5.png"></div>
+<div><img src="vnc6.png"></div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag"># 树莓派</a>
+              <a href="/tags/RaspberryPi/" rel="tag"># RaspberryPi</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/12/11/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="prev" title="[复习]算法分析与设计-动态规划篇">
+                  <i class="fa fa-chevron-left"></i> [复习]算法分析与设计-动态规划篇
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" rel="next" title="JVM学习笔记1-内存与垃圾回收">
+                  JVM学习笔记1-内存与垃圾回收 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Etin Ban</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

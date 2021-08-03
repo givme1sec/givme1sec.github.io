@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="动态规划基本思想：问题的最优解如果可以由子问题的最优解推导得到，则可以先求子问题的最优解，再构造原问题的最优解；若子问题有较多的重复出现，则可以自底向上从最终子问题向原问题逐步求解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[复习]算法分析与设计-动态规划篇">
+<meta property="og:url" content="http://example.com/2020/12/11/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.html">
+<meta property="og:site_name" content="Et1nnn&#39;s Notes">
+<meta property="og:description" content="动态规划基本思想：问题的最优解如果可以由子问题的最优解推导得到，则可以先求子问题的最优解，再构造原问题的最优解；若子问题有较多的重复出现，则可以自底向上从最终子问题向原问题逐步求解。">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2020/12/11/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/a.jpg">
+<meta property="article:published_time" content="2020-12-11T07:53:52.000Z">
+<meta property="article:modified_time" content="2020-12-17T12:44:34.000Z">
+<meta property="article:author" content="Etin Ban">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="动态规划">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/12/11/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/a.jpg">
+
+
+<link rel="canonical" href="http://example.com/2020/12/11/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"http://example.com/2020/12/11/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/","path":"2020/12/11/复习-算法分析与设计-动态规划/","title":"[复习]算法分析与设计-动态规划篇"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[复习]算法分析与设计-动态规划篇 | Et1nnn's Notes</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Et1nnn's Notes</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">record every step</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-number">1.</span> <span class="nav-text">动态规划</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">矩阵连乘问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97"><span class="nav-number">1.2.</span> <span class="nav-text">最长公共子序列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.</span> <span class="nav-text">0-1背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">1.4.</span> <span class="nav-text">最优二叉搜索树</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Etin Ban</p>
+  <div class="site-description" itemprop="description">磨刀不误砍柴工，读完硕士再打工</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/11/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etin Ban">
+      <meta itemprop="description" content="磨刀不误砍柴工，读完硕士再打工">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Et1nnn's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [复习]算法分析与设计-动态规划篇
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-11 15:53:52" itemprop="dateCreated datePublished" datetime="2020-12-11T15:53:52+08:00">2020-12-11</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-17 20:44:34" itemprop="dateModified" datetime="2020-12-17T20:44:34+08:00">2020-12-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><p><strong>基本思想</strong>：问题的最优解如果可以由子问题的最优解推导得到，则可以先求子问题的最优解，再构造原问题的最优解；若子问题有<strong>较多的重复出现</strong>，则可以<strong>自底向上</strong>从最终子问题向原问题逐步求解。</p>
+<div align="center"><img src="a.jpg"></div>
+
+<span id="more"></span>
+
+<h2 id="矩阵连乘问题"><a href="#矩阵连乘问题" class="headerlink" title="矩阵连乘问题"></a>矩阵连乘问题</h2><p>给定<code>n</code>个矩阵{A$_1$, A$_2$,…, A$_n$}，其中A$<em>i$与A$</em>{i+1}$是可乘的，i=1, 2,…, n-1，如何确定计算矩阵连乘积的计算次序，使得依此次序计算矩阵连乘积所需要的数乘次数最少。<br>例如，给定三个连乘矩阵{A$_1$, A$_2$, A$_3$}的维数分别为10×100,100×5,5×50，采用(A$_1$A$_2$)A$_3$，乘法次数为10×100×5+10×5×50=7500次，而采用A$_1$(A$_2$A$_3$)，乘法次数为100×5×50+10×100×50=75000次。显然，最好的次序是(A$_1$A$_2$)A$_3$，乘法次数为7500次。</p>
+<p><strong>问题分析</strong>：<br>将矩阵连乘积A$<em>i$A$</em>{i+1}$…A$_j$简记为<code>A[i: j]</code>。对于计算<code>A[1: n]</code>的最优计算次序，设这个计算次序在A$<em>k$和A$</em>{k+1}$之间断开，$1≤k≤n$，即(A$_1$…A$<em>k$)(A$</em>{k+1}$…A$_n$)。以此次序，总的计算量为<code>A[1: k]</code>的计算量加上<code>A[k+1, n]</code>的计算量，再加上<code>A[1: k]</code>和<code>A[k+1, n]</code>相乘的计算量。<br>这个问题的关键特征是，计算<code>A[1: n]</code>的最优次序所包含的计算矩阵子链<code>A[1: k]</code>和<code>A[k+1, n]</code>的次序也是最优的。因此，矩阵连乘积计算次序问题的最优解包含着其子问题的最优解。这种性质称为最优子结构性质。</p>
+<p><strong>建立递推关系</strong>：<br>设<code>m[i, j]</code>是矩阵链A$<em>i$…A$<em>j$的最优解的代价，则：<br>$$ m[i][j]=\left{<br>\begin{aligned}<br>0 \qquad\qquad\qquad\qquad\qquad\qquad &amp; i = j \<br>\min</em>{\substack{i \le k \lt j}} {m[i][k] + m[k+1][j] + p</em>{i-1}p_kp_j } \qquad &amp; i \lt j<br>\end{aligned}<br>\right.<br>$$</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**构建辅助表，解决重叠子问题**：</span><br><span class="line">从第二部的递归式可以发现解的过程中会有很多的重叠子问题，可以用一个辅助表```s[n][n]```来表示分割位置```k```。</span><br><span class="line">这里使用自底向上的方法构建```s[i][j]```，按照递增的方式逐步填写子问题的解（先计算长度为2的所有矩阵链的解，再计算长度为3的矩阵链的解，以此类推）。</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">public static void MatrixChain(int *p, int n, int **m, int **s)&#123;</span><br><span class="line">    for(int i = 1; i &lt;= n; i++) </span><br><span class="line">        m[i][i] = 0;</span><br><span class="line">    for(int r = 2;, r &lt;= n; r++)&#123;</span><br><span class="line">        int j = i+r-1;</span><br><span class="line">        m[i][j] = m[i+1][j] + p[i-1]*p[i]*p[j];</span><br><span class="line">        s[i][j] = i;</span><br><span class="line">        for(int k = i+1; k &lt; j; k++)&#123;</span><br><span class="line">            int t = m[i][k] + m[k+1][j] + p[i-1]*p[k]*p[j];</span><br><span class="line">            if(t &lt; m[i][j])&#123;</span><br><span class="line">                m[i][j] = t;</span><br><span class="line">                s[i][j] = k;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Traceback按算法MaxChain计算出的</span><br><span class="line">// 断点矩阵s指示的加括号方式输出计算A[i:j]的最优计算次序，</span><br><span class="line">// 要输出A[1:n]的最优计算次序，</span><br><span class="line">// 只要调用Trackback(1, n , s)即可</span><br><span class="line">publit static void Trackback(int i, int j, int **s)&#123;</span><br><span class="line">    if(i == j)&#123;</span><br><span class="line">        return ;</span><br><span class="line">    &#125;</span><br><span class="line">    Traceback(i, s[i][j], s);</span><br><span class="line">    Traceback(s[i][j] + 1, j, s);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h2><p>一个给定序列的子序列是在该序列中删去若干元素后得到的序列。确切地说，若给定序列$X={x_1, x_2,…, x_m}$，则另一序列$Z={z_1, z_2,…, z_k }$，是$X$的子序列是指存在一个<strong>严格递增下标序列</strong>${i_1, i_2,…, i_k}$使得对于所有$j=1, 2,…, k$，有：$z_j = x_{ij}$。例如，序列$Z={B, C, D, B}$是序列$X={A, B, C, B, D, A, B}$的子序列，相应的递增下标序列为${2, 3, 5, 7}$。</p>
+<p><strong>最长公共子序列问题</strong>：给定两个序列$X={x_1, x_2,…, x_m}$和$Y={y_1, y_2,…, y_n }$，找出$X$和$Y$的最长公共子序列。</p>
+<p><strong>子问题的递归结构</strong>：<br>由最长公共子序列问题的最优子结构性质可知，要找出$X={x_1, x_2,…, x_m}$和$Y={y_1, y_2,…, y_n }$的最长公共子序列，可按以下方式递归地进行：当$x_m=y_n$时，找出$X_{m-1}$和$Y_{n-1}$的最长公共子序列，然后在其尾部加上$x_m$（$x_m=y_n$），即可得$X$和$Y$的最长公共子序列。当$x_m \neq y_n$时，必须解两个子问题，即找出$X_{m-1}$和$Y$的一个最长公共子序列及$X$和$X$和$Y_{n-1}$的一个最长公共子序列。这两个公共子序列中较长者即为$X$和$Y$的最长公共子序列。</p>
+<p>$$ c[i][j]=\left{<br>\begin{aligned}<br>0 \qquad \qquad \qquad \qquad &amp; i \gt 0 ; j = 0 \<br>c[i-1][j-1]+1 \qquad \qquad &amp; i, j \gt 0; x_i=y_i \<br>\max {c[i][j-1], c[i-1][j]} \qquad &amp; i, j \gt 0; x_i \neq y_i<br>\end{aligned}<br>\right.<br>$$</p>
+<p><strong>计算最优值</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">LCSLength</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">char</span> *x, <span class="keyword">char</span> *y, <span class="keyword">int</span> **c, <span class="keyword">int</span> **b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= m; i++)&#123;</span><br><span class="line">        c[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n, i++)&#123;</span><br><span class="line">        c[<span class="number">0</span>][i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= m, i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt;= n; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(x[i] == y[j])&#123;</span><br><span class="line">                c[i][j] = c[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">                b[i][j] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(c[i-<span class="number">1</span>][j] &gt;= c[i][j-<span class="number">1</span>])&#123;</span><br><span class="line">                c[i][j] = c[i-<span class="number">1</span>][j];</span><br><span class="line">                b[i][j] = <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                c[i][j] = c[i][j-<span class="number">1</span>];</span><br><span class="line">                b[i][j] = <span class="number">3</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>构造最长公共子序列</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">LCS</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">char</span> *x, <span class="keyword">int</span> **b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">0</span> || j == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(b[i][j] == <span class="number">1</span>)&#123;</span><br><span class="line">        LCS(i-<span class="number">1</span>, j-<span class="number">1</span>, x, b);</span><br><span class="line">        System.out.print(x[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(b[i][j] == <span class="number">2</span>)</span><br><span class="line">        LCS(i-<span class="number">1</span>, j, x, b);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        LCS(i, j-<span class="number">1</span>, x, b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="0-1背包问题"><a href="#0-1背包问题" class="headerlink" title="0-1背包问题"></a>0-1背包问题</h2><p>给定$n$种物品和一背包。物品$i$的重量是$w_i$，其价值为$v_i$，背包的容量为$c$。问应如何选择装入背包中的物品，使得装入背包中物品的总价值最大？<br>在选择装入背包的物品时，对每种物品$i$只有装入和不装入两种选择。不能将物品$i$装入背包多次，也不能只装入部分物品$i$。因此，该问题称为0-1背包问题。即：<br>$$<br>\max \sum_{i=1}^n v_ix_i=\left{<br>\begin{aligned}<br>\sum_{i=1}^nw_ix_i \le c &amp; \<br>x_i \in {0, 1} &amp; \qquad 1 \le i \le n<br>\end{aligned}<br>\right.<br>$$</p>
+<p><strong>最优子结构性质</strong>：<br>设$(y_1, y_2,…, y_n)$是所给0-1背包问题的一个最优解，则$(y_2, y_3,…, y_n)$是下面相应子问题的一个最优解：<br>$$<br>\max \sum_{i=1}^n v_ix_i=\left{<br>\begin{aligned}<br>\sum_{i=1}^nw_ix_i \le c-w_iy_1 &amp; \<br>x_i \in {0, 1}\qquad &amp; \qquad 2 \le i \le n<br>\end{aligned}<br>\right.<br>$$</p>
+<p><strong>建立递归关系</strong>：<br>设所给0-1背包问题的子问题的最优值为$m(i, j)$，即$m(i, j)$是背包容量为$j$，可选择物品为$i$，$i+1$，…，$n$时0-1背包问题的最优值。可建立递推关系如下：<br>$$<br>m(i,j)=\left{<br>\begin{aligned}<br>\max{m(i,j), m(i+1, j-w_i)+v_i} &amp; \qquad j \le w_i \<br>m(i+1, j) \qquad \qquad \qquad&amp; \qquad 0 \le j \le w_i<br>\end{aligned}<br>\right.<br>$$</p>
+<p><strong>算法描述</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Knapsack</span><span class="params">(Comparable v, <span class="keyword">int</span> w, <span class="keyword">int</span> c, <span class="keyword">int</span> n, Comparable** m)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> jMax = Math.min(w[n]-<span class="number">1</span>, c);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= jMax; j++)&#123;</span><br><span class="line">        m[n][j] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = w[n]; j &lt;= c; j++)&#123;</span><br><span class="line">        m[n][j] = v[n];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n-<span class="number">1</span>; i &gt; <span class="number">1</span>; i--)&#123;</span><br><span class="line">        jMax = Math.min(w[i]-<span class="number">1</span>, c);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= jMax; j++)&#123;</span><br><span class="line">            m[i][j] = m[i+<span class="number">1</span>][j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = w[i]; j &lt;= c; j++)&#123;</span><br><span class="line">            m[i][j] = Math.max(m[i+<span class="number">1</span>][j], m[i+<span class="number">1</span>][j-w[i]]+v[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        m[<span class="number">1</span>][c] = m[<span class="number">2</span>][c];</span><br><span class="line">        <span class="keyword">if</span>(c &gt;= w[<span class="number">1</span>])&#123;</span><br><span class="line">            m[<span class="number">1</span>][c] = Math.max(m[<span class="number">1</span>][c], m[<span class="number">2</span>][c-w[<span class="number">1</span>]]+v[<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Traceback</span><span class="params">(Comparable **m, <span class="keyword">int</span> w, <span class="keyword">int</span> n, <span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(m[i][c] == m[i+<span class="number">1</span>][c])&#123;</span><br><span class="line">            x[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            x[i] = <span class="number">1</span>;</span><br><span class="line">            c -= w[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    x[n] = (m[n][c]) ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="最优二叉搜索树"><a href="#最优二叉搜索树" class="headerlink" title="最优二叉搜索树"></a>最优二叉搜索树</h2><p>对于一颗二叉搜索树，其中的任何一个结点，它的左结点都不比它大，它的右结点都不比它小。<br>如果在二叉树中查找元素不考虑概率及查找不成功的情况下，可以采用红黑树或者平衡二叉树来搜索，这样可以在O(lgn)时间内完成。而现实生活中，查找的关键字是有一定的概率的，就是说有的关键字可能经常被搜索，而有的很少被搜索，而且搜索的关键字可能不存在，为此需要根据关键字出现的概率构建一个二叉树。比如中文输入法字库中各词条（单字、词组等）的先验概率，针对用户习惯可以自动调整词频——所谓动态调频、高频先现原则，以减少用户翻查次数，使得经常用的词汇被放置在前面，这样就能有效地加快查找速度。这就是最优二叉搜索0树所要解决的问题。</p>
+<p>给定一个由$n$个互异的关键字组成的有序序列$S={x_1, x_2,…, x_n}$和它们被查询的概率$P={p_1, p_2,…, p_n}$，要求构造一颗二叉搜索树$T$，使得查询所有元素的总的代价最小。对于一个搜索树，当搜索的元素在树内时，表示搜索成功；当不在树内时，表示搜索失败，用一个“虚叶子结点”来表示搜索失败的情况，因此需要$n+1$个虚叶子结点${d_0, d_1,…, d_n}$，对应于$d_i$的概率序列是$Q={q_0, q_1,…, q_n}$，其中$d_0$表示搜索元素小于$x_1$的失败情况，$d_n$表示搜索元素大于$x_n$的失败情况。$d_i(0&lt;i&lt;n)$表示搜索结点在$x_i$和$x_{i+1}$之间时的失败情况。因此有：</p>
+<p>$\sum_{i=1}^np_i+\sum_{i=0}^nq_i=1$</p>
+<p>由每个结点和每个虚拟结点被搜索的概率，可以确定在一颗给定的二叉搜索树$T$内一次搜索的期望代价$E(T)$。</p>
+<p>$E(T)=\sum_{i=1}^n(depth_T(x_i)+1)*p_i+\sum_{i=0}^n(depth_T(d_i)+1)*q_i=1+\sum_{i=1}^ndepth_T(x_i)*p_i+\sum_{i=0}^ndepth_T(d_i)*q_i$</p>
+<p><strong>需要注意的是，一颗最优二叉搜索树不一定是一颗整体高度最小的树，也不一定总是把最大概率的结点放在根部。</strong></p>
+<p>定义$e_{i,j}$为搜索一颗包含关键字$x_i,x_{i+1},…,x_j$的最优二叉搜索树的期望代价。$e_{i,j}=w_{i,j}*distance_{i,j}$，$distance_{i,j}$为二叉树$T_{i,j}$的平均路长。<br>当 $j=i-1$ 时：<br>此时只有虚拟结点$d_{i-1}$，故$e_{i,i-1}=q_{i-1}$</p>
+<p>当 $j \ge i$ 时：<br>需要从$x_i,…,x_j$中选择一个$x_k$，来构造一颗最优二叉搜索树，其中$x_i,…,x_{k-1}$作为左子树，$x_{k+1},…,x_j$作为右子树。定义概率总和为：</p>
+<p>$w_{i,j}=\sum_{l=i}^jp_l+\sum_{l=i-1}^jq_l$</p>
+<p>如果$x_k$是<strong>最优子树</strong>$x_i,…,x_j$的根，则：</p>
+<p>$e_{i,j}=e_{i,k-1}+e_{k+1,j}+w_{i,j}$</p>
+<p>最优子结构递推式可写为：<br>$e_{i,j}=w_{i,j}+\min_{\substack{i \le k \le j}}{e_{i,k-1},e_{k+1,j}}  \qquad j \ge i$<br>$e(i,i-1)=0 \qquad 1 \le i \le n$</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">OptimalBinarySearchTree</span><span class="params">(Comparable[] p, Comparable[] q, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n+<span class="number">1</span>, i++)&#123;</span><br><span class="line">        e[i][i-<span class="number">1</span>] = q[i-<span class="number">1</span>];</span><br><span class="line">        w[i][i-<span class="number">1</span>] = q[i-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> l, j, r;</span><br><span class="line">    <span class="keyword">for</span>(l = <span class="number">1</span>, l &lt;= n; l++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n-l+<span class="number">1</span>; i++)&#123;</span><br><span class="line">            j = i+l-<span class="number">1</span>;</span><br><span class="line">            e[i][j] = MAX;</span><br><span class="line">            w[i][j] = w[i][j-<span class="number">1</span>] + p[j] + q[j];</span><br><span class="line">            <span class="keyword">for</span>(r = i; r &lt;= j; r++)&#123;</span><br><span class="line">                <span class="keyword">double</span> t = e[i][r-<span class="number">1</span>]+e[r+<span class="number">1</span>][j]+w[i][j];</span><br><span class="line">                <span class="keyword">if</span>(t &lt; e[i][j])&#123;</span><br><span class="line">                    e[i][j] = t;</span><br><span class="line">                    root[i][j] = r;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">contrustOPST</span><span class="params">(<span class="keyword">int</span> i, intj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> r = root[i][j];</span><br><span class="line">    contrustOPST(i, r-<span class="number">1</span>);</span><br><span class="line">    contrustOPST(r+<span class="number">1</span>, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E5%88%86%E6%B2%BB%E6%B3%95/" rel="prev" title="[复习]算法分析与设计-分治篇">
+                  <i class="fa fa-chevron-left"></i> [复习]算法分析与设计-分治篇
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/11/%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="next" title="简单上手树莓派">
+                  简单上手树莓派 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Etin Ban</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

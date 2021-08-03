@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="这是一个自己搭建Hexo博客的记录，踩过的坑和耍过的花样都在这里！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Start from Hexo. Chapter 1">
+<meta property="og:url" content="http://example.com/2020/12/01/Start-from-hexo/index.html">
+<meta property="og:site_name" content="Et1nnn&#39;s Notes">
+<meta property="og:description" content="这是一个自己搭建Hexo博客的记录，踩过的坑和耍过的花样都在这里！">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/a.jpg">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/nodejs.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/nodeandnpm.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/hexo.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/hexo-init.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/hexo-s.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/landscape-blog.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/git-clone-next.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/theme-next.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/next-blog.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/github-repo.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/deployer-install.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/deployment.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/github-deployment.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Start-from-hexo/givme1sec-1.png">
+<meta property="article:published_time" content="2020-12-01T07:25:36.000Z">
+<meta property="article:modified_time" content="2020-12-03T13:38:32.000Z">
+<meta property="article:author" content="Etin Ban">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/12/01/Start-from-hexo/a.jpg">
+
+
+<link rel="canonical" href="http://example.com/2020/12/01/Start-from-hexo/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"http://example.com/2020/12/01/Start-from-hexo/","path":"2020/12/01/Start-from-hexo/","title":"Start from Hexo. Chapter 1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Start from Hexo. Chapter 1 | Et1nnn's Notes</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Et1nnn's Notes</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">record every step</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nodejs-%E5%92%8C-Hexo"><span class="nav-number">1.1.</span> <span class="nav-text">Nodejs 和 Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BABlog"><span class="nav-number">1.2.</span> <span class="nav-text">搭建Blog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2Blog%E4%B8%BB%E9%A2%98"><span class="nav-number">1.3.</span> <span class="nav-text">更换Blog主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86Hexo%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.4.</span> <span class="nav-text">将Hexo部署到服务器</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Etin Ban</p>
+  <div class="site-description" itemprop="description">磨刀不误砍柴工，读完硕士再打工</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/01/Start-from-hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etin Ban">
+      <meta itemprop="description" content="磨刀不误砍柴工，读完硕士再打工">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Et1nnn's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Start from Hexo. Chapter 1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-01 15:25:36" itemprop="dateCreated datePublished" datetime="2020-12-01T15:25:36+08:00">2020-12-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-03 21:38:32" itemprop="dateModified" datetime="2020-12-03T21:38:32+08:00">2020-12-03</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E6%8A%80/" itemprop="url" rel="index"><span itemprop="name">杂技</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>这是一个自己搭建<em>Hexo</em>博客的记录，踩过的坑和耍过的花样都在这里！</p>
+<div align="center"><img src="a.jpg"/></div>
+
+<span id="more"></span>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Nodejs-和-Hexo"><a href="#Nodejs-和-Hexo" class="headerlink" title="Nodejs 和 Hexo"></a>Nodejs 和 Hexo</h3><p>在安装<em>Hexo</em>之前，<a target="_blank" rel="noopener" href="https://nodejs.org/en/">点这里</a>下载并安装<em>Nodejs</em>。</p>
+<div align="center"><img src="nodejs.png" width="80%"></div>
+
+<p>在<em>windows</em>系统下，打开<em>cmd</em>，使用<code>node -v</code>和<code>npm -v</code>查看这两个是否安装成功。</p>
+<div align="center"><img src="nodeandnpm.png" width="50%" /></div>
+
+<p>之后，利用安装好的<em>npm</em>来安装<em>cnpm</em>（淘宝的一个镜像源）。<br><code>&gt; npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
+<p>最后用<br><code>&gt; cnpm install -g hexo-cli</code><br>安装Hexo。</p>
+<div align="center"><img src="hexo.png" width="50%"/></div>
+
+
+<h3 id="搭建Blog"><a href="#搭建Blog" class="headerlink" title="搭建Blog"></a>搭建Blog</h3><p>新建一个文件夹<em>test-blog</em>，作为博客的根目录，在该根目录下，运行<em>cmd</em>，使用<code>hexo init</code>初始化。</p>
+<div align="center"><img src="hexo-init.png" width="50%"/></div>
+
+<p>克隆到本地的初始化框架自带<em>landscape</em>主题，是可以用<code>hexo s</code>直接启动的。</p>
+<div align="center"><img src="hexo-s.png" width="50%"/></div>
+
+<p>在浏览器中打开端口<code>localhost:4000</code>，就可以看到一个博客页面。</p>
+<div align="center"><img src="landscape-blog.png"/></div>
+
+
+ 
+<h3 id="更换Blog主题"><a href="#更换Blog主题" class="headerlink" title="更换Blog主题"></a>更换Blog主题</h3><p><em>Hexo</em>官方网站上有很多收集的<a target="_blank" rel="noopener" href="https://hexo.io/themes/"><em>Hexo</em>主题</a></p>
+<p>以经典的<em>NexT</em>主题为例，在<a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next"><em>Github-theme-next</em></a>上<em>clone</em>下来。在博客根目录下打开<em>Git</em>。</p>
+<p>使用<br><code>&gt; git clone https://github.com/next-theme/hexo-theme-next themes/next</code></p>
+<p>将<em>NexT</em>主题<em>clone</em>到<em>themes</em>下的<em>next</em>文件夹中，但是这个过程会非常慢，在链接中<em>github.com</em>后面加上<code>cnpmjs.org</code>可以更换源。即</p>
+<p><code>&gt; git clone https://github.com.cnpm.org/next-theme/hexo-theme-next themes/next</code></p>
+<div align="center"><img src="git-clone-next.png" width="80%"/></div>
+
+<p>然后，打开根目录下的 <em>_config.yml</em> 文件，将<em>theme</em>改为<em>next</em>。</p>
+<div align="center"><img src="theme-next.png" width="60%"/></div>
+
+<p>在<em>cmd</em>中，先后执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo clean</span><br><span class="line">&gt; hexo g</span><br><span class="line">&gt; hexo s</span><br></pre></td></tr></table></figure>
+<p>再次打开<code>localhost:4000</code>，可以看到<em>next</em>主题下的博客。</p>
+<div align="center"><img src="next-blog.png"/></div>
+
+<h3 id="将Hexo部署到服务器"><a href="#将Hexo部署到服务器" class="headerlink" title="将Hexo部署到服务器"></a>将Hexo部署到服务器</h3><p>服务器选用<em>Github</em>的个人仓库 <em>(Repositories)<em>，首先登陆</em>Github</em>，新建一个<em>Repositories</em>，<strong>仓库的名称一定要写成：</strong><code>Github_id.github.io</code></p>
+<div align="center"><img src="github-repo.png" width="80%"/></div>
+
+<p>之后我们要将本地的博客部署到这个仓库中，第一次部署时需要安装<em>Hexo</em>部署组件，在<em>cmd</em>中：</p>
+<p><code>&gt; cnpm install --save hexo-deployer-git</code></p>
+<div align="center"><img src="deployer-install.png" width="80%"/></div>
+
+<p>另外，还需要在根目录下的 <em>_config.yml</em> 文件中，添加部署的参数：</p>
+<div align="center"><img src="deployment.png" width="80%"/></div>
+
+<p>在<em>cmd</em>中，执行：</p>
+<p><code>&gt; hexo d</code></p>
+<p>（<strong>注意</strong>在初次部署时，要使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; git config --global user.email &quot;your%example.com&quot;</span><br><span class="line">&gt; git config --global user.name &quot;your name&quot;</span><br></pre></td></tr></table></figure>
+<p>初始化一下。）<br>在<em>Github</em>上的仓库中可以看到文件已经部署上去了。</p>
+<div align="center"><img src="github-deployment.png"/></div>
+
+
+
+<p>在浏览器中打开 <a target="_blank" rel="noopener" href="https://givme1sec.github.io,就可以访问热乎出炉的博客啦!/">https://givme1sec.github.io，就可以访问热乎出炉的博客啦！</a></p>
+<div align="center"><img src="givme1sec-1.png"/></div>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/12/03/Hexo-blog-embellishing/" rel="next" title="Start from Hexo. Chapter 2">
+                  Start from Hexo. Chapter 2 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Etin Ban</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
