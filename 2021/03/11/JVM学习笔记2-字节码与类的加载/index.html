@@ -7,7 +7,7 @@
 <meta name="generator" content="Hexo 5.4.0">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-16x16-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
@@ -19,35 +19,35 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"givme1sec.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM学习笔记2-字节码与类的加载">
-<meta property="og:url" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/index.html">
+<meta property="og:url" content="https://givme1sec.github.io/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/index.html">
 <meta property="og:site_name" content="Et1nnn&#39;s Notes">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/1.JPG">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/inttest2.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/inttest1.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/stringtest2.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/stringtest3.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/sontest1.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/sontest2.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/classfile1.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/classfilestruc.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/classfile2.jpg">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/constant.jpg">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/accessflag.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/javap.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/javap1.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/javap2.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/stackframe.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/loadandstore1.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/loadandstore2.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/loadandstore3.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/loadandstore4.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/classloadingp.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/classunload.png">
-<meta property="og:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/hotexchange.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//1.JPG">
+<meta property="og:image" content="https://givme1sec.github.io/.io//inttest2.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//inttest1.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//stringtest2.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//stringtest3.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//sontest1.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//sontest2.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//classfile1.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//classfilestruc.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//classfile2.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//constant.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//accessflag.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//javap.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//javap1.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//javap2.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//stackframe.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//loadandstore1.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//loadandstore2.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//loadandstore3.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//loadandstore4.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//classloadingp.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//classunload.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//hotexchange.png">
 <meta property="article:published_time" content="2021-03-11T12:51:44.000Z">
 <meta property="article:modified_time" content="2021-04-21T09:29:12.000Z">
 <meta property="article:author" content="Etin Ban">
@@ -55,14 +55,14 @@
 <meta property="article:tag" content="类">
 <meta property="article:tag" content="Class">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/1.JPG">
+<meta name="twitter:image" content="https://givme1sec.github.io/.io//1.JPG">
 
 
-<link rel="canonical" href="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/">
+<link rel="canonical" href="https://givme1sec.github.io/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/","path":"2021/03/11/JVM学习笔记2-字节码与类的加载/","title":"JVM学习笔记2-字节码与类的加载"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://givme1sec.github.io/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/","path":"2021/03/11/JVM学习笔记2-字节码与类的加载/","title":"JVM学习笔记2-字节码与类的加载"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>JVM学习笔记2-字节码与类的加载 | Et1nnn's Notes</title>
@@ -177,6 +177,8 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-overview">
             <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Etin Ban"
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">Etin Ban</p>
   <div class="site-description" itemprop="description">磨刀不误砍柴工，读完硕士再打工</div>
 </div>
@@ -198,6 +200,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/givme1sec" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;givme1sec" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ting.ban@ipp.ac.cn" title="E-Mail → mailto:ting.ban@ipp.ac.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
 
 
@@ -233,7 +243,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/">
+    <link itemprop="mainEntityOfPage" href="https://givme1sec.github.io/2021/03/11/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -286,16 +296,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <div align="center"><img src="1.JPG"></div>
+        <div align="center"><img src="/.io//1.JPG"></div>
 
 <span id="more"></span>
 
 <h2 id="字节码看代码执行细节"><a href="#字节码看代码执行细节" class="headerlink" title="字节码看代码执行细节"></a>字节码看代码执行细节</h2><h3 id="举例1"><a href="#举例1" class="headerlink" title="举例1"></a>举例1</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntegerTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Example 1</span></span><br><span class="line">        Integer x = <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">int</span> y = <span class="number">5</span>;</span><br><span class="line">        System.out.println(x == y); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Example 2</span></span><br><span class="line">        Integer i1 = <span class="number">10</span>;</span><br><span class="line">        Integer i2 = <span class="number">10</span>;</span><br><span class="line">        System.out.println(i1 == i2); <span class="comment">//true</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Example 3</span></span><br><span class="line">        Integer i3 = <span class="number">128</span>;</span><br><span class="line">        Integer i4 = <span class="number">128</span>;</span><br><span class="line">        System.out.println(i3 == i4); <span class="comment">//flase</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<div align="center"><img src="inttest2.png" width="70%"></div>
+<div align="center"><img src="/.io//inttest2.png" width="70%"></div>
 
 <p>从上面的字节码文件中可以看到，<code>Integer x = 5</code>调用了<code>Integer</code>对象中的<code>valueOf</code>方法，<code>valueOf</code>方法中的<code>IntegerCache.cache</code>是<code>IntegerCache</code>方法中声明为全局常量的数组，数组大小为256，保存了$[-128, 127]$中的所有整数，如果<code>i</code>的值在该区间，直接从<code>IntegerCache.cache</code>数组中取出这个数，否则new一个<code>Integer</code>。</p>
-<div align="center"><img src="inttest1.png" width="80%"></div>
+<div align="center"><img src="/.io//inttest1.png" width="80%"></div>
 
 <p><strong>Example1：</strong><br>① <code>5</code>在这个区间中，所以<code>x</code>指向的地址是<code>IntegerCache.cache</code>数组中<code>int</code>型数据<code>5</code>的位置，<code>Integer</code>本身有一个装箱的操作，所以<code>x</code>是一个引用数据类型。字节码文件中的<code>astore_1</code>表示<code>x</code>保存在了局部变量表索引为1的位置（索引为0的位置保存main方法的参数args）。</p>
 <p>② <code>int y = 5</code>对基本数据类型<code>y</code>赋值<code>5</code>。一般情况下，引用数据类型和基本数据类型不能做<code>==</code>的操作，但是<code>x</code>又包含拆箱的操作，所以相当于取出了基本数据类型<code>5</code>与<code>y</code>进行比较，返回结果必然是<code>true</code>。</p>
@@ -303,9 +313,9 @@
 <p><strong>Example3：</strong><br>由于<code>i3</code>和<code>i4</code>赋值<code>128</code>超出了<code>IntegerCache.cache</code>的数组的范围，所以new了两个<code>Integer</code>对象，<code>i3</code>和<code>i4</code>指向了不同的索引地址，故返回<code>false</code>。</p>
 <h3 id="举例2"><a href="#举例2" class="headerlink" title="举例2"></a>举例2</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Example 1</span></span><br><span class="line">        String str1 = <span class="keyword">new</span> String(<span class="string">&quot;hello&quot;</span>) + <span class="keyword">new</span> String(<span class="string">&quot;world&quot;</span>);</span><br><span class="line">        String str2 = <span class="string">&quot;helloworld&quot;</span>;</span><br><span class="line">        System.out.println(str1 == str2); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Example 2</span></span><br><span class="line">        String str3 = <span class="keyword">new</span> String(<span class="string">&quot;helloworld&quot;</span>);</span><br><span class="line">        System.out.println(str2 == str3); <span class="comment">// flase</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<div align="center"><img src="stringtest2.png" width="100%"></div>
+<div align="center"><img src="/.io//stringtest2.png" width="100%"></div>
 
-<div align="center"><img src="stringtest3.png" width="80%"></div>
+<div align="center"><img src="/.io//stringtest3.png" width="80%"></div>
 
 
 <p><strong>Example1：</strong><br>上图中可以看到<code>str1</code>和<code>str2</code>指向的是两个完全不同的对象，所以判断<code>str1 == str2</code>会返回<code>false</code>。</p>
@@ -315,23 +325,23 @@
 <p><strong>Example1:</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Example 1</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SonTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Father f = <span class="keyword">new</span> Father();</span><br><span class="line">        System.out.println(f.x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Output:</span></span><br><span class="line"><span class="comment"> * Father.x = 10</span></span><br><span class="line"><span class="comment"> * 20</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<div align="center"><img src="sontest1.png" width="100%"></div>
+<div align="center"><img src="/.io//sontest1.png" width="100%"></div>
 
 
 <p>成员变量（非静态）的赋值过程（按先后顺序排列）：①默认初始化 ②显示初始化/代码块中初始化 ③构造器中初始化 ④有了对象之后，可以<code>Object.prop</code>或<code>Object.method()</code>的方式初始化</p>
 <figure class="highlight plaintext"><figcaption><span>f </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;br /&gt;</span><br><span class="line"></span><br><span class="line">**Example2:**</span><br><span class="line">```java</span><br><span class="line">public class SonTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Father f = new Son();</span><br><span class="line">        System.out.println(f.x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/* Output:</span><br><span class="line"> * Son.x = 0</span><br><span class="line"> * Son.x = 30</span><br><span class="line"> * 20</span><br><span class="line">*/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<div align="center"><img src="sontest2.png" width="100%"></div>
+<div align="center"><img src="/.io//sontest2.png" width="100%"></div>
 
 <p>代码<code>Father f = new Son()</code>首先new了一个Son对象，调用Son的构造器进行初始化前，先调用其父类对象Father的构造器<code>public Father()&#123;&#125;</code>，里面有<code>this.print()</code>，由于子类对象Son重写了父类对象Father的<code>print()</code>方法，所以实际调用的是Son中的<code>print()</code>，此时Son.x还没有复制，故打印<code>Son.x = 0</code>。父类构造器执行完后，再执行子类构造器，子类构造器对成员变量初始化之前，先有显示初始化方法<code>int x = 30</code>，故在子类构造器中<code>this.print()</code>打印<code>Son.x = 30</code>。最后执行<code>System.out.println(f.x)</code>，由于属性不存在多态性，<code>f.x</code>调用的是父类Father中的<code>x</code>，<code>Father.x</code>在父类构造器中最后被复制为<code>20</code>，故打印<code>20</code>。</p>
 <h2 id="Class文件"><a href="#Class文件" class="headerlink" title="Class文件"></a>Class文件</h2><h3 id="字节码文件"><a href="#字节码文件" class="headerlink" title="字节码文件"></a>字节码文件</h3><p>字节码文件由源代码经编译器编译生成，里面是JVM指令，而与C、C++编译后直接生成机器码（这也是C、C++比Java快的原因）。</p>
 <h3 id="字节码指令"><a href="#字节码指令" class="headerlink" title="字节码指令"></a>字节码指令</h3><p>Java虚拟机的指令由一个字节长度的、代表着某种特定操作含义的操作码（opcode）以及跟随其后的零至多个代表此操作所需参数的操作数（operand）构成。虚拟机中的许多指令并不包含操作数，只有一个操作码。</p>
-<div align="center"><img src="classfile1.png" width="80%"></div>
+<div align="center"><img src="/.io//classfile1.png" width="80%"></div>
 
 <h3 id="解读字节码文件"><a href="#解读字节码文件" class="headerlink" title="解读字节码文件"></a>解读字节码文件</h3><p>① Jclasslib（或IDEA中Jclasslib插件）<br>② javap指令：JDK自带的反解析工具 <code>javap -v Test.class</code>或<code>javap -v Test.class &gt; Test.txt</code><br>④ Binary Viewer<br>③ Notepad++中HEX-editor插件</p>
-<h3 id="字节码文件格式"><a href="#字节码文件格式" class="headerlink" title="字节码文件格式"></a>字节码文件格式</h3><p>Class文件没有分隔符，其中的字节顺序、数量都被严格限制。<br>Class文件格式用类似C语言结构体的方式进行数据存储，这种结构只有两种数据类型：<strong>无符号数</strong>和<strong>表</strong>。<br>$\bullet$ 无符号数属于基本的数据类型，以u1、u2、u4、u8来分别代表1个字节、2个字节、4个字节和8个字节无符号数，无符号数可以用来描述数字、索引引用、数量值或者按照UTF-8编码构成字符串值。<br /><br>$\bullet$ 表示由多个无符号数或者其他表作为数据项构成的复合数据类型，所有表都习惯性地以<code>_info</code>结尾。表用于描述有层次关系的复合结构的数据，整个Class文件本质上就是一张表。由于表没有固定长度，所以通常会在其前面加上个数说明。</p>
+<h3 id="字节码文件格式"><a href="#字节码文件格式" class="headerlink" title="字节码文件格式"></a>字节码文件格式</h3><p>Class文件没有分隔符，其中的字节顺序、数量都被严格限制。<br>Class文件格式用类似C语言结构体的方式进行数据存储，这种结构只有两种数据类型：<strong>无符号数</strong>和<strong>表</strong>。<br>$\bullet$ 无符号数属于基本的数据类型，以u1、u2、u4、u8来分别代表1个字节、2个字节、4个字节和8个字节无符号数，无符号数可以用来描述数字、索引引用、数量值或者按照UTF-8编码构成字符串值。<br><br>$\bullet$ 表示由多个无符号数或者其他表作为数据项构成的复合数据类型，所有表都习惯性地以<code>_info</code>结尾。表用于描述有层次关系的复合结构的数据，整个Class文件本质上就是一张表。由于表没有固定长度，所以通常会在其前面加上个数说明。</p>
 <h3 id="字节码文件结构"><a href="#字节码文件结构" class="headerlink" title="字节码文件结构"></a>字节码文件结构</h3><p>字节码文件的基本结构和框架是非常稳定的，如下：</p>
-<div align="center"><img src="classfilestruc.png"></div>
+<div align="center"><img src="/.io//classfilestruc.png"></div>
 
 <p>以<strong>Demo.class</strong>的字节码文件为例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Demo.class</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ind <span class="title">add</span><span class="params">()</span></span>&#123;</span><br><span class="line">        num = num + <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -339,7 +349,7 @@
 <p><em>编译Demo.class后得到的字节码文件：</em></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">ca	fe	ba	be	00	00	00	34	00	16	0a	00	04	00	12	09</span><br><span class="line">00	03	00	13	07	00	14	07	00	15	01	00	03	6e	75	6d</span><br><span class="line">01	00	01	49	01	00	06	3c	69	6e	69	74	3e	01	00	03</span><br><span class="line">28	29	56	01	00	04	43	6f	64	65	01	00	0f	4c	69	6e</span><br><span class="line">65	4e	75	6d	62	65	72	54	61	62	6c	65	01	00	12	4c</span><br><span class="line">6f	63	61	6c	56	61	72	69	61	62	6c	65	54	61	62	6c</span><br><span class="line">65	01	00	04	74	68	69	73	01	00	13	4c	63	6f	6d	2f</span><br><span class="line">63	6f	6d	70	61	6e	79	2f	44	65	6d	6f	31	3b	01	00</span><br><span class="line">03	61	64	64	01	00	03	28	29	49	01	00	0a	53	6f	75</span><br><span class="line">72	63	65	46	69	6c	65	01	00	0a	44	65	6d	6f	31	2e</span><br><span class="line">6a	61	76	61	0c	00	07	00	08	0c	00	05	00	06	01	00</span><br><span class="line">11	63	6f	6d	2f	63	6f	6d	70	61	6e	79	2f	44	65	6d</span><br><span class="line">6f	31	01	00	10	6a	61	76	61	2f	6c	61	6e	67	2f	4f</span><br><span class="line">62	6a	65	63	74	00	21	00	03	00	04	00	00	00	01	00</span><br><span class="line">02	00	05	00	06	00	00	00	02	00	01	00	07	00	08	00</span><br><span class="line">01	00	09	00	00	00	38	00	02	00	01	00	00	00	0a	2a</span><br><span class="line">b7	00	01	2a	04	b5	00	02	b1	00	00	00	02	00	0a	00</span><br><span class="line">00	00	0a	00	02	00	00	00	03	00	04	00	04	00	0b	00</span><br><span class="line">00	00	0c	00	01	00	00	00	0a	00	0c	00	0d	00	00	00</span><br><span class="line">01	00	0e	00	0f	00	01	00	09	00	00	00	3d	00	03	00</span><br><span class="line">01	00	00	00	0f	2a	2a	b4	00	02	05	60	b5	00	02	2a</span><br><span class="line">b4	00	02	ac	00	00	00	02	00	0a	00	00	00	0a	00	02</span><br><span class="line">00	00	00	06	00	0a	00	07	00	0b	00	00	00	0c	00	01</span><br><span class="line">00	00	00	0f	00	0c	00	0d	00	00	00	01	00	10	00	00</span><br><span class="line">00	02	00	11											</span><br></pre></td></tr></table></figure>
 
-<div align="center"><img src="classfile2.jpg"></div>
+<div align="center"><img src="/.io//classfile2.jpg"></div>
 
 
 
@@ -410,13 +420,13 @@
 </tbody></table>
 <p>$\bullet$ 版本号后的是<strong>常量池计数器</strong>（<strong>2个字节</strong>，容量计数从1开始，即constant_pool_count=1表示常量池中有0个常量项，而计数0表示不引用任何一个常量项） 和若干个常量池表项。常量池是整个Class文件的基石。<br>常量池<strong>主要</strong>存放两大类常量：字面量（Literal）和符号引用（Symbolic Reference）。  </p>
 <p>常量池中每一项常量都是一个表，JDK 1.7之后共有14种不同的表结构数据，如下所示：</p>
-<div align="center"><img src="constant.jpg"></div>
+<div align="center"><img src="/.io//constant.jpg"></div>
 
 <p>这14种表的共同点是：表开始的第一位是一个<code>u1</code>类型的的标志位<code>tag</code>，代表当前这个常量项使用的是哪种表结构。且除了<code>CONSTANT_Utf8_info</code>外其他常量项占用的字节数固定。</p>
-<p>常量池是Class文件中的资源仓库，是Class文件结构中与其他项目关联最多的数据类型，也是占用Class文件空间最大的数据项目之一。<br /></p>
+<p>常量池是Class文件中的资源仓库，是Class文件结构中与其他项目关联最多的数据类型，也是占用Class文件空间最大的数据项目之一。<br></p>
 <p>$\bullet$ 之后是<strong>访问标识（access_flag）</strong>，<strong>2个字节</strong>，用来识别一些类或者接口层次访问信息。</p>
 <p>在<code>Demo.class</code>文件中<code>access_flag</code>的值为<code>0x0021</code>，是<code>ACC_PUBLIC</code>和<code>ACC_SUPER</code>的加和。</p>
-<div align="center"><img src="accessflag.png" width="90%"></div>
+<div align="center"><img src="/.io//accessflag.png" width="90%"></div>
 
 <p>① 如果一个Class文件被设置了<code>ACC_INTERFACE</code>标志，那么同时也要设置<code>ACC_ABSTRACT</code>标志，并不能再设置<code>ACC_FINAL</code>、<code>ACC_SUPER</code>和<code>ACC_ENUM</code>。</p>
 <p>② 如果没有设置<code>ACC_INTERFACE</code>标志，那么这个Class文件可以设置上表中除<code>ACC_ANNOTATION</code>以外的所有标志，但<code>ACC_FINAL</code>和<code>ACC_ABSTRACT</code>是互斥的不可同时设置。</p>
@@ -714,47 +724,47 @@
 <p>Code属性中还有<code>LineNumberTable</code>和<code>LocalVariableTable</code>两个内部属性。</p>
 <h3 id="指令解析Class文件"><a href="#指令解析Class文件" class="headerlink" title="指令解析Class文件"></a>指令解析Class文件</h3><h4 id="编译指令"><a href="#编译指令" class="headerlink" title="编译指令"></a>编译指令</h4><p>①<code>javac</code>、<code>javac -g</code>的区别：<br>使用<code>javac test.java</code>编译后得到的字节码文件不会生成对应的局部变量表等信息。<code>javac -g test.java</code>则可以。默认情况下，Eclipse和IEDA在编译时也会生成局部变量表、指令和代码行偏移量映射表等信息。</p>
 <h4 id="反编译指令"><a href="#反编译指令" class="headerlink" title="反编译指令"></a>反编译指令</h4><p>使用<code>javap</code>或<code>javap -help</code>可以看到可用选项。</p>
-<div align="center"><img src="javap.png"></div>
+<div align="center"><img src="/.io//javap.png"></div>
 
 <p>使用<code>javap -v Demo.class &gt; Demo.txt</code>反解析字节码文件存入<code>Demo.txt</code>中：</p>
-<div align="center"><img src="javap1.png"></div>
+<div align="center"><img src="/.io//javap1.png"></div>
 
-<div align="center"><img src="javap2.png"></div>
+<div align="center"><img src="/.io//javap2.png"></div>
 
 <h2 id="字节码指令-1"><a href="#字节码指令-1" class="headerlink" title="字节码指令"></a>字节码指令</h2><p>Java字节码对于虚拟机，就好像汇编语言对于计算机，属于基本执行指令。</p>
 <p>Java虚拟机的指令由一个字节长度的、代表着某种特定操作含义的数字（称为操作码，Opcode）以及跟随其后的零至多个代表此操作所需参数（称为操作数，Operands）而构成。由于Java虚拟机采用面向操作数栈而不是寄存器的结构，所以大多数的指令都不包含操作数，只有一个操作码。</p>
 <p>对于大部分与数据类型相关的字节码指令，它们的操作码助记符中都有特殊的字符来表明专门为哪种数据类型服务。</p>
 <p><strong>i</strong> 代表对 <strong>int</strong> 类型的数据操作<br><strong>l</strong> 代表 <strong>long</strong><br><strong>s</strong> 代表 <strong>short</strong><br><strong>b</strong> 代表 <strong>byte</strong><br><strong>c</strong> 代表 <strong>char</strong><br><strong>f</strong> 代表 <strong>float</strong><br><strong>d</strong> 代表 <strong>double</strong></p>
 <p>由于大部分指令都没有支持整数类型byte、char、short和boolean，编译器会在编译期或运行期将byte和short类型的数据（和数组）带符号扩展为相应的int类型数据。</p>
-<p>JVM中的字节码指令集按照用途大致可以分成9类：<br>$\bullet$ 加载与存储指令 <br /><br>$\bullet$ 算术指令<br /><br>$\bullet$ 对象的创建与访问指令<br /><br>$\bullet$ 方法调用与返回指令<br /><br>$\bullet$ 操作数栈管理指令<br /><br>$\bullet$ 比较控制指令<br /><br>$\bullet$ 异常处理指令<br /><br>$\bullet$ 同步控制指令<br /></p>
+<p>JVM中的字节码指令集按照用途大致可以分成9类：<br>$\bullet$ 加载与存储指令 <br><br>$\bullet$ 算术指令<br><br>$\bullet$ 对象的创建与访问指令<br><br>$\bullet$ 方法调用与返回指令<br><br>$\bullet$ 操作数栈管理指令<br><br>$\bullet$ 比较控制指令<br><br>$\bullet$ 异常处理指令<br><br>$\bullet$ 同步控制指令<br></p>
 <h3 id="加载与存储指令"><a href="#加载与存储指令" class="headerlink" title="加载与存储指令"></a>加载与存储指令</h3><p>加载和存储指令用于将数据从栈帧的局部变量表和操作数栈之间来回传递。<br><strong>常用指令：</strong><br>① 带有<code>load</code>、<code>push</code>、<code>const</code>、<code>ldc</code>的指令都是把数据压入操作数栈。<br>② 带有<code>store</code>的指令都是把数据保存在栈帧的局部变量表中。</p>
 <p><strong>局部变量压栈指令：</strong><br>将一个局部变量加载到操作数栈。<br>① <code>[x]load</code>、<code>[x]load_&lt;n&gt;</code><br>其中<code>x</code>为<code>i</code>、<code>l</code>、<code>f</code>、<code>d</code>、<code>a</code>、<code>n</code><br>其中<code>n</code>为<code>0</code>、<code>1</code>、<code>2</code>、<code>3</code><br>如<code>iload_3</code>、<code>iload 4</code> n </p>
 <p><strong>常用入栈指令：</strong><br>将一个常量加载到操作数栈。<br>①<code>bipush</code>、<code>sipush</code>、<code>ldc</code>、<code>ldc_w</code>、<code>ldc2_w</code>、<code>aconst_null</code>、<code>iconst_ml</code>、<code>iconst_&lt;i&gt;</code>、<code>lconst_&lt;l&gt;</code>、<code>fconst_&lt;f&gt;</code>、<code>dconst_&lt;d&gt;</code></p>
 <p><strong>出栈装入局部变量表指令：</strong><br>将一个数值从操作数栈存储到局部变量表。<br>① <code>xstore</code>、<code>xstore_&lt;n&gt;</code><br>其中<code>x</code>为<code>i</code>、<code>l</code>、<code>f</code>、<code>d</code>、<code>a</code>、<code>n</code><br>其中<code>n</code>为<code>0</code>、<code>1</code>、<code>2</code>、<code>3</code><br>② <code>xastore</code><br>其中<code>x</code>为<code>i</code>、<code>l</code>、<code>f</code>、<code>d</code>、<code>a</code>、<code>b</code>、<code>c</code>、<code>s</code></p>
-<h4 id="复习：操作数栈与局部变量表"><a href="#复习：操作数栈与局部变量表" class="headerlink" title="复习：操作数栈与局部变量表"></a>复习：操作数栈与局部变量表</h4><div align="center"><img src="stackframe.png"></div>
+<h4 id="复习：操作数栈与局部变量表"><a href="#复习：操作数栈与局部变量表" class="headerlink" title="复习：操作数栈与局部变量表"></a>复习：操作数栈与局部变量表</h4><div align="center"><img src="/.io//stackframe.png"></div>
 
 <p><strong>操作数栈</strong>用于存放计算的操作数以及返回结果。执行每一条指令之前，Java虚拟机要求该指令的操作数已经被压入操作数栈中。执行指令时，Java虚拟机将该指令所需的操作数弹出，并将指令的结果压入栈中。<br><strong>局部变量表</strong>中存放计算的缓存结果。局部变量表中按照Slot进行划分，一个Slot可以存放4个字节的数据，且非静态方法中索引为0的位置存放this。</p>
 <h4 id="局部变量表压栈指令"><a href="#局部变量表压栈指令" class="headerlink" title="局部变量表压栈指令"></a>局部变量表压栈指令</h4><p><strong>代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoadAndStoreTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">load</span><span class="params">(<span class="keyword">int</span> num, Object obj, <span class="keyword">long</span> count, <span class="keyword">boolean</span> flag, <span class="keyword">short</span>[] arr)</span></span>&#123;</span><br><span class="line">        System.out.println(num);</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">        System.out.println(count);</span><br><span class="line">        System.out.println(flag);</span><br><span class="line">        System.out.println(arr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>字节码指令：</strong></p>
-<div align="center"><img src="loadandstore1.png" ></div>
+<div align="center"><img src="/.io//loadandstore1.png"></div>
 
 <h4 id="常量入栈指令"><a href="#常量入栈指令" class="headerlink" title="常量入栈指令"></a>常量入栈指令</h4><h5 id="const指令"><a href="#const指令" class="headerlink" title="const指令"></a>const指令</h5><p>整型：<code>iconst_&lt;i&gt;：i∈[-1, -5]，其中iconst_m1将-1压入栈</code><br>长整型：<code>lconst_&lt;l&gt;：l∈[0, 1]</code><br>float型：<code>fconst_&lt;f&gt;：f∈[0, 2]</code><br>double型：<code>dconst_&lt;d&gt;：d∈[0, 1]</code><br>null值：<code>aconst_null</code></p>
 <h5 id="push指令"><a href="#push指令" class="headerlink" title="push指令"></a>push指令</h5><p><strong>bipush</strong> 接收8位整数作为参数 <strong>[-128, 127]</strong><br><strong>sipush</strong> 接收16位整数作为参数 <strong>[-32768, 32767]</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoadAndStoreTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pushConstLdc</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">int</span> c = <span class="number">127</span>;</span><br><span class="line">        <span class="keyword">int</span> d = <span class="number">128</span>;</span><br><span class="line">        <span class="keyword">int</span> e = <span class="number">1234567</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<div align="center"><img src="loadandstore2.png" width="80%"></div>
+<div align="center"><img src="/.io//loadandstore2.png" width="80%"></div>
 
 
 <h5 id="ldc指令"><a href="#ldc指令" class="headerlink" title="ldc指令"></a>ldc指令</h5><p>以上指令都不满足需求的：<br>① 指向<code>int</code>、<code>float</code>、<code>String</code>的索引（8位），用<code>ldc</code>指令。<br>② 有两个8位参数，用<code>ldc_w</code>。<br>③ 对于<code>long</code>和<code>double</code>类型，用<code>ldc2_w</code>。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoadAndStoreTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">constLdc</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">long</span> a1 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">long</span> a2 = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">float</span> b1 = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">float</span> b2 = <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">double</span> c1 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">double</span> c2 = <span class="number">2</span>;</span><br><span class="line">        Date d = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<div align="center"><img src="loadandstore3.png" width="80%"></div>
+<div align="center"><img src="/.io//loadandstore3.png" width="80%"></div>
 
 <h4 id="出栈装入局部变量表指令"><a href="#出栈装入局部变量表指令" class="headerlink" title="出栈装入局部变量表指令"></a>出栈装入局部变量表指令</h4><p>这类指令主要以<code>store</code>指令形式存在。<br>① <code>xstore</code>（<code>x</code>为<code>i、l、f、d、a</code>）<br>② <code>xtore_n</code>（<code>x</code>为<code>i、l、f、d、a</code>，<code>n</code>为<code>0、1、2、3</code>）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoadAndStoreTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">store</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">double</span> d)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = k + <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">long</span> l = <span class="number">12</span>;</span><br><span class="line">        String str = <span class="string">&quot;helloworld&quot;</span>;</span><br><span class="line">        <span class="keyword">float</span> f = <span class="number">10.0F</span>;</span><br><span class="line">        d = <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<div align="center"><img src="loadandstore4.png" width="80%"></div>
+<div align="center"><img src="/.io//loadandstore4.png" width="80%"></div>
 
 <h3 id="算术指令"><a href="#算术指令" class="headerlink" title="算术指令"></a>算术指令</h3><p><em>《深入理解Java虚拟机》P254</em></p>
 <p>算术指令用于对两个操作数栈上的值进行某种特定运算，并把结果重新压入操作数栈。<br>算术指令可以分为两种：① 对整型数据进行运算的指令；② 对浮点型数据进行运算的指令。</p>
@@ -866,7 +876,7 @@
 <h3 id="同步控制指令"><a href="#同步控制指令" class="headerlink" title="同步控制指令"></a>同步控制指令</h3><p><em>《深入理解Java虚拟机》P258</em></p>
 <p>Java虚拟机支持两种同步结构：① 方法级的同步；② 方法内部一段指令序列的同步。</p>
 <h2 id="类的加载"><a href="#类的加载" class="headerlink" title="类的加载"></a>类的加载</h2><p>按照Java虚拟机规范，从class文件到加载到内存中的类，到类卸载出内存为止，它的整个生命周期分为以下7个阶段：</p>
-<div align="center"><img src="classloadingp.png"></div>
+<div align="center"><img src="/.io//classloadingp.png"></div>
 
 
 
@@ -939,7 +949,7 @@
 <h3 id="过程5：类的Unloading（卸载）"><a href="#过程5：类的Unloading（卸载）" class="headerlink" title="过程5：类的Unloading（卸载）"></a>过程5：类的Unloading（卸载）</h3><h4 id="类、类的加载器、类的实例之间的引用关系"><a href="#类、类的加载器、类的实例之间的引用关系" class="headerlink" title="类、类的加载器、类的实例之间的引用关系"></a>类、类的加载器、类的实例之间的引用关系</h4><p>在类的加载器的内部实现中，用一个Java集合来存放所加载类的引用。另一方面，一个Class对象总是会引用它的类的加载器，调用Class对象的getClassLoader()方法，就能获得它的类加载器。由此可见，代表某个类的Class实例与其类的加载器之间为双向关联关系。</p>
 <p>一个类的实例总是引用代表这个类的Class对象。在Object类中定义了getClass()方法，这个方法返回代表对象所属类的Class对象的引用。此外，所有的Java类都有一个静态属性class，它引用代表这个类的Class对象。</p>
 <h4 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h4><p>当Sample类被加载、链接和初始化后，它的生命周期就开始。当代表Sample类的Class对象不再被引用，即不可触及时，Class对象就会结束生命周期，Sample类在方法区内的数据也会被卸载，从而结束Sample类的生命周期。<br>一个类何时结束生命周期，取决于代表它的Class对象何时结束生命周期。</p>
-<div align="center"><img src="classunload.png"></div>
+<div align="center"><img src="/.io//classunload.png"></div>
 
 
 <h2 id="类的加载器"><a href="#类的加载器" class="headerlink" title="类的加载器"></a>类的加载器</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><h4 id="类的加载方式"><a href="#类的加载方式" class="headerlink" title="类的加载方式"></a>类的加载方式</h4><p><strong>显示加载：</strong><br>在代码中通过调用ClassLoader加载class对象，如直接使用Class.forName(name)或this.getClass().getClassLoader().loadClass()加载class对象。<br><strong>隐式加载：</strong><br>不直接在代码中调用ClassLoader的方法加载class对象，而是通过虚拟机自动加载到内存中，如在加载某个类的class文件时，该类的class文件中引用了另外一个类的对象，此时额外引用的类将通过JVM自动加载到内存中。</p>
@@ -956,7 +966,7 @@
 <p>通常情况下，引导类加载器中的类为系统核心类，包括一些重要的系统接口，而在应用程序加载器中，为应用类。按照这种模式，应用类访问系统类是没有问题的，但是系统类访问应用类就会出现问题。比如在系统中提供了一个接口，该接口需要在应用类中得以实现，改接口还绑定一个工厂方法，用于创建该接口的实例，而接口和工厂方法都在引导类加载器中。这时，就会出现该工厂方法无法创建由应用类加载器加载的应用实例的问题。</p>
 <h4 id="双亲委托模式的破坏"><a href="#双亲委托模式的破坏" class="headerlink" title="双亲委托模式的破坏"></a>双亲委托模式的破坏</h4><p><em>《深入理解Java虚拟机》P285</em></p>
 <h4 id="热替换"><a href="#热替换" class="headerlink" title="热替换"></a>热替换</h4><p>热替换是指在程序运行过程中，不停止服务，只通过替换程序文件来修改程序的行为。热替换的关键需求在于服务不能中断，修改必须立即表现在正在运行的系统之上。<br>Java中通过使用ClassLoader来实现热替换。</p>
-<div align="center"><img src="hotexchange.png"></div>
+<div align="center"><img src="/.io//hotexchange.png"></div>
  
 
 <h3 id="Java9新特性"><a href="#Java9新特性" class="headerlink" title="Java9新特性"></a>Java9新特性</h3><p>① 扩展机制被移除，扩展类加载器由于向后兼容性的问题被保留，不过被重命名为平台类加载器（Platform Classloader）。可以通过ClassLoader的新方法<code>getPlatformClassLoader()</code>来获取。<br>② 平台类加载器和应用程序类加载器都不再继承自java.net.URLClassLoader。现在引导类加载器、平台类加载器、应用程序类加载器全都继承于<code>jdk.internal.loader.BuiltinClassLoader</code>。<br>③ 在Java9中，类加载器有了名称。该名称在构造方法中指定，可以通过getName()方法来获取。平台类加载器的名称是platform，应用类加载器的名称是app。类加载器名称在调试时很有用。<br>④ 启动类加载器现在是在jvm内部和java类库共同协作实现的类加载器（以前是C++实现），但是为了与之前代码兼容，在获取启动类加载器的场景中仍然会返回null，而不会得到BootClassLoader实例。<br>⑤ 类加载的委派关系也发生了变动。当平台及应用程序类加载器收到类加载请求，在委派给父加载器加载前，要先判断该类是否能够归属到某一个系统模块中，如果可以找到这样的归属关系，就要优先委派给负责那个模块的加载器完成加载。</p>

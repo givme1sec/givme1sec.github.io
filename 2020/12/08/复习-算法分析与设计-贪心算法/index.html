@@ -7,7 +7,7 @@
 <meta name="generator" content="Hexo 5.4.0">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-16x16-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
@@ -19,25 +19,25 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"givme1sec.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta property="og:type" content="article">
 <meta property="og:title" content="[复习]算法分析与设计-贪心篇">
-<meta property="og:url" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:url" content="https://givme1sec.github.io/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="Et1nnn&#39;s Notes">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/a.jpg">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/复习-算法分析与设计-贪心算法/dijkstra.png">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/prim1.png">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/prim1.jpg">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/prim2.jpg">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/prim3.jpg">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/prim4.jpg">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/prim5.jpg">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/kruskal1.jpg">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/kruskal2.jpg">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/kruskal3.jpg">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/kruskal4.jpg">
-<meta property="og:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/kruskal5.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//a.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//dijkstra.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//prim1.png">
+<meta property="og:image" content="https://givme1sec.github.io/.io//prim1.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//prim2.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//prim3.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//prim4.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//prim5.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//kruskal1.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//kruskal2.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//kruskal3.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//kruskal4.jpg">
+<meta property="og:image" content="https://givme1sec.github.io/.io//kruskal5.jpg">
 <meta property="article:published_time" content="2020-12-08T12:15:37.000Z">
 <meta property="article:modified_time" content="2020-12-15T15:12:24.000Z">
 <meta property="article:author" content="Etin Ban">
@@ -46,14 +46,14 @@
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/a.jpg">
+<meta name="twitter:image" content="https://givme1sec.github.io/.io//a.jpg">
 
 
-<link rel="canonical" href="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">
+<link rel="canonical" href="https://givme1sec.github.io/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/","path":"2020/12/08/复习-算法分析与设计-贪心算法/","title":"[复习]算法分析与设计-贪心篇"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://givme1sec.github.io/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/","path":"2020/12/08/复习-算法分析与设计-贪心算法/","title":"[复习]算法分析与设计-贪心篇"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>[复习]算法分析与设计-贪心篇 | Et1nnn's Notes</title>
@@ -168,6 +168,8 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-overview">
             <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Etin Ban"
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">Etin Ban</p>
   <div class="site-description" itemprop="description">磨刀不误砍柴工，读完硕士再打工</div>
 </div>
@@ -189,6 +191,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/givme1sec" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;givme1sec" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ting.ban@ipp.ac.cn" title="E-Mail → mailto:ting.ban@ipp.ac.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
 
 
@@ -224,7 +234,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="https://givme1sec.github.io/2020/12/08/%E5%A4%8D%E4%B9%A0-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -277,7 +287,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <div align="center"><img src="a.jpg"></div>
+        <div align="center"><img src="/.io//a.jpg"></div>
 
 <span id="more"></span>
 
@@ -293,7 +303,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">a: 45</span><br><span class="line">b: 13</span><br><span class="line">c: 12</span><br><span class="line">d: 16</span><br><span class="line">e: 9</span><br><span class="line">f: 5</span><br><span class="line"></span><br><span class="line">第一步合并：     第二步合并：     第三步合并：    </span><br><span class="line">  a: 45           a: 45          a: 45</span><br><span class="line">  b: 13         b,c: 25        b,c: 25 </span><br><span class="line">  c: 12           d: 16      d,e,f: 30</span><br><span class="line">  d: 16         e,f: 14</span><br><span class="line">e,f: 14</span><br><span class="line"></span><br><span class="line">       第四步合并：              第五步合并：</span><br><span class="line">        a: 45           a,b,c,d,e,f: 100</span><br><span class="line">b,c,d,e,f: 55 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                        100</span><br><span class="line">                   0   /  \   1</span><br><span class="line">                     /     \</span><br><span class="line">                  a: 45    55</span><br><span class="line">                         /    \</span><br><span class="line">                  0   /         \  1</span><br><span class="line">                   /              \ </span><br><span class="line">                 25               30</span><br><span class="line">            0  /   \  1       0  /  \  1</span><br><span class="line">             /      \          /     \</span><br><span class="line">          b: 13    c: 12    d: 16    14</span><br><span class="line">                                 0  /   \  1</span><br><span class="line">                                  /      \</span><br><span class="line">                                e: 9    f: 5</span><br><span class="line"></span><br><span class="line">故编码为：</span><br><span class="line">a: 0</span><br><span class="line">b: 100</span><br><span class="line">c: 101</span><br><span class="line">d: 110</span><br><span class="line">e: 1110</span><br><span class="line">f: 1111</span><br></pre></td></tr></table></figure>
 
 <h2 id="单源最短路径"><a href="#单源最短路径" class="headerlink" title="单源最短路径"></a>单源最短路径</h2><h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><p>$Dijkstra$算法是解决单源最短路径问题的一个贪心算法。其基本思想是，设置顶点集合$S$，并不断的做贪心选择来扩充这个集合。给定一个带权有向图$S={V, E}$，初始时，$S$中仅含有源。设$u$是$G$的一个顶点，把从源到$u$且中间只经过$S$中顶点的路称为从源到$u$的最短路径并用数组$dist$记录当前顶点所对应的最短特殊路径长度$Dijkstra$算法每次从$V-S$中取出具有最短特殊路长度的顶点$u$，将$u$添加到$S$中，同时对数组$dist$做必要的修改。一旦$S$包含了所有$V$中顶点，$dist$就记录了从源到所有其他顶点之间的最短路径长度。例如：</p>
-<div align="center"><img src="复习-算法分析与设计-贪心算法/dijkstra.png"></div>
+<div align="center"><img src="/.io//dijkstra.png"></div>
 
 <table>
 <thead>
@@ -354,12 +364,12 @@
 </tr>
 </tbody></table>
 <h2 id="最小生成树算法"><a href="#最小生成树算法" class="headerlink" title="最小生成树算法"></a>最小生成树算法</h2><h3 id="Prim"><a href="#Prim" class="headerlink" title="Prim"></a>Prim</h3><p>设$G=(V, E)$是连通带权图，$V={1,2,…,n}$。构造$G$的最小生成树的$Prim$算法的基本思想是：首先置$S={1}$，然后，只要$S$是$V$的真子集，就做如下贪心选择：选取满足条件$i \in S, j \in V-S$，且$c[i][j]$（即权值）最小的边，并将顶点$j$添加到$S$中。这个过程一直进行到$S=V$时为止，选取到的所有边恰好构成$G$的一颗最小生成树。</p>
-<div align="center"><img src="prim1.png"width="60%"></div>
-<div><img src="prim1.jpg" width="20%"><img src="prim2.jpg"width="20%"><img src="prim3.jpg"width="20%"><img src="prim4.jpg"width="20%"><img src="prim5.jpg"width="20%"></div>
+<div align="center"><img src="/.io//prim1.png" width="60%"></div>
+<div><img src="/.io//prim1.jpg" width="20%"><img src="/.io//prim2.jpg" width="20%"><img src="/.io//prim3.jpg" width="20%"><img src="/.io//prim4.jpg" width="20%"><img src="/.io//prim5.jpg" width="20%"></div>
 ### Kruskal
 构造最小生成树的另一个算法是$Kruskal$算法。当图的边数为$e$时，$Kruskal$算法所需的时间是$O(eloge)$。当$e=\Omega(n^2)$时，$Kruskal$算法比$Prim$算法差，但当$e=o(n^2)$时，$Kruskal$算法却比$Prim$算法好得多。
 给定无向连通带权图$G=(V, E)$，$V=\{1,2,...,n\}$。构造$G$的最小生成树的$Kruskal$算法的基本思想是：首先将$G$的$n$个顶点看成$n$个孤立的连通分支，将所有的边按从小到大的顺序排列；然后从第一条边开始，以边权递增的顺序查看每条边，如果边的两个端点属于两个不同的连通分支，就加入该边，继续查看下一条边；如果两个端点属于同一个连通分支，直接查看下一条边。这个过程一直进行到只剩下一个连通分支。
-<div><img src="kruskal1.jpg" width="17%"> <img src="kruskal2.jpg"width="17%"> <img src="kruskal3.jpg"width="17%"> <img src="kruskal4.jpg"width="17%"> <img src="kruskal5.jpg"width="17%"></div>
+<div><img src="/.io//kruskal1.jpg" width="17%"> <img src="/.io//kruskal2.jpg" width="17%"> <img src="/.io//kruskal3.jpg" width="17%"> <img src="/.io//kruskal4.jpg" width="17%"> <img src="/.io//kruskal5.jpg" width="17%"></div>
 
     </div>
 
